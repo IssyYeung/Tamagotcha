@@ -1,0 +1,47 @@
+@mixin margin($r: auto, $l: auto, $t: null, $b: null) {
+  margin-right: $r;
+  margin-left: $l;
+  margin-top: $t;
+  margin-bottom: $b;
+}
+
+@mixin flex($dir: row, $jc: center, $ai: center) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+@mixin box($w: 200px, $h: 100px, $br: 1px, $bg: yellow) {
+  width: $w;
+  height: $h;
+  border-radius: $br;
+  background-color: $bg;
+}
+
+$breakpoints: (
+  "phone": 400px,
+  // xxs
+  "phone-wide": 480px,
+  // xs
+  "phablet": 576px,
+  // sm
+  "tablet": 768px,
+  //md
+  "tablet-wide": 992px,
+  // lg
+  "desktop": 1200px,
+  //xl
+  "desktop-wide": 1440px,
+);
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}

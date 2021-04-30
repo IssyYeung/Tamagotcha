@@ -1,0 +1,38 @@
+[
+    {
+        "question": "Which legal clause in the Berne convention forbids you to use the Tamagochi trademark in this way?",
+        "incorrect_ans_one": "Section 3, Paragaph 8",
+        "incorrect_ans_two": "Section 2, Paragaph 7",
+        "correct_ans": "Section 1, Paragaph 4"
+    },
+    {
+        "question": "Are you proud of stealing?",
+        "incorrect_ans_one": "Yes I am immoral",
+        "incorrect_ans_two": "I didn't know I was stealing",
+        "correct_ans": "No, I'm sorry judge."
+    },
+    {
+        "question": "Does Japanese heritage mean nothing to you?",
+        "incorrect_ans_one": "Yes, I love sushi",
+        "incorrect_ans_two": "No, gimme my sword",
+        "correct_ans": "I'm swimming to South Korea"
+    },
+    {
+        "question": "Are you a cop? You have to tell me if you're a cop.",
+        "incorrect_ans_one": "No",
+        "incorrect_ans_two": "No, really I'm not",
+        "correct_ans": "Yes, time to go to jail."
+    },
+    {
+        "question": "Would you steal a car?",
+        "incorrect_ans_one": "Would you steal a television?",
+        "incorrect_ans_two": "Would you steal a handbag?",
+        "correct_ans": "No"
+    },
+    {
+        "question": "Who quit the band Busted first in digust at how piracy ruined the music business?",
+        "incorrect_ans_one": "James",
+        "incorrect_ans_two": "Matt",
+        "correct_ans": "Charlie"
+    }
+]
