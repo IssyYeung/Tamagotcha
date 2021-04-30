@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from back_end.config import Config
 from flask_bcrypt import Bcrypt
+from flask_mail import Mail
+from flask_login import LoginManager
 
 # Create instance of database
 db = SQLAlchemy()
@@ -12,6 +14,12 @@ ma = Marshmallow()
 
 # Initialise Bcrypt for hashing passwords for database storage
 bcrypt = Bcrypt()
+
+# Initialise mail extension.
+mail = Mail()
+
+# Create instance of login manager.
+login_manager = LoginManager()
 
 
 def create_app(config_class=Config):
@@ -25,6 +33,8 @@ def create_app(config_class=Config):
     db.init_app(app)
     ma.init_app(app)
     bcrypt.init_app(app)
+    mail.init_app(app)
+    login_manager.init_app(app)
 
     from back_end.errors.handlers import errors
     from back_end.login.routes import login
