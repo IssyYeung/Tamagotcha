@@ -5,7 +5,7 @@
 }
 @font-face {
   font-family: "tamagotchi";
-  src: local("tamagotchi"), url(../fonts/tamagotchi.ttf) format("truetype");
+  src: url("../fonts/tamagotchi.ttf") format("truetype");
 }
 
 body {
