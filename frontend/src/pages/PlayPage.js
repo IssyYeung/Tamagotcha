@@ -3,7 +3,7 @@ import Layout from "../components/layout/Layout";
 const PlayPage = () => {
   return (
     <div>
-      <Layout pageTitle="TAMAGOTCHA">
+      <Layout pageTitle="Tamagotcha">
         <h1>Play Page</h1>
         {/* <HealthBar/>
         <Tamagotcha/>

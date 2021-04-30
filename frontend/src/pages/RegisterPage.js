@@ -50,7 +50,7 @@ const RegisterPage = () => {
 
   return (
     <div>
-      <Layout pageTitle="TAMAGOTCHA">
+      <Layout pageTitle="Tamagotcha">
         <h1>Register Page</h1>
         <form onSubmit={onSubmit}>
           <label>Username</label>

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const AccountPage = () => {
   return (
     <div>
-      <Layout pageTitle="TAMACCOUNT">
+      <Layout pageTitle="Tamaccount">
         <h1>Account Page</h1>
         <NavLink to="/">
           <Button>Logout</Button>
