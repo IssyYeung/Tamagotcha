@@ -1,0 +1,12 @@
+Flask_SQLAlchemy==2.5.1
+Flask_Bcrypt==0.7.1
+Flask_Login==0.5.0
+itsdangerous==1.1.0
+Flask_WTF==0.14.3
+flask_marshmallow==0.14.0
+Flask==1.1.2
+WTForms==2.3.3
+flask_mail==0.9.1
+Pillow==8.2.0
+secrets==1.0.2
+flask-cors==3.0.10
