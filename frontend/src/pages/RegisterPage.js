@@ -1,13 +1,13 @@
 import Layout from "../components/layout/Layout";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div>
       <Layout pageTitle="TAMAGOTCHA">
-        <h1>Login Page</h1>
+        <h1>Register Page</h1>
       </Layout>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
