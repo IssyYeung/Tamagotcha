@@ -1,0 +1,15 @@
+// @font-face {
+//   font-family: "tamagotchinormal";
+//   src: url("../../styles/font/webfontkit/tamagotchi-webfont.woff2")
+//       format("woff2"),
+//     url("../../styles/font/webfontkit/tamagotchi-webfont.woff") format("woff");
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
+// @import url("https://bigfontsite.com/fonts/tamagotchi-normal.html");
+
+.pageTitle {
+  color: blue;
+  font-family: "tamagotchinormal", sans-serif;
+}
