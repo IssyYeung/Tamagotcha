@@ -1,0 +1,26 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.navbar {
+  // background-color: $darkColor;
+  height: 60px;
+  @include flex;
+
+  div {
+    @include flex($jc: space-around);
+    width: 100%;
+
+    a {
+      @include flex;
+      font-size: 1rem;
+      // color: white;
+      flex: 1;
+      height: 60px;
+      border: 1px solid black;
+    }
+  }
+
+  img {
+    height: 45px;
+  }
+}
