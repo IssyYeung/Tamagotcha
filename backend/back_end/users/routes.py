@@ -1,11 +1,12 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint,jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 from back_end import db, bcrypt
-from back_end.models import User, Tamagotchi
+from back_end.models import TamagotchiSchema, User, Tamagotchi
 from back_end.users.utils import save_picture, send_reset_email
 from flask import Blueprint
 from back_end.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm)
+from back_end.models import TamagotchiSchema
 
 users = Blueprint('users', __name__)
 
@@ -21,7 +22,7 @@ def register():
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'btn btn-success')
         return redirect(url_for('users.login'))
-    return render_template('register.html', title='Register', form=form)
+    #return render_template('register.html', title='Register', form=form)
 
 @users.route("/login", methods=['GET', 'POST'])
 def login():
@@ -36,13 +37,13 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'btn btn-danger')
-    return render_template('login.html', title='Login', form=form)
+    #return render_template('login.html', title='Login', form=form)
 
 
 @users.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('main.home'))
+    #return redirect(url_for('main.home'))
 
 @users.route("/account", methods=['GET', 'POST'])
 @login_required
@@ -61,19 +62,13 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('account.html', title='Account',
-                           image_file=image_file, form=form)
+    # return render_template('account.html', title='Account',
+    #                        image_file=image_file, form=form)
 
-@users.route("/user/<string:username>")
-def user_Tamagotchis(username):
-    page = request.args.get('page', 1, type=int)
-    user = User.query.filter_by(username=username).first_or_404()
-    Tamagotchis = Tamagotchi.query.filter_by(author=user)\
-        .order_by(Tamagotchi.date_Tamagotchied.desc())\
-        .paginate(page=page, per_page=5)
-    return render_template('user_Tamagotchis.html', Tamagotchis=Tamagotchis, user=user)
 
-@users.route("/reset_password", methods=['GET', 'Tamagotchi'])
+
+
+@users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
@@ -85,7 +80,7 @@ def reset_request():
         return redirect(url_for('users.login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
-@users.route("/reset_password/<token>", methods=['GET', 'Tamagotchi'])
+@users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
