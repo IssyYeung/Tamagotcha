@@ -1,2 +1,3 @@
 # Tamagotcha
-A virtual pet, and so much more!  
+
+A virtual pet, and so much more!
