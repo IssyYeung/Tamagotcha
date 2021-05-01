@@ -1,5 +1,5 @@
 import Navbar from "../navbar/Navbar";
-import style from "./layout.module.scss";
+import style from "./Layout.module.scss";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const helmetContext = {};

@@ -1,0 +1,9 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.BottomNav {
+  @include flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
