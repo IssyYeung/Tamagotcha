@@ -13,19 +13,20 @@ $borderRadius: 8px;
 
 .statTitleContainer {
   @include flex;
-  border: 1px solid;
   border-radius: $borderRadius;
   padding: $padding;
-  width: 50%;
+  width: 70%;
   margin: $margin;
+  background-color: $lightColor;
+  box-shadow: 5px 5px 5px 0px rgba($color: #000000, $alpha: 0.1);
 }
 
 .statValueContainer {
   @include flex;
-  border: 1px solid;
   border-radius: $borderRadius;
   padding: $padding;
-  padding-left: 30px;
-  padding-right: 30px;
+  width: 30%;
   margin: $margin;
+  background-color: $lightColor;
+  box-shadow: 5px 5px 5px 0px rgba($color: #000000, $alpha: 0.1);
 }

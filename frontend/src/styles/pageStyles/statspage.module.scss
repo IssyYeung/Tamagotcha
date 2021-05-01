@@ -1,0 +1,14 @@
+@import "../mixins";
+@import "../variables";
+
+.statsPageContainer {
+  border-radius: 80px;
+  background-color: $midColor;
+  padding: 40px;
+  margin: 10px;
+  box-shadow: 5px 5px 5px 0px rgba($color: #000000, $alpha: 0.1);
+}
+
+.infoContainer {
+  padding: 10px;
+}

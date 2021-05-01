@@ -1,16 +1,19 @@
 import Layout from "../components/layout/Layout";
 import StatBar from "../components/stat_bar/StatBar";
+import style from "../styles/pageStyles/statspage.module.scss";
 
 const StatsPage = () => {
   return (
     <div>
       <Layout pageTitle="Tamastats">
         <h1>Stats Page</h1>
-        <div className="stats-page-container">
-          <h3>Name: Boris</h3>
-          <h3>Age: 40</h3>
-          <h3>Breed: Duckster</h3>
-          <h3>Needs:</h3>
+        <div className={style.statsPageContainer}>
+          <div className={style.infoContainer}>
+            <h3>Name: Boris</h3>
+            <h3>Age: 40</h3>
+            <h3>Breed: Duckster</h3>
+            <h3>Needs:</h3>
+          </div>
           <StatBar statTitle="Average Health" statValue="70" />
           <StatBar statTitle="Sleep" statValue="50" />
           <StatBar statTitle="Thirst" statValue="99" />
