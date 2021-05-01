@@ -1,19 +1,21 @@
 import Navbar from "../navbar/Navbar";
 import style from "./layout.module.scss";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
-const Layout = ({ pageTitle, children }) => {
+const helmetContext = {};
+
+const Layout = ({ pageTitle, children, showNavbar = true }) => {
   return (
-    <div>
+    <HelmetProvider context={helmetContext}>
       <Helmet>
         {/* any meta tags, link tags, external script tags go in here,
    try not to touch the index.html */}
         <title>{pageTitle}</title>
       </Helmet>
       <h1 className={style.pageTitle}>{pageTitle}</h1>
-      <Navbar />
+      {showNavbar && <Navbar />}
       {children}
-    </div>
+    </HelmetProvider>
   );
 };
 

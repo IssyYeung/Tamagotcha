@@ -1,7 +1,8 @@
 import Layout from "../components/layout/Layout";
+import style from "../styles/pageStyles/registerpage.module.scss";
+import Button from "../components/button/Button";
 import React, { useReducer } from "react";
-// import Button from "../components/button/Button";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const formReducer = (state, event) => {
   return {
@@ -42,16 +43,10 @@ const RegisterPage = () => {
     });
   };
 
-  // method: "POST",
-  // headers: {
-  //   "Content-type": "application/json",
-  // },
-  // body: resBody,
-
   return (
-    <div>
-      <Layout pageTitle="Tamagotcha">
-        <h1>Register Page</h1>
+    <Layout pageTitle="Tamagotcha" showNavbar={false}>
+      <div className={style.register}>
+        <h2>Please register</h2>
         <form onSubmit={onSubmit}>
           <label>Username</label>
           <input
@@ -84,11 +79,27 @@ const RegisterPage = () => {
             value={formInfo.confirm_password}
             onChange={handleChange}
           />
-          <label>Remember me</label>
-          <input type="submit" value="Login" />
+          <span>
+            <label>Remember me</label>
+            <input
+              type="checkbox"
+              value={formInfo.remember}
+              onChange={handleChange}
+            />
+          </span>
+          <Button
+            to="/play"
+            component="input"
+            type="submit"
+            value="Register"
+            className={style.registerBtn}
+          />
         </form>
-      </Layout>
-    </div>
+        <Button to="/" component={NavLink} className={style.loginBtn}>
+          Return to login
+        </Button>
+      </div>
+    </Layout>
   );
 };
 

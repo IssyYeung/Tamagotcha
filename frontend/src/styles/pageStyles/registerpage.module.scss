@@ -1,0 +1,41 @@
+@import "../mixins";
+@import "../variables";
+
+.register {
+  @include margin;
+  width: calc(100% - 60px);
+  display: block;
+  h2 {
+    margin: 20px 0;
+  }
+  input[type="text"] {
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px 0px;
+
+    &::placeholder {
+      padding: 0px 5px;
+    }
+  }
+
+  .registerBtn {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .loginBtn {
+    background-color: $lightColor;
+    margin-bottom: 20px;
+
+    &:hover {
+      background-color: darken($color: $lightColor, $amount: 10);
+    }
+  }
+
+  span {
+    @include flex;
+    margin-bottom: 20px;
+    label {
+      margin-right: 20px;
+    }
+  }
+}

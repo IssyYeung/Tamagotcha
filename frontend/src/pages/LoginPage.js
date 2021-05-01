@@ -2,6 +2,7 @@ import Layout from "../components/layout/Layout";
 import Button from "../components/button/Button";
 import { NavLink } from "react-router-dom";
 import React, { useReducer } from "react";
+import style from "../styles/pageStyles/loginpage.module.scss";
 
 const formReducer = (state, event) => {
   return {
@@ -42,9 +43,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <Layout pageTitle="Tamagotcha">
-        <h1>Login Page</h1>
+    <Layout pageTitle="Tamagotcha" showNavbar={false}>
+      <div className={style.login}>
+        <h2>Please login or register</h2>
         <form onSubmit={onSubmit}>
           <label>Email</label>
           <input
@@ -62,19 +63,36 @@ const LoginPage = () => {
             value={formInfo.password}
             onChange={handleChange}
           />
-          <label>Remember me</label>
-          <input
-            type="checkbox"
-            value={formInfo.remember}
-            onChange={handleChange}
+          <span>
+            <label>Remember me</label>
+            <input
+              type="checkbox"
+              value={formInfo.remember}
+              onChange={handleChange}
+            />
+          </span>
+          <Button
+            to="/play"
+            component="input"
+            type="submit"
+            value="Login"
+            className={style.loginBtn}
           />
-          <input type="submit" />
         </form>
-        <NavLink to="/register">
-          <Button>Register</Button>
-        </NavLink>
-      </Layout>
-    </div>
+
+        <Button
+          to="/register"
+          component={NavLink}
+          className={style.registerBtn}
+        >
+          Register
+        </Button>
+
+        <Button to="/play" component={NavLink} className={style.loginBtn}>
+          Pretend login. WILL REMOVE.
+        </Button>
+      </div>
+    </Layout>
   );
 };
 

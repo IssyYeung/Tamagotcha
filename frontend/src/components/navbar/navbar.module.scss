@@ -2,8 +2,6 @@
 @import "../../styles/variables";
 
 .navbar {
-  // background-color: $darkColor;
-  height: 60px;
   @include flex;
 
   div {
@@ -11,16 +9,21 @@
     width: 100%;
 
     a {
-      @include flex;
+      @include flex(column);
       font-size: 1rem;
-      // color: white;
       flex: 1;
-      height: 60px;
-      border: 1px solid black;
+      height: 80px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+      &:last-child {
+        border-right: none;
+      }
     }
   }
 
   img {
     height: 45px;
+    padding-bottom: 5px;
   }
 }
