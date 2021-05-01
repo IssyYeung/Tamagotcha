@@ -42,50 +42,50 @@ const RegisterPage = () => {
     });
   };
 
-  // method: "POST",
-  // headers: {
-  //   "Content-type": "application/json",
-  // },
-  // body: resBody,
-
   return (
     <div>
       <Layout pageTitle="Tamagotcha">
-        <h1>Register Page</h1>
+        <h2>Register Page</h2>
         <form onSubmit={onSubmit}>
-          <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            placeholder="Your Username"
-            value={formInfo.username}
-            onChange={handleChange}
-          />
-          <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="Your email address"
-            value={formInfo.email}
-            onChange={handleChange}
-          />
-          <label>Password</label>
-          <input
-            type="text"
-            name="password"
-            placeholder="Your password"
-            value={formInfo.password}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="confirm_password"
-            placeholder="Your password again"
-            value={formInfo.confirm_password}
-            onChange={handleChange}
-          />
-          <label>Remember me</label>
-          <input type="submit" value="Login" />
+          <div className="form-input">
+            <input
+              type="text"
+              name="username"
+              placeholder="Your Username"
+              value={formInfo.username}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-input">
+            <input
+              type="text"
+              name="email"
+              placeholder="Your email address"
+              value={formInfo.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-input">
+            <input
+              type="text"
+              name="password"
+              placeholder="Your password"
+              value={formInfo.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-input">
+            <input
+              type="text"
+              name="confirm_password"
+              placeholder="Your password again"
+              value={formInfo.confirm_password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-button-container">
+            <input className="form-button" type="submit" value="Sign up" />
+          </div>
         </form>
       </Layout>
     </div>

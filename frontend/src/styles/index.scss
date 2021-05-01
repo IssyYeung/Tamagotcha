@@ -36,3 +36,84 @@ a:hover {
 a:active {
   text-decoration: underline;
 }
+
+.form-input {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.form-input label {
+  display: block;
+  font-size: 17px;
+}
+
+.form-input input {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  height: 2.5em;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+  border: 1px solid #cdcdcd;
+  border-radius: 10px;
+}
+
+.form-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 60%;
+  height: 2.5em;
+  border: none;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #fef546;
+}
+
+.form-check-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-checkbox {
+  margin: 4px;
+}
+
+.register-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 60%;
+  height: 2.5em;
+}
+
+.nav-link-button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #13cdd4;
+}
+
+p.centered-text {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}

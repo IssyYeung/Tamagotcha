@@ -10,7 +10,9 @@ const Layout = ({ pageTitle, children }) => {
    try not to touch the index.html */}
         <title>{pageTitle}</title>
       </Helmet>
-      <h1 className={style.pageTitle}>{pageTitle}</h1>
+      <div className="title-container">
+        <h1 className={style.pageTitle}>{pageTitle}</h1>
+      </div>
       <Navbar />
       {children}
     </div>

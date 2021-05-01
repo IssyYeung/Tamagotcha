@@ -1,5 +1,4 @@
 import Layout from "../components/layout/Layout";
-import Button from "../components/button/Button";
 import { NavLink } from "react-router-dom";
 import React, { useReducer } from "react";
 
@@ -44,35 +43,45 @@ const LoginPage = () => {
   return (
     <div>
       <Layout pageTitle="Tamagotcha">
-        <h1>Login Page</h1>
+        <h2>Login Page</h2>
         <form onSubmit={onSubmit}>
-          <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="Your email address"
-            value={formInfo.email}
-            onChange={handleChange}
-          />
-          <label>Password</label>
-          <input
-            type="text"
-            name="password"
-            placeholder="Your password"
-            value={formInfo.password}
-            onChange={handleChange}
-          />
-          <label>Remember me</label>
-          <input
-            type="checkbox"
-            value={formInfo.remember}
-            onChange={handleChange}
-          />
-          <input type="submit" />
+          <div className="form-input">
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              value={formInfo.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-input">
+            <input
+              type="text"
+              name="password"
+              placeholder="Password"
+              value={formInfo.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-check-container">
+            <label>Remember me</label>
+            <input
+              className="form-checkbox"
+              type="checkbox"
+              value={formInfo.remember}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-button-container">
+            <input className="form-button" type="submit" value="Login" />
+          </div>
         </form>
-        <NavLink to="/register">
-          <Button>Register</Button>
-        </NavLink>
+        <p className="centered-text">Not yet have an account?</p>
+        <div className="form-button-container">
+          <NavLink to="/register" className="register-button">
+            <button className="nav-link-button">Register now</button>
+          </NavLink>
+        </div>
       </Layout>
     </div>
   );
