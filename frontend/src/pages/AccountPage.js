@@ -1,9 +1,13 @@
 import Layout from "../components/layout/Layout";
 import Button from "../components/button/Button";
+import ChangePassword from "../components/change_password/ChangePassword";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import style from "../styles/pageStyles/accountpage.module.scss";
 
 const AccountPage = () => {
+  const [showChangePassword, setShowChangePassword] = useState(false);
+
   const username = "Boris";
   const email = "boris@boris.boris";
   const hoursPlayed = 48;
@@ -20,7 +24,15 @@ const AccountPage = () => {
             <h4>Hours played: {hoursPlayed}</h4>
           </div>
           <div className={style.btnContainer}>
-            <Button className={style.changePasswordBtn}>Change Password</Button>
+            <Button
+              className={style.changePasswordBtn}
+              onClick={() => {
+                setShowChangePassword(!showChangePassword);
+              }}
+            >
+              Change Password
+            </Button>
+            {showChangePassword && <ChangePassword />}
             <NavLink to="/">
               <Button className={style.logoutBtn}>Logout</Button>
             </NavLink>
