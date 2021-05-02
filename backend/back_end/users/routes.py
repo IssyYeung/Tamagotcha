@@ -1,115 +1,56 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify, abort
-from flask_login import login_user, current_user, logout_user, login_required
-from back_end import db, bcrypt
+from flask import request, Blueprint, jsonify, abort
+from back_end import db, bcrypt, guard
 from back_end.models import User, UserSchema
-from back_end.users.utils import save_picture, send_reset_email
 from flask import Blueprint
-from back_end.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
-                                  RequestResetForm, ResetPasswordForm)
+import flask_praetorian 
 from back_end.models import UserSchema
 
 users = Blueprint('users', __name__)
 
-
-@users.route("/register", methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(
-            form.password.data).decode('utf-8')
-        user = User(username=form.username.data,
-                    email=form.email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash('Your account has been created! You are now able to log in',
-              'btn btn-success')
-        return redirect(url_for('users.login'))
-    # return render_template('register.html', title='Register', form=form)
-
-
-@users.route("/login", methods=['GET', 'POST'])
+@users.route('/api/login', methods=['POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('main.home'))
-        else:
-            flash('Login Unsuccessful. Please check email and password',
-                  'btn btn-danger')
-    # return render_template('login.html', title='Login', form=form)
-
-
-@users.route("/logout")
-def logout():
-    logout_user()
-    # return redirect(url_for('main.home'))
-
-
-@users.route("/account", methods=['GET', 'POST'])
-@login_required
-def account():
-    form = UpdateAccountForm()
-    if form.validate_on_submit():
-        if form.picture.data:
-            picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        db.session.commit()
-        # flash('Your account has been updated!', 'btn btn-success')
-        # return redirect(url_for('users.account'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.email.data = current_user.email
-    image_file = url_for(
-        'static', filename='profile_pics/' + current_user.image_file)
-    user_schema = UserSchema()
-    return user_schema.jsonify(current_user)
-    # return render_template('account.html', title='Account',
-    #                        image_file=image_file, form=form)
-
-
-@users.route("/reset_password", methods=['GET', 'POST'])
-def reset_request():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
-    form = RequestResetForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        send_reset_email(user)
-        flash('An email has been sent with instructions to reset your password.', 'info')
-        return redirect(url_for('users.login'))
-    return render_template('reset_request.html', title='Reset Password', form=form)
-
-
-@users.route("/reset_password/<token>", methods=['GET', 'POST'])
-def reset_token(token):
-    if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
-    user = User.verify_reset_token(token)
-    if user is None:
-        flash('That is an invalid or expired token', 'btn btn-warning')
-        return redirect(url_for('users.reset_request'))
-    form = ResetPasswordForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(
-            form.password.data).decode('utf-8')
-        user.password = hashed_password
-        db.session.commit()
-        flash('Your password has been updated! You are now able to log in',
-              'btn btn-success')
-        return redirect(url_for('users.login'))
-    return render_template('reset_token.html', title='Reset Password', form=form)
+    """
+    Logs a user in by parsing a POST request containing user credentials and
+    issuing a JWT token.
+    .. example::
+       $ curl http://localhost:5000/api/login -X POST \
+         -d '{"username":"Yasoob","password":"strongpassword"}'
+    """
+    req = request.get_json(force=True)
+    username = req.get('username', None)
+    password = req.get('password', None)
+    user = guard.authenticate(username, password)
+    ret = {'access_token': guard.encode_jwt_token(user)}
+    return ret, 200
+ 
+@users.route('/api/refresh', methods=['POST'])
+def refresh():
+    """
+    Refreshes an existing JWT by creating a new one that is a copy of the old
+    except that it has a refrehsed access expiration.
+    .. example::
+       $ curl http://localhost:5000/api/refresh -X GET \
+         -H "Authorization: Bearer <your_token>"
+    """
+    print("refresh request")
+    old_token = request.get_data()
+    new_token = guard.refresh_jwt_token(old_token)
+    ret = {'access_token': new_token}
+    return ret, 200
+  
+@users.route('/api/protected')
+@flask_praetorian .auth_required
+def protected():
+    """
+    A protected endpoint. The auth_required decorator will require a header
+    containing a valid JWT
+    .. example::
+       $ curl http://localhost:5000/api/protected -X GET \
+         -H "Authorization: Bearer <your_token>"
+    """
+    return {'message': f'protected endpoint (allowed user {flask_praetorian .current_user().username})'}
 
 # ADMIN ROUTES
-
 
 @users.route('/user_list', methods=['GET'])
 def list_users():
@@ -138,8 +79,9 @@ def new_user():
         # Hash password entered by user for secure storage in database.
         hashed_password = bcrypt.generate_password_hash(
             password_data).decode('utf-8')
+        role = "player"
         new_user = User(email=email_data, username=username_data,
-                        password=hashed_password)
+                        hashed_password=hashed_password, roles=role)
         db.session.add(new_user)
         db.session.commit()
         user_schema = UserSchema()
@@ -158,8 +100,9 @@ def new_users():
             password_data = json_object.get('password')
             hashed_password = bcrypt.generate_password_hash(
                 password_data).decode('utf-8')
+            role = "player"
             new_user = User(email=email_data,
-                            username=username_data, password=hashed_password)
+                            username=username_data, hashed_password=hashed_password, roles=role)
             db.session.add(new_user)
             db.session.commit()
             user_schema = UserSchema()
@@ -184,7 +127,7 @@ def update_user(id):
         user.username = username_data
         hashed_password = bcrypt.generate_password_hash(
             password_data).decode('utf-8')
-        user.password = hashed_password
+        user.hashed_password = hashed_password
 
         db.session.commit()
 

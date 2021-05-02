@@ -18,9 +18,9 @@ const LoginPage = () => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.set("email", formInfo.email);
+    formData.set("username", formInfo.email);
     formData.set("password", formInfo.password);
-    formData.set("remember", formInfo.remember);
+    //formData.set("remember", formInfo.remember);
 
     console.log(formInfo);
     console.log(formData);
@@ -28,8 +28,8 @@ const LoginPage = () => {
       method: "POST",
       body: formData,
     };
-
-    fetch("http://127.0.0.1:8000/register/", requestOptions)
+    
+    fetch("http://127.0.0.1:5000/api/login", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -47,12 +47,12 @@ const LoginPage = () => {
       <div className={style.login}>
         <h2>Please login or register</h2>
         <form onSubmit={onSubmit}>
-          <label>Email</label>
+          <label>Username</label>
           <input
             type="text"
-            name="email"
-            placeholder="Your email address"
-            value={formInfo.email}
+            name="username"
+            placeholder="Your username"
+            value={formInfo.username}
             onChange={handleChange}
           />
           <label>Password</label>
@@ -67,8 +67,8 @@ const LoginPage = () => {
             <label>Remember me</label>
             <input
               type="checkbox"
-              value={formInfo.remember}
-              onChange={handleChange}
+              //value={formInfo.remember}
+              //onChange={handleChange}
             />
           </span>
           <Button

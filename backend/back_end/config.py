@@ -6,6 +6,9 @@ class Config:
 
     SECRET_KEY = '11de6d11b968dd66feb8cb6aff64a0b0'
 
+    JWT_ACCESS_LIFESPAN = {'hours': 24}
+    JWT_REFRESH_LIFESPAN = {'days': 30}
+
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True

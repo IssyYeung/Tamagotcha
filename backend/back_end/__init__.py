@@ -6,6 +6,7 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 from flask_login import LoginManager
 from flask_cors import CORS
+from flask_praetorian import Praetorian
 
 # Create instance of database
 db = SQLAlchemy()
@@ -22,10 +23,16 @@ mail = Mail()
 # Create instance of login manager.
 login_manager = LoginManager()
 
+# Create instance of flask praetorian for authentication.
+guard = Praetorian()
+
+# Allow for cross origin reference sources (from frontend)
+cors = CORS()
 
 def create_app(config_class=Config):
     # name is the name of the current python module
     app = Flask(__name__)
+    
 
     # Linking to config.py file to set configurations
     app.config.from_object(Config)
@@ -36,7 +43,8 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     mail.init_app(app)
     login_manager.init_app(app)
-    CORS(app)
+    cors.init_app(app)
+
 
     from back_end.errors.handlers import errors
     from back_end.main.routes import main
@@ -50,5 +58,10 @@ def create_app(config_class=Config):
     app.register_blueprint(main)
     app.register_blueprint(minigames)
     app.register_blueprint(users)
+
+    #Done to avoid circular import dilemma with Praetorian initialisation:
+    with app.app_context():
+        from back_end.models import User
+        guard.init_app(app, User)
 
     return app

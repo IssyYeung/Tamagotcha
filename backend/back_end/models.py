@@ -1,39 +1,26 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
-from back_end import db, ma, login_manager
-from flask_login import UserMixin
+from back_end import db, ma
 
-# Function to get a user by id upon login.
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-
-class User(db.Model, UserMixin):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    image_file = db.Column(db.String(120), nullable=False,
-                           default='default.jpg')
-    password = db.Column(db.String(120), nullable=False)
+    hashed_password = db.Column(db.String(500), nullable=False)
     time_on_app = db.Column(db.Float, nullable=False, default=0.0)
-    last_login = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
-
-    # Might want to add a column which records the last login so that we can calculate the timeOnApp or change Tamagochi stats based upon time
-    # lastLogin = db.Column( db.DateTime, nullable=False )
-
+    last_login = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    roles = db.Column(db.Text)
+    is_active = db.Column(db.Boolean, default=True, server_default="true")
     # One to many relationship because one user can have many Tamagotchis (eventually).
     # Backref allows us to get owner (user) attribute of Tamagotchi.
     Tamagotchis = db.relationship('Tamagotchi', backref='author', lazy=True)
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, hashed_password, roles):
         self.username = username
         self.email = email
-        self.password = password
+        self.hashed_password = hashed_password
+        self.roles = roles
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -48,6 +35,66 @@ class User(db.Model, UserMixin):
             return None
         return User.query.get(user_id)
 
+    @property
+    def identity(self):
+        """
+        *Required Attribute or Property*
+
+        flask-praetorian requires that the user class has an ``identity`` instance
+        attribute or property that provides the unique id of the user instance
+        """
+        return self.id
+
+    @property
+    def rolenames(self):
+        """
+        *Required Attribute or Property*
+
+        flask-praetorian requires that the user class has a ``rolenames`` instance
+        attribute or property that provides a list of strings that describe the roles
+        attached to the user instance
+        """
+        try:
+            return self.roles.split(",")
+        except Exception:
+            return []
+
+    @property
+    def password(self):
+        """
+        *Required Attribute or Property*
+
+        flask-praetorian requires that the user class has a ``password`` instance
+        attribute or property that provides the hashed password assigned to the user
+        instance
+        """
+        return self.hashed_password
+
+    @classmethod
+    def lookup(cls, username):
+        """
+        *Required Method*
+
+        flask-praetorian requires that the user class implements a ``lookup()``
+        class method that takes a single ``username`` argument and returns a user
+        instance if there is one that matches or ``None`` if there is not.
+        """
+        return cls.query.filter_by(username=username).one_or_none()
+
+    @classmethod
+    def identify(cls, id):
+        """
+        *Required Method*
+
+        flask-praetorian requires that the user class implements an ``identify()``
+        class method that takes a single ``id`` argument and returns user instance if
+        there is one that matches or ``None`` if there is not.
+        """
+        return cls.query.get(id)
+
+    def is_valid(self):
+        return self.is_active
+
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}', '{self.time_on_app}', '{self.last_login}')"
 
@@ -56,8 +103,7 @@ class Tamagotchi(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    time_of_birth = db.Column(
-        db.DateTime, nullable=False, default=datetime.utcnow)
+    time_of_birth = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     breed = db.Column(db.String(100), nullable=False)
     overall_health = db.Column(db.Integer, nullable=False, default=100)
     sleep = db.Column(db.Integer, nullable=False, default=70)
@@ -99,10 +145,3 @@ class TriviaQuestionsSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = TriviaQuestions
 
-# Create the database called site.db from scratch by following the steps below in the terminal:
-# 'python'
-#'from back_end import db, create_app, login_manager'
-#'app = create_app()'
-# 'app.app_context().push()'
-#'from back_end.models import User, Tamagotchi, TriviaQuestions'
-# 'db.create_all()'
