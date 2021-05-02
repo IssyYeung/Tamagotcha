@@ -1,4 +1,5 @@
 import style from "./ChangePassword.module.scss";
+import Button from "../button/Button";
 
 const ChangePassword = () => {
   return (
@@ -10,6 +11,12 @@ const ChangePassword = () => {
         <input type="text" placeholder="Your new password" />
         <label>Confirm new password</label>
         <input type="text" placeholder="Confirm your new password" />
+        <Button
+          type="submit"
+          className={style.submitPassword}
+          component="input"
+          value="Confirm New Password"
+        />
       </form>
     </div>
   );
