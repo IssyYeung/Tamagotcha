@@ -16,6 +16,6 @@
 }
 
 .button:hover {
-  background-color: darken($color: $btnColor, $amount: 5);
+  background-color: darken($color: $btnColor, $amount: 10);
   text-decoration: none;
 }

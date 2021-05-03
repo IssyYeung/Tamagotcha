@@ -12,7 +12,7 @@
   align-items: $ai;
 }
 
-@mixin box($w: 200px, $h: 100px, $br: 1px, $bg: yellow) {
+@mixin box($w: 200px, $h: 100px, $br: 1px, $bg: purple) {
   width: $w;
   height: $h;
   border-radius: $br;
