@@ -1,0 +1,329 @@
+.creature {
+  position: absolute;
+  overflow: visible;
+  height: 140px;
+  bottom: 170px;
+  &__jump {
+    animation-name: jump;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 2;
+  }
+}
+.body {
+  stroke: #000000;
+  stroke-miterlimit: 10;
+}
+.face {
+  fill: #ffffff;
+}
+
+.mouth {
+  opacity: 1;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: rotate(180deg) translateY(-5px);
+}
+
+.mouthNeutral {
+  opacity: 0;
+}
+
+.deadEyeLeft,
+.deadEyeRight {
+  opacity: 0;
+}
+
+.sleepEyeLeft,
+.sleepEyeRight {
+  opacity: 0;
+}
+
+.armLeft {
+  transform-box: fill-box;
+  transform-origin: left;
+  transform: rotate(60deg);
+
+  &__jump {
+    animation-name: jumpLeftArm;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 2;
+  }
+  &__wave {
+    animation-name: waveLeft;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+  &__cheer {
+    animation-name: cheerLeft;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+}
+
+.armRight {
+  transform-box: fill-box;
+  transform-origin: right;
+  transform: rotate(-60deg);
+  &__jump {
+    animation-name: jumpRightArm;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 2;
+  }
+  &__cheer {
+    animation-name: cheerRight;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+}
+
+.legRight {
+  transform-box: fill-box;
+  transform-origin: top;
+  transform: rotate(10deg);
+  &__jump {
+    animation-name: jumpRightLeg;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 2;
+  }
+}
+
+.legLeft {
+  transform-box: fill-box;
+  transform-origin: top;
+  transform: rotate(-10deg);
+  &__jump {
+    animation-name: jumpLeftLeg;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 2;
+  }
+}
+
+.earLeft {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  transform: rotate(10deg);
+  &__wiggle {
+    animation-name: wiggleLeftEar;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+}
+
+.earRight {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  transform: rotate(-10deg);
+  &__wiggle {
+    animation-name: wiggleRightEar;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+}
+
+@keyframes waveLeft {
+  from {
+    transform: rotate(60deg);
+  }
+  25% {
+    transform: rotate(-50deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-50deg);
+  }
+  to {
+    transform: rotate(60deg);
+  }
+}
+
+@keyframes cheerLeft {
+  from {
+    transform: rotate(60deg);
+  }
+  20% {
+    transform: rotate(-50deg);
+  }
+  30% {
+    transform: rotate(-20deg);
+  }
+  40% {
+    transform: rotate(-50deg);
+  }
+  50% {
+    transform: rotate(-20deg);
+  }
+  60% {
+    transform: rotate(-50deg);
+  }
+  70% {
+    transform: rotate(-20deg);
+  }
+  80% {
+    transform: rotate(-50deg);
+  }
+  to {
+    transform: rotate(60deg);
+  }
+}
+
+@keyframes cheerRight {
+  from {
+    transform: rotate(-60deg);
+  }
+  20% {
+    transform: rotate(50deg);
+  }
+  30% {
+    transform: rotate(20deg);
+  }
+  40% {
+    transform: rotate(50deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  60% {
+    transform: rotate(50deg);
+  }
+  70% {
+    transform: rotate(20deg);
+  }
+  80% {
+    transform: rotate(50deg);
+  }
+  to {
+    transform: rotate(-60deg);
+  }
+}
+
+@keyframes jumpRightLeg {
+  from {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes jumpLeftLeg {
+  from {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(-30deg);
+  }
+  to {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes jumpRightArm {
+  from {
+    transform: rotate(-60deg);
+  }
+  50% {
+    transform: rotate(-40deg);
+  }
+  to {
+    transform: rotate(-60deg);
+  }
+}
+
+@keyframes jumpLeftArm {
+  from {
+    transform: rotate(60deg);
+  }
+  50% {
+    transform: rotate(40deg);
+  }
+  to {
+    transform: rotate(60deg);
+  }
+}
+
+@keyframes jump {
+  from {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggleRightEar {
+  from {
+    transform: rotate(-10deg);
+  }
+  20% {
+    transform: rotate(-15deg);
+  }
+  30% {
+    transform: rotate(-5deg);
+  }
+  40% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  60% {
+    transform: rotate(-15deg);
+  }
+  70% {
+    transform: rotate(-5deg);
+  }
+  80% {
+    transform: rotate(-15deg);
+  }
+  to {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes wiggleLeftEar {
+  from {
+    transform: rotate(10deg);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  30% {
+    transform: rotate(5deg);
+  }
+  40% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  60% {
+    transform: rotate(15deg);
+  }
+  70% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(15deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}

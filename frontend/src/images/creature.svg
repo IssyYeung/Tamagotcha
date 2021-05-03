@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 282.6 287.3" style="enable-background:new 0 0 282.6 287.3;" xml:space="preserve">
+<style type="text/css">
+	.st0{stroke:#000000;stroke-miterlimit:10;}
+	.st1{fill:#FFFFFF;}
+</style>
+<circle id="body" class="st0" cx="141" cy="162.6" r="97.6"/>
+<path id="face" class="st1" d="M82.9,115.2c-11.6,13.5-18.6,31-18.6,50.2c0,42.5,34.5,77,77,77c42.5,0,77-34.5,77-77
+	c0-19.2-7-36.7-18.6-50.2H82.9z"/>
+<circle id="eyeRight" cx="105.3" cy="143.7" r="12.9"/>
+<circle id="eyeLeft" cx="176.3" cy="143.7" r="12.9"/>
+<path id="mouthNeutral" d="M163.8,183.7h-45c-5.1,0-9.3-4.2-9.3-9.3v0c0-5.1,4.2-9.3,9.3-9.3h45c5.1,0,9.3,4.2,9.3,9.3v0
+	C173.1,179.5,168.9,183.7,163.8,183.7z"/>
+<path id="mouth" d="M141,159.3c-17.7,0-32,11.7-32,26.1h64C173,171,158.7,159.3,141,159.3z"/>
+<ellipse id="armLeft" cx="250.4" cy="162.6" rx="32.1" ry="15.8"/>
+<ellipse id="armRight" cx="32.1" cy="162.6" rx="32.1" ry="15.8"/>
+<rect id="sleepEyeRight" x="90.5" y="140.3" width="29.6" height="6.7"/>
+<rect id="sleepEyeLeft" x="161.5" y="140.3" width="29.6" height="6.7"/>
+<polygon id="deadEyeRight" points="118.2,151.2 110.1,143.1 118.2,135.1 113.5,130.3 105.4,138.4 97.3,130.3 92.6,135.1 
+	100.7,143.1 92.6,151.2 97.3,156 105.4,147.9 113.5,156 "/>
+<polygon id="deadEyeLeft" points="189.1,151.7 181.1,143.7 189.1,135.6 184.4,130.8 176.3,138.9 168.2,130.8 163.5,135.6 
+	171.6,143.7 163.5,151.7 168.2,156.5 176.3,148.4 184.4,156.5 "/>
+<ellipse id="legRight" cx="105.4" cy="261.6" rx="18.6" ry="25.7"/>
+<ellipse id="legLeft" cx="176.3" cy="261.6" rx="18.6" ry="25.7"/>
+<ellipse id="earLeft" cx="176.3" cy="51.4" rx="32.6" ry="51.4"/>
+<ellipse id="earRight" cx="105.3" cy="51.4" rx="32.6" ry="51.4"/>
+</svg>
