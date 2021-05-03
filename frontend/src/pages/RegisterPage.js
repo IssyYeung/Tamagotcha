@@ -2,7 +2,7 @@ import Layout from "../components/layout/Layout";
 import style from "../styles/pageStyles/registerpage.module.scss";
 import Button from "../components/button/Button";
 import React, { useReducer } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const formReducer = (state, event) => {
   return {
@@ -13,6 +13,7 @@ const formReducer = (state, event) => {
 
 const RegisterPage = () => {
   const [formInfo, setFormInfo] = useReducer(formReducer, {});
+  const history = useHistory();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -33,6 +34,7 @@ const RegisterPage = () => {
     fetch("http://127.0.0.1:5000/api/register", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
+      .then(history.push("/"))
       .catch((error) => console.log("error", error));
   };
 

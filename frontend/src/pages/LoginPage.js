@@ -1,6 +1,6 @@
 import Layout from "../components/layout/Layout";
 import Button from "../components/button/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import React, { useReducer } from "react";
 import style from "../styles/pageStyles/loginpage.module.scss";
 import { login, useAuth } from "../auth/index";
@@ -14,6 +14,7 @@ const formReducer = (state, event) => {
 
 const LoginPage = () => {
   const [formInfo, setFormInfo] = useReducer(formReducer, {});
+  const history = useHistory();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -41,6 +42,7 @@ const LoginPage = () => {
         if (token.access_token) {
           login(token);
           console.log(token);
+          history.push("/play");
         } else {
           console.log("Please type in correct username/password");
         }
