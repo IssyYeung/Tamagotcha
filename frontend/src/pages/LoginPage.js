@@ -73,7 +73,7 @@ const LoginPage = () => {
           />
           <label>Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Your password"
             value={formInfo.password || ""}

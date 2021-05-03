@@ -68,14 +68,15 @@ const RegisterPage = () => {
           />
           <label>Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Your password"
             value={formInfo.password || ""}
             onChange={handleChange}
           />
+          <label>Confirm Password</label>
           <input
-            type="text"
+            type="password"
             name="confirm_password"
             placeholder="Your password again"
             value={formInfo.confirm_password || ""}

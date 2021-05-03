@@ -2,7 +2,7 @@ import Layout from "../components/layout/Layout";
 import Button from "../components/button/Button";
 import ChangePassword from "../components/change_password/ChangePassword";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "../styles/pageStyles/accountpage.module.scss";
 
 const AccountPage = () => {
@@ -16,7 +16,6 @@ const AccountPage = () => {
   return (
     <div>
       <Layout pageTitle="Tamaccount">
-        <h1>Account Page</h1>
         <div className={style.accountPageContainer}>
           <div className={style.infoContainer}>
             <h4>Username: {username}</h4>

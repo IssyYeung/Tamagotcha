@@ -13,7 +13,6 @@ const StatsPage = () => {
   return (
     <div>
       <Layout pageTitle="Tamastats">
-        <h2>Stats Page</h2>
         <div className={style.statsPageContainer}>
           <div className={style.infoContainer}>
             <h4>Name: Boris</h4>
