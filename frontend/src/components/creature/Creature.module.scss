@@ -28,9 +28,13 @@
   transform: rotate(180deg) translateY(-5px);
 }
 
-.mouth,
+.mouth {
+  opacity: 0;
+}
+
 .mouthNeutral {
   opacity: 0;
+  transform: translateY(-10px);
 }
 
 .eyesNormal,
