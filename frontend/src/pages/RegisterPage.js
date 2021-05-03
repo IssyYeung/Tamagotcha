@@ -24,13 +24,13 @@ const RegisterPage = () => {
     formData.set("confirm_password", formInfo.confirm_password);
 
     console.log(formInfo);
-    console.log(formData);
+    //console.log(formData);
     const requestOptions = {
       method: "POST",
-      body: formData,
+      body: JSON.stringify(formInfo),
     };
 
-    fetch("http://127.0.0.1:5000/register", requestOptions)
+    fetch("http://127.0.0.1:5000/api/register", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));

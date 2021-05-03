@@ -3,6 +3,7 @@ import Button from "../components/button/Button";
 import { NavLink } from "react-router-dom";
 import React, { useReducer } from "react";
 import style from "../styles/pageStyles/loginpage.module.scss";
+import { login, useAuth } from "../auth/index";
 
 const formReducer = (state, event) => {
   return {
@@ -23,16 +24,28 @@ const LoginPage = () => {
     //formData.set("remember", formInfo.remember);
 
     console.log(formInfo);
-    console.log(formData);
     const requestOptions = {
       method: "POST",
-      body: formData,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify(formInfo),
     };
+
+    console.log(requestOptions.body)
     
     fetch("http://127.0.0.1:5000/api/login", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+      .then(r => r.json())
+      .then(token => {
+        if (token.access_token) {
+          login(token)
+          console.log(token)
+        }
+        else {
+          console.log("Please type in correct username/password")
+        }
+      })
   };
 
   const handleChange = (event) => {
@@ -41,6 +54,8 @@ const LoginPage = () => {
       value: event.target.value,
     });
   };
+
+  const [logged] = useAuth();
 
   return (
     <Layout pageTitle="Tamagotcha" showNavbar={false}>
@@ -67,8 +82,8 @@ const LoginPage = () => {
             <label>Remember me</label>
             <input
               type="checkbox"
-              //value={formInfo.remember}
-              //onChange={handleChange}
+            //value={formInfo.remember}
+            //onChange={handleChange}
             />
           </span>
           <Button

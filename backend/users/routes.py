@@ -10,7 +10,7 @@ users = Blueprint('users', __name__)
 
 @users.route('/api/register', methods=['POST'])
 def register_user():
-    try:
+    # try:
         req = request.get_json(force=True)
         email = req.get('email', None)
         username = req.get('username', None)
@@ -27,8 +27,8 @@ def register_user():
         assign_first_tamagotchi(new_user_id)
         user_schema = UserSchema()
         return user_schema.jsonify(new_user)
-    except:
-        abort(400)
+    # except:
+    #     abort(400)
 
 @users.route('/api/login', methods=['POST'])
 def login():
