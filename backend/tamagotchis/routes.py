@@ -1,6 +1,6 @@
 from flask import (request, abort, Blueprint, jsonify)
-from back_end.models import User, Tamagotchi, TamagotchiSchema
-from back_end import db
+from backend.models import User, Tamagotchi, TamagotchiSchema
+from backend import db
 
 tamagotchis = Blueprint('tamagotchis', __name__)
 

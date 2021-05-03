@@ -1,7 +1,7 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
-from back_end import db, ma
+from backend import db, ma
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -96,7 +96,7 @@ class User(db.Model):
         return self.is_active
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.image_file}', '{self.time_on_app}', '{self.last_login}')"
+        return f"User('{self.username}', '{self.email}', '{self.time_on_app}', '{self.last_login}')"
 
 
 class Tamagotchi(db.Model):
@@ -111,12 +111,13 @@ class Tamagotchi(db.Model):
     hunger = db.Column(db.Integer, nullable=False, default=10)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
-    def __init__(self, name, breed):
+    def __init__(self, name, breed, user_id):
         self.name = name
         self.breed = breed
+        self.user_id = user_id
 
     def __repr__(self):
-        return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.overall_health}', '{self.sleep}', '{self.thirst}', '{self.hunger}')"
+        return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.overall_health}', '{self.sleep}', '{self.thirst}', '{self.hunger}', '{self.user_id}')"
 
 
 class TriviaQuestions(db.Model):
@@ -125,9 +126,11 @@ class TriviaQuestions(db.Model):
     incorrect_ans_one = db.Column(db.String(15), nullable=False)
     incorrect_ans_two = db.Column(db.String(15), nullable=False)
     correct_ans = db.Column(db.String(15), nullable=False)
+    question_used = db.Column(db.Boolean, nullable = False, default=False)
+
 
     def __repr__(self):
-        return f"Tamagotchi('{self.question}', '{self.incorrect_ans_one}', '{self.incorrect_ans_two}', '{self.correct_ans}')"
+        return f"Tamagotchi('{self.question}', '{self.incorrect_ans_one}', '{self.incorrect_ans_two}', '{self.correct_ans}', '{self.question_used}')"
 
 
 # Create Marshmallow Schema (JSON Serialisable objects)

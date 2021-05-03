@@ -1,21 +1,37 @@
 from flask import request, Blueprint, jsonify, abort
-from back_end import db, bcrypt, guard
-from back_end.models import User, UserSchema
+from backend import db, bcrypt, guard
+from backend.models import User, UserSchema
 from flask import Blueprint
 import flask_praetorian 
-from back_end.models import UserSchema
+from backend.models import UserSchema
+from backend.users.utils import assign_first_tamagotchi
 
 users = Blueprint('users', __name__)
 
+@users.route('/api/register', methods=['POST'])
+def register_user():
+    try:
+        req = request.get_json(force=True)
+        email = req.get('email', None)
+        username = req.get('username', None)
+        password = req.get('password', None)
+        hashed_password = bcrypt.generate_password_hash(
+            password).decode('utf-8')
+        role = "player"
+        new_user = User(email=email, username=username,
+                        hashed_password=hashed_password, roles=role)
+        db.session.add(new_user)
+        db.session.commit()
+        current_users = User.query.all()
+        new_user_id = len(current_users)
+        assign_first_tamagotchi(new_user_id)
+        user_schema = UserSchema()
+        return user_schema.jsonify(new_user)
+    except:
+        abort(400)
+
 @users.route('/api/login', methods=['POST'])
 def login():
-    """
-    Logs a user in by parsing a POST request containing user credentials and
-    issuing a JWT token.
-    .. example::
-       $ curl http://localhost:5000/api/login -X POST \
-         -d '{"username":"Yasoob","password":"strongpassword"}'
-    """
     req = request.get_json(force=True)
     username = req.get('username', None)
     password = req.get('password', None)
@@ -49,6 +65,8 @@ def protected():
          -H "Authorization: Bearer <your_token>"
     """
     return {'message': f'protected endpoint (allowed user {flask_praetorian .current_user().username})'}
+
+
 
 # ADMIN ROUTES
 

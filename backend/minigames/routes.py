@@ -1,8 +1,31 @@
 from flask import Blueprint, request, jsonify, abort
-from back_end.models import TriviaQuestions, TriviaQuestionsSchema
-from back_end import db
+from backend.models import TriviaQuestions, TriviaQuestionsSchema
+from backend import db
 
 minigames = Blueprint('minigames', __name__)
+
+@minigames.route('/api/play/quiz', methods=['GET'])
+def get_new_question():
+    try:
+        triviaQuestion = TriviaQuestions.query.filter_by(question_used = 0).first()
+        (TriviaQuestions.query.get(int(triviaQuestion.id))).question_used = 1
+        db.session.commit()
+        triviaQuestions_schema = TriviaQuestionsSchema()
+        return triviaQuestions_schema.jsonify(triviaQuestion)
+    except:
+         abort(405)
+
+@minigames.route('/api/play/finish_quiz', methods=['PUT'])
+def reset_questions():
+    try:
+        triviaQuestions = TriviaQuestions.query.all()
+        for question in triviaQuestions:
+            (TriviaQuestions.query.get(int(question.id))).question_used = 0
+            db.session.commit()
+        return jsonify(([{'Questions available' : len(triviaQuestions)}]))
+    except:
+         abort(400)
+
 
 #ADMIN ROUTES
 
