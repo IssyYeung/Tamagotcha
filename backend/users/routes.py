@@ -54,18 +54,13 @@ def refresh():
     ret = {'access_token': new_token}
     return ret, 200
   
-@users.route('/api/protected')
+@users.route('/api/account', methods=['GET'])
 @flask_praetorian .auth_required
-def protected():
-    """
-    A protected endpoint. The auth_required decorator will require a header
-    containing a valid JWT
-    .. example::
-       $ curl http://localhost:5000/api/protected -X GET \
-         -H "Authorization: Bearer <your_token>"
-    """
-    return {'message': f'protected endpoint (allowed user {flask_praetorian .current_user().username})'}
-
+def get_account_details():
+    user = User.query.filter_by(id=flask_praetorian .current_user().id)
+    user_schema = UserSchema(many=True)
+    output = user_schema.dump(user)
+    return jsonify(output)
 
 
 # ADMIN ROUTES

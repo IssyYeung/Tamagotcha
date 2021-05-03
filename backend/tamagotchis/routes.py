@@ -1,21 +1,18 @@
 from flask import (request, abort, Blueprint, jsonify)
 from backend.models import User, Tamagotchi, TamagotchiSchema
 from backend import db
+import flask_praetorian 
 
 tamagotchis = Blueprint('tamagotchis', __name__)
 
-@tamagotchis.route('/user_tamagotchis/<username>', methods=['GET'])
-# @login_required
-def user_Tamagotchis(username):
-    username = str(username)
-    #page = request.args.get('page', 1, type=int)
-    user = User.query.get(username)  # .first_or_404()
-    tamagotchis = Tamagotchi.query.filter_by(user_id=user.username)\
-        .order_by(Tamagotchi.time_of_birth.desc())\
-        # .paginate(page=page, per_page=5)
-    # return render_template('user_Tamagotchis.html', Tamagotchis=Tamagotchis, user=user)
-    tamagotchi_schema = TamagotchiSchema()
-    return tamagotchi_schema.jsonify(tamagotchis)
+@tamagotchis.route('/api/tamagotchi_stats', methods=['GET'])
+@flask_praetorian .auth_required
+def get_tamagotchi_stats():
+    tamagotchis = Tamagotchi.query.filter_by(user_id=flask_praetorian .current_user().id)
+    tamagotchi_schema = TamagotchiSchema(many=True)
+    output = tamagotchi_schema.dump(tamagotchis)
+    #{f'{flask_praetorian .current_user().username}\'s tamagotchi\'s': 
+    return jsonify(output)
 
 # ADMIN ROUTES
 
@@ -42,7 +39,8 @@ def new_tamagotchi():
     try:
         name = request.json['name']
         breed = request.json['breed']
-        new_tamagotchi = Tamagotchi(name=name, breed=breed)
+        user_id = request.json['user_id']
+        new_tamagotchi = Tamagotchi(name=name, breed=breed, user_id=user_id)
         db.session.add(new_tamagotchi)
         db.session.commit()
         tamagotchi_schema = TamagotchiSchema()
@@ -58,7 +56,8 @@ def new_tamagotchis():
     for json_object in jsonBody:
         name = json_object.get('name')
         breed = json_object.get('breed')
-        new_tamagotchi = Tamagotchi(name=name, breed=breed)
+        user_id = json_object.get('user_id')
+        new_tamagotchi = Tamagotchi(name=name, breed=breed, user_id=user_id)
         db.session.add(new_tamagotchi)
         db.session.commit()
         tamagotchi_schema = TamagotchiSchema()
@@ -76,9 +75,10 @@ def update_tamagotchi(id):
         tamagotchi = Tamagotchi.query.get(id)
         name = request.json['name']
         breed = request.json['breed']
-
+        user_id = request.json['user_id']
         tamagotchi.name = name
         tamagotchi.breed = breed
+        tamagotchi.user_id = user_id
 
         db.session.commit()
 
