@@ -3,6 +3,7 @@ import Button from "../components/button/Button";
 import { NavLink } from "react-router-dom";
 import React, { useReducer } from "react";
 import style from "../styles/pageStyles/loginpage.module.scss";
+import { login, useAuth } from "../auth/index";
 
 const formReducer = (state, event) => {
   return {
@@ -18,21 +19,33 @@ const LoginPage = () => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.set("email", formInfo.email);
+    formData.set("username", formInfo.email);
     formData.set("password", formInfo.password);
-    formData.set("remember", formInfo.remember);
+    //formData.set("remember", formInfo.remember);
 
     console.log(formInfo);
-    console.log(formData);
     const requestOptions = {
       method: "POST",
-      body: formData,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify(formInfo),
     };
 
-    fetch("http://127.0.0.1:8000/register/", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    console.log(requestOptions.body)
+    
+    fetch("http://127.0.0.1:5000/api/login", requestOptions)
+      .then(r => r.json())
+      .then(token => {
+        if (token.access_token) {
+          login(token)
+          console.log(token)
+        }
+        else {
+          console.log("Please type in correct username/password")
+        }
+      })
   };
 
   const handleChange = (event) => {
@@ -42,17 +55,19 @@ const LoginPage = () => {
     });
   };
 
+  const [logged] = useAuth();
+
   return (
     <Layout pageTitle="Tamagotcha" showNavbar={false}>
       <div className={style.login}>
         <h2>Please login or register</h2>
         <form onSubmit={onSubmit}>
-          <label>Email</label>
+          <label>Username</label>
           <input
             type="text"
-            name="email"
-            placeholder="Your email address"
-            value={formInfo.email}
+            name="username"
+            placeholder="Your username"
+            value={formInfo.username}
             onChange={handleChange}
           />
           <label>Password</label>
@@ -67,8 +82,8 @@ const LoginPage = () => {
             <label>Remember me</label>
             <input
               type="checkbox"
-              value={formInfo.remember}
-              onChange={handleChange}
+            //value={formInfo.remember}
+            //onChange={handleChange}
             />
           </span>
           <Button

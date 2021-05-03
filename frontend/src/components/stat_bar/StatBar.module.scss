@@ -1,0 +1,32 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+$padding: 10px;
+$margin: 10px;
+$borderRadius: 8px;
+
+.statbar {
+  @include flex($jc: space-around);
+  vertical-align: middle;
+  width: 100%;
+}
+
+.statTitleContainer {
+  @include flex;
+  border-radius: $borderRadius;
+  padding: $padding;
+  width: 70%;
+  margin: $margin;
+  background-color: $lightColor;
+  box-shadow: 5px 5px 5px 0px rgba($color: #000000, $alpha: 0.1);
+}
+
+.statValueContainer {
+  @include flex;
+  border-radius: $borderRadius;
+  padding: $padding;
+  width: 30%;
+  margin: $margin;
+  background-color: $lightColor;
+  box-shadow: 5px 5px 5px 0px rgba($color: #000000, $alpha: 0.1);
+}

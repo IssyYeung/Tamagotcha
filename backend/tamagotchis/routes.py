@@ -1,11 +1,8 @@
-from flask import (render_template, url_for, flash,
-                   redirect, request, abort, Blueprint, jsonify)
-from flask_login import current_user, login_required
-from back_end.models import User, Tamagotchi, TamagotchiSchema
-from back_end import db
+from flask import (request, abort, Blueprint, jsonify)
+from backend.models import User, Tamagotchi, TamagotchiSchema
+from backend import db
 
 tamagotchis = Blueprint('tamagotchis', __name__)
-
 
 @tamagotchis.route('/user_tamagotchis/<username>', methods=['GET'])
 # @login_required
@@ -21,7 +18,6 @@ def user_Tamagotchis(username):
     return tamagotchi_schema.jsonify(tamagotchis)
 
 # ADMIN ROUTES
-
 
 @tamagotchis.route('/tamagotchi_list', methods=['GET'])
 def list_tamagotchis():
@@ -73,7 +69,6 @@ def new_tamagotchis():
     return jsonify({'# tamagotchis in database': len(output)})
     # except:
     #     abort(400)
-
 
 @tamagotchis.route('/update_tamagotchi/<id>', methods=['PUT'])
 def update_tamagotchi(id):

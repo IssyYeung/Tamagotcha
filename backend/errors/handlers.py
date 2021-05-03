@@ -18,6 +18,14 @@ def not_found(error):
         "message": "Not found"
     }), 404
 
+@errors.app_errorhandler(405)
+def not_found(error):
+    return jsonify({
+        "success": False,
+        "error": 405,
+        "message": "Sorry, there's no questions left!"
+    }), 405
+
 @errors.app_errorhandler(403)
 def not_found(error):
     return jsonify({

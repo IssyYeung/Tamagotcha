@@ -1,4 +1,4 @@
-from back_end import create_app
+from backend import create_app
 #Call create_app function in run.py
 app = create_app()
 #Run application directly using python without environment variables:
