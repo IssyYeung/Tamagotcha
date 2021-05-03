@@ -1,6 +1,14 @@
 import style from "./Creature.module.scss";
 
-const Creature = ({ wave, cheer, jump, wiggle, resetAnimations }) => {
+const Creature = ({
+  wave,
+  cheer,
+  jump,
+  wiggle,
+  eyeState = "awake",
+  mouthState = "neutral",
+  resetAnimations,
+}) => {
   return (
     <svg
       version="1.1"
@@ -53,7 +61,6 @@ const Creature = ({ wave, cheer, jump, wiggle, resetAnimations }) => {
         ry="25.7"
         onAnimationEnd={resetAnimations}
       />
-
       <ellipse
         id="earLeft"
         className={`${style.earLeft} ${wiggle && style.earLeft__wiggle}`}
@@ -78,23 +85,38 @@ const Creature = ({ wave, cheer, jump, wiggle, resetAnimations }) => {
         d="M82.9,108.7c-11.6,13.5-18.6,31-18.6,50.2c0,42.5,34.5,77,77,77c42.5,0,77-34.5,77-77c0-19.2-7-36.7-18.6-50.2
 	H82.9z"
       />
-      <circle cx="105.3" cy="137.1" r="12.9" />
-      <circle cx="176.3" cy="137.1" r="12.9" />
+      <circle
+        id="eyeNormalRight"
+        className={`${style.eyesNormal} ${eyeState === "awake" && style.show}`}
+        cx="105.3"
+        cy="137.1"
+        r="12.9"
+      />
+      <circle
+        id="eyeNormalLeft"
+        className={`${style.eyesNormal} ${eyeState === "awake" && style.show}`}
+        cx="176.3"
+        cy="137.1"
+        r="12.9"
+      />
       <path
         id="mouthNeutral"
-        className={style.mouthNeutral}
+        className={`${style.mouthNeutral} ${
+          mouthState === "neutral" && style.show
+        }`}
         d="M163.8,177.2h-45c-5.1,0-9.3-4.2-9.3-9.3v0c0-5.1,4.2-9.3,9.3-9.3h45c5.1,0,9.3,4.2,9.3,9.3v0
 	C173.1,173,168.9,177.2,163.8,177.2z"
       />
       <path
         id="mouth"
-        className={style.mouth}
+        className={`${style.mouth} ${mouthState === "sad" && style.show} ${
+          mouthState === "happy" && style.mouthHappy
+        }`}
         d="M141,152.7c-17.7,0-32,11.7-32,26.1h64C173,164.4,158.7,152.7,141,152.7z"
       />
-
       <rect
         id="sleepEyeRight"
-        className={style.sleepEyeRight}
+        className={`${style.eyesAsleep} ${eyeState === "asleep" && style.show}`}
         x="90.5"
         y="133.8"
         width="29.6"
@@ -102,7 +124,7 @@ const Creature = ({ wave, cheer, jump, wiggle, resetAnimations }) => {
       />
       <rect
         id="sleepEyeLeft"
-        className={style.sleepEyeLeft}
+        className={`${style.eyesAsleep} ${eyeState === "asleep" && style.show}`}
         x="161.5"
         y="133.8"
         width="29.6"
@@ -110,13 +132,13 @@ const Creature = ({ wave, cheer, jump, wiggle, resetAnimations }) => {
       />
       <polygon
         id="deadEyeRight"
-        className={style.deadEyeRight}
+        className={`${style.eyesDead} ${eyeState === "dead" && style.show}`}
         points="118.2,144.7 110.1,136.6 118.2,128.5 113.5,123.8 105.4,131.9 97.3,123.8 92.6,128.5 
 	100.7,136.6 92.6,144.7 97.3,149.4 105.4,141.3 113.5,149.4 "
       />
       <polygon
         id="deadEyeLeft"
-        className={style.deadEyeLeft}
+        className={`${style.eyesDead} ${eyeState === "dead" && style.show}`}
         points="189.1,145.2 181.1,137.1 189.1,129 184.4,124.3 176.3,132.4 168.2,124.3 163.5,129 171.6,137.1 
 	163.5,145.2 168.2,149.9 176.3,141.9 184.4,149.9 "
       />

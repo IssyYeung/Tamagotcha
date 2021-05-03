@@ -10,6 +10,9 @@
     animation-iteration-count: 2;
   }
 }
+.show.show {
+  opacity: 1;
+}
 .body {
   stroke: #000000;
   stroke-miterlimit: 10;
@@ -18,24 +21,21 @@
   fill: #ffffff;
 }
 
-.mouth {
+.mouthHappy.mouthHappy {
   opacity: 1;
   transform-box: fill-box;
   transform-origin: center;
   transform: rotate(180deg) translateY(-5px);
 }
 
+.mouth,
 .mouthNeutral {
   opacity: 0;
 }
 
-.deadEyeLeft,
-.deadEyeRight {
-  opacity: 0;
-}
-
-.sleepEyeLeft,
-.sleepEyeRight {
+.eyesNormal,
+.eyesDead,
+.eyesAsleep {
   opacity: 0;
 }
 

@@ -8,15 +8,15 @@ import Creature from "../components/creature/Creature";
 
 const PlayPage = () => {
   const [isWaving, setIsWaving] = useState(false);
-  // const [isCheering, setIsCheering] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [isWiggling, setIsWiggling] = useState(false);
+  // const [isCheering, setIsCheering] = useState(false);
 
   const handleBtn1 = () => {
     setIsWaving(true);
+    // setIsCheering(true);
   };
   const handleBtn2 = () => {
-    // setIsCheering(true);
     setIsWiggling(true);
   };
   const handleBtn3 = () => {
@@ -36,10 +36,15 @@ const PlayPage = () => {
           <img src={tamagotchi} alt="Tamagotcha toy" />
           <Creature
             wave={isWaving}
-            // cheer={isCheering}
             jump={isJumping}
             wiggle={isWiggling}
             resetAnimations={resetAnimations}
+            // cheer={isCheering}
+
+            // Eye options: awake, asleep, dead
+            // eyeState="asleep"
+            // mouth option: happy, sad, neutral
+            // mouthState="happy"
           />
           <Button className={style.btn1} onClick={handleBtn1} />
           <Button className={style.btn2} onClick={handleBtn2} />
