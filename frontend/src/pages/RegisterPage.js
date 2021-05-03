@@ -53,7 +53,7 @@ const RegisterPage = () => {
             type="text"
             name="username"
             placeholder="Your Username"
-            value={formInfo.username}
+            value={formInfo.username || ""}
             onChange={handleChange}
           />
           <label>Email</label>
@@ -61,7 +61,7 @@ const RegisterPage = () => {
             type="text"
             name="email"
             placeholder="Your email address"
-            value={formInfo.email}
+            value={formInfo.email || ""}
             onChange={handleChange}
           />
           <label>Password</label>
@@ -69,21 +69,21 @@ const RegisterPage = () => {
             type="text"
             name="password"
             placeholder="Your password"
-            value={formInfo.password}
+            value={formInfo.password || ""}
             onChange={handleChange}
           />
           <input
             type="text"
             name="confirm_password"
             placeholder="Your password again"
-            value={formInfo.confirm_password}
+            value={formInfo.confirm_password || ""}
             onChange={handleChange}
           />
           <span>
             <label>Remember me</label>
             <input
               type="checkbox"
-              value={formInfo.remember}
+              value={formInfo.remember || ""}
               onChange={handleChange}
             />
           </span>

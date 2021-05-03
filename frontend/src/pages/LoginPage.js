@@ -27,25 +27,24 @@ const LoginPage = () => {
     const requestOptions = {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(formInfo),
     };
 
-    console.log(requestOptions.body)
-    
+    console.log(requestOptions.body);
+
     fetch("http://127.0.0.1:5000/api/login", requestOptions)
-      .then(r => r.json())
-      .then(token => {
+      .then((r) => r.json())
+      .then((token) => {
         if (token.access_token) {
-          login(token)
-          console.log(token)
+          login(token);
+          console.log(token);
+        } else {
+          console.log("Please type in correct username/password");
         }
-        else {
-          console.log("Please type in correct username/password")
-        }
-      })
+      });
   };
 
   const handleChange = (event) => {
@@ -67,7 +66,7 @@ const LoginPage = () => {
             type="text"
             name="username"
             placeholder="Your username"
-            value={formInfo.username}
+            value={formInfo.username || ""}
             onChange={handleChange}
           />
           <label>Password</label>
@@ -75,15 +74,15 @@ const LoginPage = () => {
             type="text"
             name="password"
             placeholder="Your password"
-            value={formInfo.password}
+            value={formInfo.password || ""}
             onChange={handleChange}
           />
           <span>
             <label>Remember me</label>
             <input
               type="checkbox"
-            //value={formInfo.remember}
-            //onChange={handleChange}
+              //value={formInfo.remember}
+              //onChange={handleChange}
             />
           </span>
           <Button
