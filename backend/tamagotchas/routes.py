@@ -1,32 +1,36 @@
 from flask import (request, abort, Blueprint, jsonify)
 from backend.models import User, Tamagotcha, TamagotchaSchema
 from backend import db
-import flask_praetorian 
+import flask_praetorian
 
 tamagotchas = Blueprint('tamagotchas', __name__)
+
 
 @tamagotchas.route('/api/tamagotcha_stats', methods=['GET'])
 @flask_praetorian .auth_required
 def get_tamagotcha_stats():
-    tamagotchas = Tamagotcha.query.filter_by(user_id=flask_praetorian .current_user().id)
+    tamagotchas = Tamagotcha.query.filter_by(
+        user_id=flask_praetorian .current_user().id)
     tamagotcha_schema = TamagotchaSchema(many=True)
     output = tamagotcha_schema.dump(tamagotchas)
-    #{f'{flask_praetorian .current_user().username}\'s tamagotcha\'s': 
+    # {f'{flask_praetorian .current_user().username}\'s tamagotcha\'s':
     return jsonify(output)
 
 
 @tamagotchas.route('/api/update_tamagotcha', methods=['PUT'])
 @flask_praetorian .auth_required
 def update_current_tamagotcha():
-    # try:
-        tamagotcha = Tamagotcha.query.filter_by(user_id=flask_praetorian .current_user().id).first()
-        name = request.json['name']
+    try:
+        tamagotcha = Tamagotcha.query.filter_by(
+            user_id=flask_praetorian .current_user().id).first()
+
         hunger = request.json['hunger']
         thirst = request.json['thirst']
         fun = request.json['fun']
         sleep = request.json['sleep']
+
         
-        tamagotcha.name = name
+
         tamagotcha.hunger = hunger
         tamagotcha.thirst = thirst
         tamagotcha.fun = fun
@@ -36,8 +40,8 @@ def update_current_tamagotcha():
 
         tamagotcha_schema = TamagotchaSchema()
         return tamagotcha_schema.jsonify(tamagotcha)
-    # except:
-    #     abort(404)
+    except:
+        abort(404)
 
 
 # ADMIN ROUTES
@@ -94,6 +98,7 @@ def new_tamagotchas():
     return jsonify({'# tamagotchas in database': len(output)})
     # except:
     #     abort(400)
+
 
 @tamagotchas.route('/update_tamagotcha/<id>', methods=['PUT'])
 def update_tamagotcha(id):

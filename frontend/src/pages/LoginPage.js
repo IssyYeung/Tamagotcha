@@ -95,7 +95,7 @@ const LoginPage = () => {
             type="submit"
             value="Login"
             className={style.loginBtn}
-            onClick={Decrement_stats()}
+            //onClick={Decrement_stats()}
           />
         </form>
 

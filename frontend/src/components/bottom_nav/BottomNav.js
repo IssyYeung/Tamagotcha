@@ -5,11 +5,83 @@ import moon from "../../images/moon.png";
 import fun from "../../images/fun.png";
 import style from "./BottomNav.module.scss";
 import Button from "../button/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { authFetch } from "../../auth/index";
 
 const BottomNav = () => {
   const [openIndex, setOpenIndex] = useState(-1);
+  const [sleep, setSleep] = useState([]);
+  const [thirst, setThirst] = useState([]);
+  const [hunger, setHunger] = useState([]);
+  const [fun, setFun] = useState([]);
+
+
+  useEffect(() => {
+    authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        setSleep(json[0].sleep);
+        setThirst(json[0].thirst);
+        setHunger(json[0].hunger);
+        setFun(json[0].fun);
+      });
+  });
+
+  const requestOptionsHunger = {
+    method: "PUT",
+    body: JSON.stringify({ "hunger": `${Math.min(100, hunger + 25)}`, "thirst": `${Math.min(100, thirst)}`, "fun": `${Math.min(100, fun)}`, "sleep": `${Math.min(100, sleep)}` }),
+    header: `Bearer ${window.$user_token}`
+  };
+
+  const requestOptionsThirst = {
+    method: "PUT",
+    body: JSON.stringify({ "thirst": `${Math.min(100, thirst + 25)}`, "hunger": `${Math.min(100, hunger)}`, "fun": `${Math.min(100, fun)}`, "sleep": `${Math.min(100, sleep)}` })
+  };
+
+  const requestOptionsSleep = {
+    method: "PUT",
+    body: JSON.stringify({ "sleep": `${Math.min(100, sleep + 25)}`, "hunger": `${Math.min(100, hunger)}`, "fun": `${Math.min(100, fun)}`, "thirst": `${Math.min(100, thirst)}` })
+  };
+
+  const requestOptionsFun = {
+    method: "PUT",
+    body: JSON.stringify({ "fun": `${Math.min(0, fun + 35)}`, "sleep": `${Math.min(100, sleep)}`, "hunger": `${Math.min(100, hunger)}`, "thirst": `${Math.min(100, thirst)}` })
+  };
+
+  const incrementHunger = () => {
+    authFetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsHunger)
+      .then(console.log("Hunger stat incremented."))
+  }
+
+  const incrementThirst = () => {
+    authFetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsThirst)
+      .then(console.log("Thirst stat incremented."))
+  }
+
+  const incrementSleep = () => {
+    authFetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsSleep)
+      .then(console.log("Sleep stat incremented."))
+  }
+
+  const incrementFun = () => {
+    authFetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsFun)
+      .then(console.log("Fun stat incremented."))
+  }
+
+  const handleHungerButton = () => {
+    incrementHunger();
+  };
+  const handleThirstButton = () => {
+    incrementThirst();
+  };
+  // const handleFunButton = () => {
+  //   incrementFun();
+  // };
+  const handleSleepButton = () => {
+    incrementSleep();
+  };
 
   return (
     <div className={style.BottomNav}>
@@ -19,10 +91,10 @@ const BottomNav = () => {
         isOpen={openIndex === 0}
         setOpenIndex={() => setOpenIndex(openIndex === 0 ? -1 : 0)}
       >
-        <Button>Pizza</Button>
-        <Button>Soup</Button>
-        <Button>Apple</Button>
-        <Button>Popcorn</Button>
+        <Button onClick={handleHungerButton}>Pizza</Button>
+        <Button onClick={handleHungerButton}>Soup</Button>
+        <Button onClick={handleHungerButton}>Apple</Button>
+        <Button onClick={handleHungerButton}>Popcorn</Button>
       </DropUp>
       <DropUp
         icon={beer}
@@ -30,10 +102,10 @@ const BottomNav = () => {
         isOpen={openIndex === 1}
         setOpenIndex={() => setOpenIndex(openIndex === 1 ? -1 : 1)}
       >
-        <Button>Wine</Button>
-        <Button>Beer</Button>
-        <Button>Juice</Button>
-        <Button>Water</Button>
+        <Button onClick={handleThirstButton}>Wine</Button>
+        <Button onClick={handleThirstButton}>Beer</Button>
+        <Button onClick={handleThirstButton}>Juice</Button>
+        <Button onClick={handleThirstButton}>Water</Button>
       </DropUp>
       <DropUp
         icon={moon}
@@ -41,10 +113,10 @@ const BottomNav = () => {
         isOpen={openIndex === 2}
         setOpenIndex={() => setOpenIndex(openIndex === 2 ? -1 : 2)}
       >
-        <Button>10 minutes</Button>
-        <Button>1 Hour</Button>
-        <Button>8 Hours</Button>
-        <Button>24 Hours</Button>
+        <Button onClick={handleSleepButton}>10 minutes</Button>
+        <Button onClick={handleSleepButton}>1 Hour</Button>
+        <Button onClick={handleSleepButton}>8 Hours</Button>
+        <Button onClick={handleSleepButton}>24 Hours</Button>
       </DropUp>
       <DropUp
         icon={fun}
