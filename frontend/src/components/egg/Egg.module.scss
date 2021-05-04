@@ -1,0 +1,61 @@
+.egg {
+  position: absolute;
+  overflow: visible;
+  height: 140px;
+  bottom: 170px;
+  cursor: pointer;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 500ms ease-in-out, visibility 1000ms linear;
+  transition-delay: 4s;
+
+  &__hide {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.st0 {
+  fill: #e91390;
+}
+.st1 {
+  fill: #fcee21;
+}
+.st2 {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+}
+
+.crackLine {
+  opacity: 0;
+}
+
+.eggTop {
+  transform: translateY(5px);
+  transform-box: fill-box;
+  transform-origin: bottom right;
+  &__open {
+    animation-name: openEgg;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+}
+
+.show.show {
+  opacity: 1;
+}
+
+@keyframes openEgg {
+  from {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(90deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
