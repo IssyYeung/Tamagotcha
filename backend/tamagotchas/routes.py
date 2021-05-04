@@ -14,6 +14,32 @@ def get_tamagotcha_stats():
     #{f'{flask_praetorian .current_user().username}\'s tamagotcha\'s': 
     return jsonify(output)
 
+
+@tamagotchas.route('/api/update_tamagotcha', methods=['PUT'])
+@flask_praetorian .auth_required
+def update_current_tamagotcha():
+    # try:
+        tamagotcha = Tamagotcha.query.filter_by(user_id=flask_praetorian .current_user().id).first()
+        name = request.json['name']
+        hunger = request.json['hunger']
+        thirst = request.json['thirst']
+        fun = request.json['fun']
+        sleep = request.json['sleep']
+        
+        tamagotcha.name = name
+        tamagotcha.hunger = hunger
+        tamagotcha.thirst = thirst
+        tamagotcha.fun = fun
+        tamagotcha.sleep = sleep
+
+        db.session.commit()
+
+        tamagotcha_schema = TamagotchaSchema()
+        return tamagotcha_schema.jsonify(tamagotcha)
+    # except:
+    #     abort(404)
+
+
 # ADMIN ROUTES
 
 @tamagotchas.route('/tamagotcha_list', methods=['GET'])

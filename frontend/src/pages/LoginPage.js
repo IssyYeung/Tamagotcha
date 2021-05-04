@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import React, { useReducer } from "react";
 import style from "../styles/pageStyles/loginpage.module.scss";
 import { login, useAuth } from "../auth/index";
+import { Decrement_stats } from "../components/decrement_stats/DecrementStats"
 
 const formReducer = (state, event) => {
   return {
@@ -42,6 +43,7 @@ const LoginPage = () => {
         if (token.access_token) {
           login(token);
           console.log(token);
+          window.$user_token = token;
           history.push("/play");
         } else {
           console.log("Please type in correct username/password");
@@ -93,6 +95,7 @@ const LoginPage = () => {
             type="submit"
             value="Login"
             className={style.loginBtn}
+            onClick={Decrement_stats()}
           />
         </form>
 
