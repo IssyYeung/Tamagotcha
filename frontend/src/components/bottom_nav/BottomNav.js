@@ -29,45 +29,53 @@ const BottomNav = () => {
       });
   });
 
+  const myHeaders = new Headers()
+  myHeaders.append("Authorization", `Bearer ${window.$user_token["access_token"]}`)
+  myHeaders.append("Content-Type", "application/json")
+
   const requestOptionsHunger = {
     method: "PUT",
     body: JSON.stringify({ "hunger": `${Math.min(100, hunger + 25)}`, "thirst": `${Math.min(100, thirst)}`, "fun": `${Math.min(100, fun)}`, "sleep": `${Math.min(100, sleep)}` }),
-    header: `Bearer ${window.$user_token}`
+    headers: myHeaders
   };
 
   const requestOptionsThirst = {
     method: "PUT",
-    body: JSON.stringify({ "thirst": `${Math.min(100, thirst + 25)}`, "hunger": `${Math.min(100, hunger)}`, "fun": `${Math.min(100, fun)}`, "sleep": `${Math.min(100, sleep)}` })
+    body: JSON.stringify({ "thirst": `${Math.min(100, thirst + 25)}`, "hunger": `${Math.min(100, hunger)}`, "fun": `${Math.min(100, fun)}`, "sleep": `${Math.min(100, sleep)}` }),
+    headers: myHeaders
   };
 
   const requestOptionsSleep = {
     method: "PUT",
-    body: JSON.stringify({ "sleep": `${Math.min(100, sleep + 25)}`, "hunger": `${Math.min(100, hunger)}`, "fun": `${Math.min(100, fun)}`, "thirst": `${Math.min(100, thirst)}` })
+    body: JSON.stringify({ "sleep": `${Math.min(100, sleep + 25)}`, "hunger": `${Math.min(100, hunger)}`, "fun": `${Math.min(100, fun)}`, "thirst": `${Math.min(100, thirst)}` }),
+    headers: myHeaders
   };
 
   const requestOptionsFun = {
     method: "PUT",
-    body: JSON.stringify({ "fun": `${Math.min(0, fun + 35)}`, "sleep": `${Math.min(100, sleep)}`, "hunger": `${Math.min(100, hunger)}`, "thirst": `${Math.min(100, thirst)}` })
+    body: JSON.stringify({ "fun": `${Math.min(0, fun + 35)}`, "sleep": `${Math.min(100, sleep)}`, "hunger": `${Math.min(100, hunger)}`, "thirst": `${Math.min(100, thirst)}` }),
+    headers: myHeaders
   };
 
   const incrementHunger = () => {
-    authFetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsHunger)
-      .then(console.log("Hunger stat incremented."))
-  }
+    fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsHunger).then(response => response.text())
+      .then(result => console.log(result))
+      .then(console.log("Hunger stat incremented.")).then(console.log(requestOptionsHunger.body))
+  };
 
   const incrementThirst = () => {
-    authFetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsThirst)
-      .then(console.log("Thirst stat incremented."))
+    fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsThirst)
+      .then(console.log("Thirst stat incremented.")).then(console.log(requestOptionsThirst.body))
   }
 
   const incrementSleep = () => {
-    authFetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsSleep)
-      .then(console.log("Sleep stat incremented."))
+    fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsSleep)
+      .then(console.log("Sleep stat incremented.")).then(console.log(requestOptionsSleep.body))
   }
 
   const incrementFun = () => {
-    authFetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsFun)
-      .then(console.log("Fun stat incremented."))
+    fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsFun)
+      .then(console.log("Fun stat incremented.")).then(console.log(requestOptionsFun.body))
   }
 
   const handleHungerButton = () => {

@@ -23,12 +23,13 @@ export const Decrement_stats = () => {
     
     const [count, setCount] = useState(0)
 
+    const myHeaders = new Headers()
+    myHeaders.append("Authorization", `Bearer ${window.$user_token["access_token"]}`)
+    myHeaders.append("Content-Type", "application/json")
+
     const requestOptions = {
         method: "PUT",
-        // headers: {
-        //     'Content-Type': 'application/json',
-        //     "Authorization": `${window.$user_token}`,
-        // },
+        headers: myHeaders,
         body: JSON.stringify({"hunger": `${Math.max(0, hunger-2)}`, "thirst": `${Math.max(0, thirst-5)}`, "fun": `${Math.max(0, fun-3)}`, "sleep": `${Math.max(0, sleep-2)}`})
     };
   
@@ -41,7 +42,7 @@ export const Decrement_stats = () => {
         const timer = setInterval(() => tick(), 30000)
     
         if (count === 0) {
-            authFetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptions)
+            fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptions)
             .then(console.log("Stats decremented."))
         }
     

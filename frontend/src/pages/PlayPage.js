@@ -14,7 +14,7 @@ const PlayPage = () => {
   // const [isCheering, setIsCheering] = useState(false);
 
 
-  //Decrement_stats()
+  Decrement_stats()
 
 
   const handleBtn1 = () => {
