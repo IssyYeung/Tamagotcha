@@ -3,7 +3,7 @@ import BottomNav from "../components/bottom_nav/BottomNav";
 import tamagotchi from "../images/tamagotchi.png";
 import style from "../styles/pageStyles/playpage.module.scss";
 import Button from "../components/button/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Creature from "../components/creature/Creature";
 import Egg from "../components/egg/Egg";
 
