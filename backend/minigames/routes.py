@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify, abort
 from backend.models import TriviaQuestions, TriviaQuestionsSchema
 from backend import db
+import flask_praetorian 
 
 minigames = Blueprint('minigames', __name__)
 
 @minigames.route('/api/play/quiz', methods=['GET'])
+@flask_praetorian .auth_required
 def get_new_question():
     try:
         triviaQuestion = TriviaQuestions.query.filter_by(question_used = 0).first()
@@ -16,6 +18,7 @@ def get_new_question():
          abort(405)
 
 @minigames.route('/api/play/finish_quiz', methods=['PUT'])
+@flask_praetorian .auth_required
 def reset_questions():
     try:
         triviaQuestions = TriviaQuestions.query.all()
