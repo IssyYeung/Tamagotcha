@@ -10,6 +10,7 @@ const AccountPage = () => {
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [username, setUsername] = useState([]);
   const [email, setEmail] = useState([]);
+  const [timeOnApp, setTimeOnApp] = useState([]);
 
   useEffect(() => {
     authFetch("http://127.0.0.1:5000/api/account")
@@ -18,11 +19,9 @@ const AccountPage = () => {
         console.log(json);
         setUsername(json[0].username);
         setEmail(json[0].email);
+        setTimeOnApp(json[0].time_on_app);
       });
   });
-
-  const hoursPlayed = 48;
-  /* These to be reults of GET request */
 
   return (
     <div>
@@ -31,7 +30,7 @@ const AccountPage = () => {
           <div className={style.infoContainer}>
             <h4>Username: {username}</h4>
             <h4>Email: {email}</h4>
-            <h4>Hours played: {hoursPlayed}</h4>
+            <h4>Hours played: {timeOnApp}</h4>
           </div>
           <div className={style.btnContainer}>
             <Button

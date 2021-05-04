@@ -11,12 +11,12 @@ const StatsPage = () => {
   const [thirst, setThirst] = useState([]);
   const [hunger, setHunger] = useState([]);
   const [timeBorn, setTimeBorn] = useState([]);
+  const [fun, setFun] = useState([]);
   const currentTime = new Date();
-  const fun = 34; //fun not in db
   const avgHealth = Math.floor((sleep + thirst + hunger + fun) / 4);
 
   useEffect(() => {
-    authFetch("http://127.0.0.1:5000/api/tamagotchi_stats")
+    authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
@@ -26,6 +26,7 @@ const StatsPage = () => {
         setSleep(json[0].sleep);
         setThirst(json[0].thirst);
         setHunger(json[0].hunger);
+        setFun(json[0].fun);
       });
   });
 
