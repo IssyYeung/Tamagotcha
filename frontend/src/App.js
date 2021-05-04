@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import StatsPage from "./pages/StatsPage";
 import RegisterPage from "./pages/RegisterPage";
 import AccountPage from "./pages/AccountPage";
+import QuizPage from "./pages/QuizPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/play" component={PlayPage} />
         <Route exact path="/stats" component={StatsPage} />
         <Route exact path="/account" component={AccountPage} />
+        <Route exact path="/minigames/quiz" component={QuizPage} />
       </Switch>
     </div>
   );
