@@ -1,9 +1,10 @@
 import Layout from "../components/layout/Layout";
 import Button from "../components/button/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import React, { useReducer } from "react";
 import style from "../styles/pageStyles/loginpage.module.scss";
 import { login, useAuth } from "../auth/index";
+import { Decrement_stats } from "../components/decrement_stats/DecrementStats"
 
 const formReducer = (state, event) => {
   return {
@@ -14,6 +15,7 @@ const formReducer = (state, event) => {
 
 const LoginPage = () => {
   const [formInfo, setFormInfo] = useReducer(formReducer, {});
+  const history = useHistory();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -27,25 +29,26 @@ const LoginPage = () => {
     const requestOptions = {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(formInfo),
     };
 
-    console.log(requestOptions.body)
-    
+    console.log(requestOptions.body);
+
     fetch("http://127.0.0.1:5000/api/login", requestOptions)
-      .then(r => r.json())
-      .then(token => {
+      .then((r) => r.json())
+      .then((token) => {
         if (token.access_token) {
-          login(token)
-          console.log(token)
+          login(token);
+          console.log(token);
+          window.$user_token = token;
+          history.push("/play");
+        } else {
+          console.log("Please type in correct username/password");
         }
-        else {
-          console.log("Please type in correct username/password")
-        }
-      })
+      });
   };
 
   const handleChange = (event) => {
@@ -67,23 +70,23 @@ const LoginPage = () => {
             type="text"
             name="username"
             placeholder="Your username"
-            value={formInfo.username}
+            value={formInfo.username || ""}
             onChange={handleChange}
           />
           <label>Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Your password"
-            value={formInfo.password}
+            value={formInfo.password || ""}
             onChange={handleChange}
           />
           <span>
             <label>Remember me</label>
             <input
               type="checkbox"
-            //value={formInfo.remember}
-            //onChange={handleChange}
+              //value={formInfo.remember}
+              //onChange={handleChange}
             />
           </span>
           <Button
@@ -92,6 +95,7 @@ const LoginPage = () => {
             type="submit"
             value="Login"
             className={style.loginBtn}
+            onClick={Decrement_stats()}
           />
         </form>
 

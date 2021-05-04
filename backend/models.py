@@ -14,7 +14,7 @@ class User(db.Model):
     is_active = db.Column(db.Boolean, default=True, server_default="true")
     # One to many relationship because one user can have many Tamagotchis (eventually).
     # Backref allows us to get owner (user) attribute of Tamagotchi.
-    Tamagotchis = db.relationship('Tamagotchi', backref='author', lazy=True)
+    Tamagotchas = db.relationship('Tamagotcha', backref='author', lazy=True)
 
     def __init__(self, username, email, hashed_password, roles):
         self.username = username
@@ -99,16 +99,16 @@ class User(db.Model):
         return f"User('{self.username}', '{self.email}', '{self.time_on_app}', '{self.last_login}')"
 
 
-class Tamagotchi(db.Model):
+class Tamagotcha(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     time_of_birth = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     breed = db.Column(db.String(100), nullable=False)
-    overall_health = db.Column(db.Integer, nullable=False, default=100)
-    sleep = db.Column(db.Integer, nullable=False, default=70)
-    thirst = db.Column(db.Integer, nullable=False, default=10)
-    hunger = db.Column(db.Integer, nullable=False, default=10)
+    fun = db.Column(db.Integer, nullable=False, default=50)
+    sleep = db.Column(db.Integer, nullable=False, default=50)
+    thirst = db.Column(db.Integer, nullable=False, default=50)
+    hunger = db.Column(db.Integer, nullable=False, default=50)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
     def __init__(self, name, breed, user_id):
@@ -117,7 +117,7 @@ class Tamagotchi(db.Model):
         self.user_id = user_id
 
     def __repr__(self):
-        return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.overall_health}', '{self.sleep}', '{self.thirst}', '{self.hunger}', '{self.user_id}')"
+        return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.fun}', '{self.sleep}', '{self.thirst}', '{self.hunger}', '{self.user_id}')"
 
 
 class TriviaQuestions(db.Model):
@@ -139,9 +139,9 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
         model = User
 
 
-class TamagotchiSchema(ma.SQLAlchemyAutoSchema):
+class TamagotchaSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Tamagotchi
+        model = Tamagotcha
 
 
 class TriviaQuestionsSchema(ma.SQLAlchemyAutoSchema):

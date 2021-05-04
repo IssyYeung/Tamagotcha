@@ -62,7 +62,7 @@ def get_account_details():
     output = user_schema.dump(user)
     return jsonify(output)
 
-
+ 
 # ADMIN ROUTES
 
 @users.route('/user_list', methods=['GET'])

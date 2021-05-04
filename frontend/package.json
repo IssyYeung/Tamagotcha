@@ -13,6 +13,7 @@
     "react-scripts": "4.0.3",
     "react-token-auth": "^1.1.8",
     "sass": "^1.32.12",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
