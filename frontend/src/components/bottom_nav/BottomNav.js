@@ -6,6 +6,7 @@ import fun from "../../images/fun.png";
 import style from "./BottomNav.module.scss";
 import Button from "../button/Button";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const BottomNav = () => {
   const [openIndex, setOpenIndex] = useState(-1);
@@ -51,7 +52,9 @@ const BottomNav = () => {
         isOpen={openIndex === 3}
         setOpenIndex={() => setOpenIndex(openIndex === 3 ? -1 : 3)}
       >
-        <Button>Quiz</Button>
+        <NavLink to="/minigames/quiz">
+          <Button>Quiz</Button>
+        </NavLink>
       </DropUp>
     </div>
   );

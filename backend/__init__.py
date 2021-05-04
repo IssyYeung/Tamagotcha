@@ -48,13 +48,13 @@ def create_app(config_class=Config):
 
     from backend.errors.handlers import errors
     from backend.main.routes import main
-    from backend.tamagotchis.routes import tamagotchis
+    from backend.tamagotchas.routes import tamagotchas
     from backend.minigames.routes import minigames
     from backend.users.routes import users
 
     # Register blueprints
     app.register_blueprint(errors)
-    app.register_blueprint(tamagotchis)
+    app.register_blueprint(tamagotchas)
     app.register_blueprint(main)
     app.register_blueprint(minigames)
     app.register_blueprint(users)
