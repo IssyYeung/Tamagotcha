@@ -8,6 +8,7 @@ const Creature = ({
   eyeState = "awake",
   mouthState = "neutral",
   resetAnimations,
+  crackState,
 }) => {
   return (
     <svg
@@ -18,7 +19,9 @@ const Creature = ({
       y="0px"
       viewBox="0 0 282.6 287.5"
       style={{ enableBackground: "new 0 0 282.6 287.5" }}
-      className={`${style.creature} ${jump && style.creature__jump}`}
+      className={`${style.inEgg} ${jump && style.creature__jump} ${
+        crackState >= 7 && style.creature
+      }`}
       onAnimationEnd={resetAnimations}
     >
       <ellipse

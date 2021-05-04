@@ -5,12 +5,19 @@ import style from "../styles/pageStyles/playpage.module.scss";
 import Button from "../components/button/Button";
 import { useState } from "react";
 import Creature from "../components/creature/Creature";
+import Egg from "../components/egg/Egg";
 
 const PlayPage = () => {
   const [isWaving, setIsWaving] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [isWiggling, setIsWiggling] = useState(false);
   // const [isCheering, setIsCheering] = useState(false);
+
+  const [crackState, setCrackState] = useState(0);
+  const crackEgg = () => {
+    setCrackState(crackState + 1);
+    console.log(`crackState: ${crackState}`);
+  };
 
   const handleBtn1 = () => {
     setIsWaving(true);
@@ -40,12 +47,13 @@ const PlayPage = () => {
             wiggle={isWiggling}
             resetAnimations={resetAnimations}
             // cheer={isCheering}
-
             // Eye options: awake, asleep, dead
             // eyeState="asleep"
             // Mouth options: happy, sad, neutral
-            // mouthState="sad"
+            mouthState="happy"
+            crackState={crackState}
           />
+          <Egg onClick={crackEgg} crackState={crackState} />
           <Button className={style.btn1} onClick={handleBtn1} />
           <Button className={style.btn2} onClick={handleBtn2} />
           <Button className={style.btn3} onClick={handleBtn3} />

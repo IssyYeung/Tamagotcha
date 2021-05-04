@@ -1,8 +1,17 @@
+.inEgg {
+  position: absolute;
+  height: 100px;
+  bottom: 200px;
+  transition: height 1s ease-in-out, bottom 1s ease-in-out;
+  transition-delay: 5s;
+}
+
 .creature {
   position: absolute;
   overflow: visible;
   height: 140px;
   bottom: 170px;
+
   &__jump {
     animation-name: jump;
     animation-duration: 0.5s;
@@ -10,6 +19,7 @@
     animation-iteration-count: 2;
   }
 }
+
 .show.show {
   opacity: 1;
 }
