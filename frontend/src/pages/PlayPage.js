@@ -44,7 +44,7 @@ const PlayPage = () => {
             // Eye options: awake, asleep, dead
             // eyeState="asleep"
             // Mouth options: happy, sad, neutral
-            // mouthState="sad"
+            mouthState="happy"
           />
           <Button className={style.btn1} onClick={handleBtn1} />
           <Button className={style.btn2} onClick={handleBtn2} />

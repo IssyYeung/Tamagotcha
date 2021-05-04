@@ -4,12 +4,23 @@ import ChangePassword from "../components/change_password/ChangePassword";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import style from "../styles/pageStyles/accountpage.module.scss";
+import { authFetch } from "../auth/index";
 
 const AccountPage = () => {
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [username, setUsername] = useState([]);
+  const [email, setEmail] = useState([]);
 
-  const username = "Boris";
-  const email = "boris@boris.boris";
+  useEffect(() => {
+    authFetch("http://127.0.0.1:5000/api/account")
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        setUsername(json[0].username);
+        setEmail(json[0].email);
+      });
+  });
+
   const hoursPlayed = 48;
   /* These to be reults of GET request */
 
