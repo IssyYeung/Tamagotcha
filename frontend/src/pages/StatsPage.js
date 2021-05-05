@@ -17,22 +17,7 @@ const StatsPage = () => {
   const [state, dispatch] = useContext(StatsContext);
   // useContext looks up component tree to find StatsContext
 
-  useEffect(() => {
-    authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
-      .then((res) => res.json())
-      .then((json) => {
-        // setName(json[0].name);
-        // setBreed(json[0].breed);
-        // setTimeBorn(json[0].time_of_birth);
-        // setSleep(json[0].sleep);
-        // setThirst(json[0].thirst);
-        // setHunger(json[0].hunger);
-        // setFun(json[0].fun);
-        console.log(json);
-        dispatch({ type: "SET_STATS", payload: json[0] });
-        // dispatch sends actions to reducer function
-      });
-  }, []);
+  useEffect(() => {});
 
   const timeBornMs = new Date(state.timeBorn);
   const age = Math.round((currentTime - timeBornMs) / (1000 * 60 * 60));

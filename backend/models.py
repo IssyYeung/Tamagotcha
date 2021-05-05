@@ -1,7 +1,8 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from backend import db, ma
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,7 +10,8 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     hashed_password = db.Column(db.String(500), nullable=False)
     time_on_app = db.Column(db.Float, nullable=False, default=0.0)
-    last_login = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    last_login = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
     roles = db.Column(db.Text)
     is_active = db.Column(db.Boolean, default=True, server_default="true")
     # One to many relationship because one user can have many Tamagotchis (eventually).
@@ -103,13 +105,22 @@ class Tamagotcha(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    time_of_birth = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    time_of_birth = db.Column(
+        db.DateTime, nullable=False, default=datetime.now())
     breed = db.Column(db.String(100), nullable=False)
     fun = db.Column(db.Integer, nullable=False, default=50)
     sleep = db.Column(db.Integer, nullable=False, default=50)
     thirst = db.Column(db.Integer, nullable=False, default=50)
     hunger = db.Column(db.Integer, nullable=False, default=50)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    time_feed_by = db.Column(db.DateTime, nullable=False,
+                             default=datetime.now() + timedelta(hours=3))
+    time_drink_by = db.Column(db.DateTime, nullable=False,
+                              default=datetime.now() + timedelta(hours=2))
+    time_sleep_by = db.Column(db.DateTime, nullable=False,
+                              default=datetime.now() + timedelta(hours=9))
+    time_play_by = db.Column(db.DateTime, nullable=False,
+                             default=datetime.now() + timedelta(hours=4))
 
     def __init__(self, name, breed, user_id):
         self.name = name
@@ -117,7 +128,7 @@ class Tamagotcha(db.Model):
         self.user_id = user_id
 
     def __repr__(self):
-        return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.fun}', '{self.sleep}', '{self.thirst}', '{self.hunger}', '{self.user_id}')"
+        return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.fun}', '{self.sleep}', '{self.thirst}', '{self.hunger}', '{self.user_id}', '{self.time_feed_by}')"
 
 
 class TriviaQuestions(db.Model):
@@ -126,8 +137,7 @@ class TriviaQuestions(db.Model):
     incorrect_ans_one = db.Column(db.String(15), nullable=False)
     incorrect_ans_two = db.Column(db.String(15), nullable=False)
     correct_ans = db.Column(db.String(15), nullable=False)
-    question_used = db.Column(db.Boolean, nullable = False, default=False)
-
+    question_used = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
         return f"Tamagotchi('{self.question}', '{self.incorrect_ans_one}', '{self.incorrect_ans_two}', '{self.correct_ans}', '{self.question_used}')"
@@ -147,4 +157,3 @@ class TamagotchaSchema(ma.SQLAlchemyAutoSchema):
 class TriviaQuestionsSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = TriviaQuestions
-
