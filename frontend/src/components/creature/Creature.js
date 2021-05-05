@@ -5,7 +5,7 @@ const Creature = ({
   cheer,
   jump,
   wiggle,
-  eyeState = "awake",
+  eyeState = "asleep",
   mouthState = "neutral",
   resetAnimations,
   crackState,

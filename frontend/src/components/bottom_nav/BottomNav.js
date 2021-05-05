@@ -2,20 +2,19 @@ import DropUp from "../drop_up/DropUp";
 import food from "../../images/food.png";
 import beer from "../../images/beer.png";
 import moon from "../../images/moon.png";
-import fun from "../../images/fun.png";
+import funIcon from "../../images/fun.png";
 import style from "./BottomNav.module.scss";
 import Button from "../button/Button";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { authFetch } from "../../auth/index";
 
-const BottomNav = () => {
+const BottomNav = ({ toggleSleep }) => {
   const [openIndex, setOpenIndex] = useState(-1);
   const [sleep, setSleep] = useState([]);
   const [thirst, setThirst] = useState([]);
   const [hunger, setHunger] = useState([]);
   const [fun, setFun] = useState([]);
-
 
   useEffect(() => {
     authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
@@ -29,54 +28,82 @@ const BottomNav = () => {
       });
   });
 
-  const myHeaders = new Headers()
-  myHeaders.append("Authorization", `Bearer ${window.$user_token["access_token"]}`)
-  myHeaders.append("Content-Type", "application/json")
+  const myHeaders = new Headers();
+  myHeaders.append(
+    "Authorization",
+    `Bearer ${window.$user_token["access_token"]}`
+  );
+  myHeaders.append("Content-Type", "application/json");
 
   const requestOptionsHunger = {
     method: "PUT",
-    body: JSON.stringify({ "hunger": `${Math.min(100, hunger + 25)}`, "thirst": `${Math.min(100, thirst)}`, "fun": `${Math.min(100, fun)}`, "sleep": `${Math.min(100, sleep)}` }),
-    headers: myHeaders
+    body: JSON.stringify({
+      hunger: `${Math.min(100, hunger + 25)}`,
+      thirst: `${Math.min(100, thirst)}`,
+      fun: `${Math.min(100, fun)}`,
+      sleep: `${Math.min(100, sleep)}`,
+    }),
+    headers: myHeaders,
   };
 
   const requestOptionsThirst = {
     method: "PUT",
-    body: JSON.stringify({ "thirst": `${Math.min(100, thirst + 25)}`, "hunger": `${Math.min(100, hunger)}`, "fun": `${Math.min(100, fun)}`, "sleep": `${Math.min(100, sleep)}` }),
-    headers: myHeaders
+    body: JSON.stringify({
+      thirst: `${Math.min(100, thirst + 25)}`,
+      hunger: `${Math.min(100, hunger)}`,
+      fun: `${Math.min(100, fun)}`,
+      sleep: `${Math.min(100, sleep)}`,
+    }),
+    headers: myHeaders,
   };
 
   const requestOptionsSleep = {
     method: "PUT",
-    body: JSON.stringify({ "sleep": `${Math.min(100, sleep + 25)}`, "hunger": `${Math.min(100, hunger)}`, "fun": `${Math.min(100, fun)}`, "thirst": `${Math.min(100, thirst)}` }),
-    headers: myHeaders
+    body: JSON.stringify({
+      sleep: `${Math.min(100, sleep + 25)}`,
+      hunger: `${Math.min(100, hunger)}`,
+      fun: `${Math.min(100, fun)}`,
+      thirst: `${Math.min(100, thirst)}`,
+    }),
+    headers: myHeaders,
   };
 
   const requestOptionsFun = {
     method: "PUT",
-    body: JSON.stringify({ "fun": `${Math.min(0, fun + 35)}`, "sleep": `${Math.min(100, sleep)}`, "hunger": `${Math.min(100, hunger)}`, "thirst": `${Math.min(100, thirst)}` }),
-    headers: myHeaders
+    body: JSON.stringify({
+      fun: `${Math.min(0, fun + 35)}`,
+      sleep: `${Math.min(100, sleep)}`,
+      hunger: `${Math.min(100, hunger)}`,
+      thirst: `${Math.min(100, thirst)}`,
+    }),
+    headers: myHeaders,
   };
 
   const incrementHunger = () => {
-    fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsHunger).then(response => response.text())
-      .then(result => console.log(result))
-      .then(console.log("Hunger stat incremented.")).then(console.log(requestOptionsHunger.body))
+    fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsHunger)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .then(console.log("Hunger stat incremented."))
+      .then(console.log(requestOptionsHunger.body));
   };
 
   const incrementThirst = () => {
     fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsThirst)
-      .then(console.log("Thirst stat incremented.")).then(console.log(requestOptionsThirst.body))
-  }
+      .then(console.log("Thirst stat incremented."))
+      .then(console.log(requestOptionsThirst.body));
+  };
 
   const incrementSleep = () => {
     fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsSleep)
-      .then(console.log("Sleep stat incremented.")).then(console.log(requestOptionsSleep.body))
-  }
+      .then(console.log("Sleep stat incremented."))
+      .then(console.log(requestOptionsSleep.body));
+  };
 
   const incrementFun = () => {
     fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsFun)
-      .then(console.log("Fun stat incremented.")).then(console.log(requestOptionsFun.body))
-  }
+      .then(console.log("Fun stat incremented."))
+      .then(console.log(requestOptionsFun.body));
+  };
 
   const handleHungerButton = () => {
     incrementHunger();
@@ -89,6 +116,7 @@ const BottomNav = () => {
   // };
   const handleSleepButton = () => {
     incrementSleep();
+    toggleSleep();
   };
 
   return (
@@ -121,13 +149,13 @@ const BottomNav = () => {
         isOpen={openIndex === 2}
         setOpenIndex={() => setOpenIndex(openIndex === 2 ? -1 : 2)}
       >
-        <Button onClick={handleSleepButton}>10 minutes</Button>
+        <Button onClick={toggleSleep}>10 minutes</Button>
         <Button onClick={handleSleepButton}>1 Hour</Button>
         <Button onClick={handleSleepButton}>8 Hours</Button>
         <Button onClick={handleSleepButton}>24 Hours</Button>
       </DropUp>
       <DropUp
-        icon={fun}
+        icon={funIcon}
         title="Games"
         isOpen={openIndex === 3}
         setOpenIndex={() => setOpenIndex(openIndex === 3 ? -1 : 3)}

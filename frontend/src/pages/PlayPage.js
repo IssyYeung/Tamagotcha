@@ -11,6 +11,9 @@ const PlayPage = () => {
   const [isWaving, setIsWaving] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [isWiggling, setIsWiggling] = useState(false);
+  const [isAwake, setIsAwake] = useState(true);
+  const [eyes, setEyes] = useState("awake");
+  const [mouth, setMouth] = useState("happy");
   // const [isCheering, setIsCheering] = useState(false);
 
   const [crackState, setCrackState] = useState(0);
@@ -35,6 +38,18 @@ const PlayPage = () => {
     isJumping && setIsJumping(false);
     // isCheering && setIsCheering(false);
   };
+  const toggleAwake = async () => {
+    setIsAwake(!isAwake);
+    setEyes("asleep");
+    setMouth("neutral");
+    setTimeout(function () {
+      setIsAwake(true);
+      setEyes("awake");
+      setMouth("happy");
+      setIsWaving(true);
+      setIsWiggling(true);
+    }, 10000);
+  };
 
   return (
     <Layout pageTitle="Tamagotcha">
@@ -49,9 +64,9 @@ const PlayPage = () => {
             resetAnimations={resetAnimations}
             // cheer={isCheering}
             // Eye options: awake, asleep, dead
-            // eyeState="asleep"
+            eyeState={eyes}
             // Mouth options: happy, sad, neutral
-            mouthState="happy"
+            mouthState={mouth}
             crackState={crackState}
           />
           <Egg onClick={crackEgg} crackState={crackState} />
@@ -60,7 +75,7 @@ const PlayPage = () => {
           <Button className={style.btn3} onClick={handleBtn3} />
         </div>
       </div>
-      <BottomNav />
+      {isAwake && <BottomNav toggleSleep={toggleAwake} />}
     </Layout>
   );
 };
