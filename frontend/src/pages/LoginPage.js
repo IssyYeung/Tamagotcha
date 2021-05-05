@@ -1,10 +1,11 @@
 import Layout from "../components/layout/Layout";
 import Button from "../components/button/Button";
 import { NavLink, useHistory } from "react-router-dom";
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import style from "../styles/pageStyles/loginpage.module.scss";
 import { login, useAuth } from "../auth/index";
-import { Decrement_stats } from "../components/decrement_stats/DecrementStats"
+import { authFetch } from "../auth/index";
+import { StatsContext } from "../state/statsContext";
 
 const formReducer = (state, event) => {
   return {
@@ -14,6 +15,8 @@ const formReducer = (state, event) => {
 };
 
 const LoginPage = () => {
+
+  const [state, dispatch] = useContext(StatsContext);
   const [formInfo, setFormInfo] = useReducer(formReducer, {});
   const history = useHistory();
 
@@ -23,7 +26,6 @@ const LoginPage = () => {
     const formData = new FormData();
     formData.set("username", formInfo.email);
     formData.set("password", formInfo.password);
-    //formData.set("remember", formInfo.remember);
 
     console.log(formInfo);
     const requestOptions = {
@@ -49,6 +51,15 @@ const LoginPage = () => {
           console.log("Please type in correct username/password");
         }
       });
+
+      authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+          dispatch({ type: "SET_STATS", payload: json[0] });
+        });
+      
+
   };
 
   const handleChange = (event) => {
@@ -85,8 +96,6 @@ const LoginPage = () => {
             <label>Remember me</label>
             <input
               type="checkbox"
-              //value={formInfo.remember}
-              //onChange={handleChange}
             />
           </span>
           <Button
@@ -95,7 +104,6 @@ const LoginPage = () => {
             type="submit"
             value="Login"
             className={style.loginBtn}
-            //onClick={Decrement_stats()}
           />
         </form>
 

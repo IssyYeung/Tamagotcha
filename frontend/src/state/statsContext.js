@@ -23,6 +23,7 @@ const reducer = (state, action) => {
       let fromAPI = action.payload;
       return {
         name: fromAPI.name,
+        breed: fromAPI.breed,
         timeBorn: fromAPI.time_of_birth,
         sleep: fromAPI.sleep,
         thirst: fromAPI.thirst,
@@ -37,6 +38,7 @@ const reducer = (state, action) => {
       let data = action.payload;
       let newState = {
         name: data.name ? data.name : state.name,
+        breed: data.breed ? data.breed : state.breed,
         timeBorn: data.timeBorn ? data.timeBorn : state.timeBorn,
         sleep: data.sleep ? data.sleep : state.sleep,
         thirst: data.thirst ? data.thirst : state.thirst,
@@ -58,15 +60,6 @@ const reducer = (state, action) => {
 export const StatsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   //  dispatch, dispatches an event, like setState but can do multiple
-
-  useEffect(() => {
-    authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        dispatch({ type: "SET_STATS", payload: json[0] });
-      });
-  }, []);
 
   return (
     <StatsContext.Provider value={[state, dispatch]}>

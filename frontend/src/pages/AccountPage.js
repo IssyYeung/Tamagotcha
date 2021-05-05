@@ -7,6 +7,7 @@ import style from "../styles/pageStyles/accountpage.module.scss";
 import { authFetch } from "../auth/index";
 
 const AccountPage = () => {
+  
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [username, setUsername] = useState([]);
   const [email, setEmail] = useState([]);

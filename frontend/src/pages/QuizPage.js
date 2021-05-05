@@ -5,7 +5,7 @@ import style from "../styles/pageStyles/playpage.module.scss";
 import Button from "../components/button/Button";
 import { useState, useEffect } from "react";
 import { authFetch } from "../auth/index";
-import {useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom";
 
 const QuizPage = () => {
 
@@ -29,7 +29,6 @@ const QuizPage = () => {
             [array[i], array[j]] = [array[j], array[i]];
         }
     }
-
 
     useEffect(() => {
         try {
@@ -59,7 +58,6 @@ const QuizPage = () => {
 
     const myHeaders = new Headers()
     myHeaders.append("Authorization", `Bearer ${window.$user_token["access_token"]}`)
-    // Hackers please ignore above line - fixed
     myHeaders.append("Content-Type", "application/json")
 
     const requestOptionsFun = {
