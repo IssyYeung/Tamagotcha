@@ -1,38 +1,92 @@
 [
     {
-        "question": "Which legal clause in the Berne convention forbids you to use the Tamagochi trademark in this way?",
-        "incorrect_ans_one": "Section 3, Paragaph 8",
-        "incorrect_ans_two": "Section 2, Paragaph 7",
-        "correct_ans": "Section 1, Paragaph 4"
+        "question": "What colour was Mr Blobby?",
+        "incorrect_ans_one": "Blue and orange",
+        "incorrect_ans_two": "Purple and blue",
+        "correct_ans": "Pink and yellow"
+    },
+    {
+        "question": "Which boyband did Robbie Williams belong to?",
+        "incorrect_ans_one": "Spice girls",
+        "incorrect_ans_two": "Backstreet boys",
+        "correct_ans": "Take that"
+    },
+    {
+        "question": "ED how big dose mountains u climb?",
+        "incorrect_ans_one": "v173",
+        "incorrect_ans_two": "v12",
+        "correct_ans": "Itsy bitsy teenie weenie yellow polka dot bikini"
+    },
+    {
+        "question": "How old was the oldest Tamagotchi when it died?",
+        "incorrect_ans_one": "219,792,099E156 tamayears",
+        "incorrect_ans_two": "17 tamayears",
+        "correct_ans": "145 tamayears"
+    },
+    {
+        "question": "What colour were the origional Pokemon games in the UK?",
+        "incorrect_ans_one": "Gold & Silver",
+        "incorrect_ans_two": "Yellow",
+        "correct_ans": "Red and blue"
+    },  
+    {
+        "question": "How many original Pokemon were there?",
+        "incorrect_ans_one": "161",
+        "incorrect_ans_two": "149",
+        "correct_ans": "151"
     },
     {
         "question": "Are you proud of stealing?",
         "incorrect_ans_one": "Yes I am immoral",
         "incorrect_ans_two": "I didn't know I was stealing",
-        "correct_ans": "No, I'm sorry judge."
+        "correct_ans": "Shut up Adam!"
     },
     {
         "question": "Does Japanese heritage mean nothing to you?",
         "incorrect_ans_one": "Yes, I love sushi",
         "incorrect_ans_two": "No, gimme my sword",
-        "correct_ans": "I'm swimming to South Korea"
+        "correct_ans": "Shut up Adam!"
     },
     {
         "question": "Are you a cop? You have to tell me if you're a cop.",
         "incorrect_ans_one": "No",
         "incorrect_ans_two": "No, really I'm not",
-        "correct_ans": "Yes, time to go to jail."
+        "correct_ans": "Shut up Adam!"
     },
     {
         "question": "Would you steal a car?",
         "incorrect_ans_one": "Would you steal a television?",
         "incorrect_ans_two": "Would you steal a handbag?",
-        "correct_ans": "No"
+        "correct_ans": "Shut up Adam!"
     },
     {
-        "question": "Who quit the band Busted first in digust at how piracy ruined the music business?",
+        "question": "Who quit the band Busted first?",
         "incorrect_ans_one": "James",
         "incorrect_ans_two": "Matt",
-        "correct_ans": "Charlie"
+        "correct_ans": "Shut up Adam!"
+    },
+    {
+        "question": "Issy Young or Yeung?",
+        "incorrect_ans_one": "YUNG",
+        "incorrect_ans_two": "YOURNG",
+        "correct_ans": "Shut up Adam!"
+    },
+    {
+        "question": "Should Ed get a coffee",
+        "incorrect_ans_one": "Yeah baby girl, you go",
+        "incorrect_ans_two": "Tea plz, no sugar, sweetie pie",
+        "correct_ans": "Can I be the milk to your shake?"
+    },
+    {
+        "question": "ED how big dose mountains u climb?",
+        "incorrect_ans_one": "v173",
+        "incorrect_ans_two": "Itsy bitsy teenie 5'10'' weenie yellow polka dot Ed",
+        "correct_ans": "Itsy bitsy teenie weenie yellow polka dot bikini"
+    },
+    {
+        "question": "Did you hurt yourself falling from the vending machine, Adam?",
+        "incorrect_ans_one": "Yes, I did, why?",
+        "incorrect_ans_two": "Cuz u snack, shawty",
+        "correct_ans": "Love to see what components are hiding in your wrapper"
     }
 ]

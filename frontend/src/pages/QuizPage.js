@@ -5,8 +5,11 @@ import style from "../styles/pageStyles/playpage.module.scss";
 import Button from "../components/button/Button";
 import { useState, useEffect } from "react";
 import { authFetch } from "../auth/index";
+import {useHistory} from "react-router-dom"
 
 const QuizPage = () => {
+
+    const history = useHistory();
 
     const [selectedAnswer, setSelectedAnswer] = useState([]);
     const [question, setQuestion] = useState([]);
@@ -27,6 +30,7 @@ const QuizPage = () => {
         }
     }
 
+
     useEffect(() => {
         try {
             authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
@@ -46,6 +50,7 @@ const QuizPage = () => {
                     setIncorrectAnsTwo(json.incorrect_ans_two);
                 });
             shuffle(array_of_ans)
+            
         }
         catch (err) {
             console.log("Error fetching API")
@@ -59,14 +64,18 @@ const QuizPage = () => {
 
     const requestOptionsFun = {
         method: "PUT",
-        body: JSON.stringify({ "fun": `${Math.min(0, fun + 10)}`, "sleep": `${Math.min(100, sleep)}`, "hunger": `${Math.min(100, hunger)}`, "thirst": `${Math.min(100, thirst)}` }),
+        body: JSON.stringify({ "fun": `${Math.min(100, fun + 10)}`, "sleep": `${Math.min(100, sleep)}`, "hunger": `${Math.min(100, hunger)}`, "thirst": `${Math.min(100, thirst)}` }),
         headers: myHeaders
     };
 
     const incrementFun = () => {
         fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsFun)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
           .then(console.log("Fun stat incremented."))
-          .then(console.log(requestOptionsFun.body));
+          .then(console.log(requestOptionsFun.body))
+          .then(history.push('/minigames/quiz'))
+        
       };
 
     const handleBtn1 = () => {
