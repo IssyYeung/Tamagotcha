@@ -38,7 +38,7 @@ const reducer = (state, action) => {
       let newState = {
         name: data.name ? data.name : state.name,
         timeBorn: data.timeBorn ? data.timeBorn : state.timeBorn,
-        sleep: data.sleep ? data.timeBorn : state.timeBorn,
+        sleep: data.sleep ? data.sleep : state.sleep,
         thirst: data.thirst ? data.thirst : state.thirst,
         hunger: data.hunger ? data.hunger : state.hunger,
         fun: data.fun ? data.fun : state.fun,

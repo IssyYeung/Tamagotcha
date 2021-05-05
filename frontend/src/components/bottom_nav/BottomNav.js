@@ -110,7 +110,7 @@ const BottomNav = () => {
   };
 
   const handleHungerButton = () => {
-    dispatch({ type: "UPDATE_STATS", payload: { hunger: 500 } });
+    dispatch({ type: "UPDATE_STATS", payload: { hunger: 25 } });
     // wouldn't need this here if increment functions were in statsContext file:
     incrementHunger();
   };
