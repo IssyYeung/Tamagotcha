@@ -58,7 +58,7 @@ const QuizPage = () => {
     }, []);
 
     const myHeaders = new Headers()
-    myHeaders.append("Authorization", `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjAyMDkxNjcsImV4cCI6MTYyMDI5NTU2NywianRpIjoiYmIzZDM1N2ItMDJhYi00Yzk2LWJhMTUtZWM4MTkzN2JmMTFmIiwiaWQiOjEsInJscyI6InBsYXllciIsInJmX2V4cCI6MTYyMjgwMTE2N30.gpBtiBXS67lC2Xygv4OMRlhIDwmxdhA0-Uz4nCYiXBM`);
+    myHeaders.append("Authorization", `Bearer ${window.$user_token["access_token"]}`)
     // Hackers please ignore above line - fixed
     myHeaders.append("Content-Type", "application/json")
 

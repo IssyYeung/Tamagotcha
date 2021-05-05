@@ -34,8 +34,7 @@ const BottomNav = () => {
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    //`Bearer ${window.$user_token["access_token"]}`
-    `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjAyMDkxNjcsImV4cCI6MTYyMDI5NTU2NywianRpIjoiYmIzZDM1N2ItMDJhYi00Yzk2LWJhMTUtZWM4MTkzN2JmMTFmIiwiaWQiOjEsInJscyI6InBsYXllciIsInJmX2V4cCI6MTYyMjgwMTE2N30.gpBtiBXS67lC2Xygv4OMRlhIDwmxdhA0-Uz4nCYiXBM}`
+    `Bearer ${window.$user_token["access_token"]}`
   );
   myHeaders.append("Content-Type", "application/json");
 
