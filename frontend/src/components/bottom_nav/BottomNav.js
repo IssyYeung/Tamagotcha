@@ -29,7 +29,7 @@ const BottomNav = () => {
         setHunger(json[0].hunger);
         setFun(json[0].fun);
       });
-  });
+  }, []);
 
   const myHeaders = new Headers();
   myHeaders.append(

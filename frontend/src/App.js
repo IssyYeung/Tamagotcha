@@ -5,6 +5,7 @@ import StatsPage from "./pages/StatsPage";
 import RegisterPage from "./pages/RegisterPage";
 import AccountPage from "./pages/AccountPage";
 import QuizPage from "./pages/QuizPage";
+import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
   return (
@@ -12,10 +13,10 @@ function App() {
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
-        <Route exact path="/play" component={PlayPage} />
-        <Route exact path="/stats" component={StatsPage} />
-        <Route exact path="/account" component={AccountPage} />
-        <Route exact path="/minigames/quiz" component={QuizPage} />
+        <ProtectedRoute exact path="/play" component={PlayPage} />
+        <ProtectedRoute exact path="/stats" component={StatsPage} />
+        <ProtectedRoute exact path="/account" component={AccountPage} />
+        <ProtectedRoute exact path="/minigames/quiz" component={QuizPage} />
       </Switch>
     </div>
   );
