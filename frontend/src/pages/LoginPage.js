@@ -3,8 +3,8 @@ import Button from "../components/button/Button";
 import { NavLink, useHistory } from "react-router-dom";
 import React, { useReducer } from "react";
 import style from "../styles/pageStyles/loginpage.module.scss";
-import { login, useAuth } from "../auth/index";
-import { Decrement_stats } from "../components/decrement_stats/DecrementStats"
+import { login } from "../auth/index";
+import { Decrement_stats } from "../components/decrement_stats/DecrementStats";
 
 const formReducer = (state, event) => {
   return {
@@ -57,8 +57,6 @@ const LoginPage = () => {
       value: event.target.value,
     });
   };
-
-  const [logged] = useAuth();
 
   return (
     <Layout pageTitle="Tamagotcha" showNavbar={false}>

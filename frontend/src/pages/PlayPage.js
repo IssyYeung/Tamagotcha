@@ -35,6 +35,7 @@ const PlayPage = () => {
     isJumping && setIsJumping(false);
     // isCheering && setIsCheering(false);
   };
+
   return (
     <Layout pageTitle="Tamagotcha">
       <div className={style.playPage}>
