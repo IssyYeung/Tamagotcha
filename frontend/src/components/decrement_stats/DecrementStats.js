@@ -32,20 +32,16 @@ export const Decrement_stats = () => {
         headers: myHeaders,
         body: JSON.stringify({"hunger": `${Math.max(-100000000, hunger-2)}`, "thirst": `${Math.max(0, thirst-5)}`, "fun": `${Math.max(0, fun-3)}`, "sleep": `${Math.max(0, sleep-2)}`})
     };
+
+
   
-    const tick = () => {
-        let newCount = count < 60 ? count + 1 : 0
-        setCount(newCount)
-    }
 
-    const fetch_decremented_stats  = () => {
-      fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptions)
-            .then(console.log("Stats decremented123."))
-    }
+    // const fetch_decremented_stats  = () => {
+    //   fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptions)
+    //         .then(console.log("Stats decremented."))
+    // }
 
-    
-
-    useEffect( setInterval( () => { fetch_decremented_stats() }, 5000) )
+    // setInterval( () => { fetch_decremented_stats() }, 5000)
 
 
 };
