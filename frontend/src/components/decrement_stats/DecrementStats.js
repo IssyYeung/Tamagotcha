@@ -19,7 +19,7 @@ export const Decrement_stats = () => {
         setHunger(json[0].hunger);
         setFun(json[0].fun);
       });
-  });
+  }, []);
     
     const [count, setCount] = useState(0)
 
@@ -47,6 +47,6 @@ export const Decrement_stats = () => {
         }
     
         return () => clearInterval(timer)
-      })
+      }, [])
 
 };

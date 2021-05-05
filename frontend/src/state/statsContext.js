@@ -1,4 +1,5 @@
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useEffect } from "react";
+import {authFetch} from "../auth/index"
 
 export const StatsContext = createContext();
 
@@ -57,6 +58,15 @@ const reducer = (state, action) => {
 export const StatsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   //  dispatch, dispatches an event, like setState but can do multiple
+
+  useEffect(() => {
+    authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        dispatch({ type: "SET_STATS", payload: json[0] });
+      });
+  }, []);
 
   return (
     <StatsContext.Provider value={[state, dispatch]}>
