@@ -2,7 +2,7 @@ import DropUp from "../drop_up/DropUp";
 import food from "../../images/food.png";
 import beer from "../../images/beer.png";
 import moon from "../../images/moon.png";
-import fun from "../../images/fun.png";
+import funIcon from "../../images/fun.png";
 import style from "./BottomNav.module.scss";
 import Button from "../button/Button";
 import { useState, useEffect, useContext } from "react";
@@ -160,14 +160,14 @@ const BottomNav = () => {
         <Button onClick={handleSleepButton}>24 Hours</Button>
       </DropUp>
       <DropUp
-        icon={fun}
+        icon={funIcon}
         title="Games"
         isOpen={openIndex === 3}
         setOpenIndex={() => setOpenIndex(openIndex === 3 ? -1 : 3)}
       >
-        <NavLink to="/minigames/quiz">
-          <Button>Quiz</Button>
-        </NavLink>
+        <Button component={NavLink} to="/minigames/quiz">
+          Quiz
+        </Button>
       </DropUp>
     </div>
   );

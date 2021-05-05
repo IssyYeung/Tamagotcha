@@ -1,5 +1,5 @@
 import { useReducer, createContext, useEffect } from "react";
-import {authFetch} from "../auth/index"
+import { authFetch } from "../auth/index";
 
 export const StatsContext = createContext();
 
@@ -21,6 +21,9 @@ const reducer = (state, action) => {
     case "SET_STATS":
       // will need to use this to set from api
       let fromAPI = action.payload;
+      if (fromAPI === undefined) {
+        return state;
+      }
       return {
         name: fromAPI.name,
         timeBorn: fromAPI.time_of_birth,

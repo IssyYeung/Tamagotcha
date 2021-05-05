@@ -47,7 +47,6 @@ const StatsPage = () => {
             <h4>Age: {age}</h4>
             <h4>Needs:</h4>
           </div>
-          <div>{state.breed}</div>
           <StatBar statTitle="Average Health" statValue={state.avgHealth} />
           <StatBar statTitle="Sleep" statValue={state.sleep} />
           <StatBar statTitle="Thirst" statValue={state.thirst} />

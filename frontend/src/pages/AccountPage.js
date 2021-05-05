@@ -42,9 +42,9 @@ const AccountPage = () => {
               Change Password
             </Button>
             {showChangePassword && <ChangePassword />}
-            <NavLink to="/">
-              <Button className={style.logoutBtn}>Logout</Button>
-            </NavLink>
+            <Button className={style.logoutBtn} component={NavLink} to="/">
+              Logout
+            </Button>
           </div>
         </div>
       </Layout>
