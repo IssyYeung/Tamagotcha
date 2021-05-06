@@ -13,7 +13,7 @@ const PlayPage = () => {
   const [isWaving, setIsWaving] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [isWiggling, setIsWiggling] = useState(false);
-  // const [isCheering, setIsCheering] = useState(false);
+  const [isCheering, setIsCheering] = useState(false);
   const [state, dispatch] = useContext(StatsContext);
   const [isAwake, setIsAwake] = useState(true);
   const [eyes, setEyes] = useState("awake");
@@ -82,7 +82,7 @@ const PlayPage = () => {
     isWaving && setIsWaving(false);
     isWiggling && setIsWiggling(false);
     isJumping && setIsJumping(false);
-    // isCheering && setIsCheering(false);
+    isCheering && setIsCheering(false);
   };
   const toggleAwake = async () => {
     setIsAwake(!isAwake);
@@ -98,11 +98,11 @@ const PlayPage = () => {
   };
 
   const drinking = () => {
-    setIsJumping(true);
+    setIsCheering(true);
   };
 
   const eating = () => {
-    setIsJumping(true);
+    setIsCheering(true);
   };
 
   return (
@@ -116,7 +116,7 @@ const PlayPage = () => {
             jump={isJumping}
             wiggle={isWiggling}
             resetAnimations={resetAnimations}
-            // cheer={isCheering}
+            cheer={isCheering}
             // Eye options: awake, asleep, dead
             eyeState={eyes}
             // Mouth options: happy, sad, neutral
