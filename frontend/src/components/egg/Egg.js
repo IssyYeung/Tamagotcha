@@ -105,6 +105,7 @@ const Egg = ({ onClick, crackState }) => {
           y1="271.5"
           x2="52.2"
           y2="221.5"
+          strokeWidth="6"
         />
         <line
           className={`${style.st2} ${style.crackLine} ${

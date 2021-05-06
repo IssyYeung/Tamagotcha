@@ -8,6 +8,9 @@ const StatsPage = () => {
 
   const currentTime = new Date();
   const [state, dispatch] = useContext(StatsContext);
+  // useContext looks up component tree to find StatsContext
+
+  useEffect(() => {});
 
   const timeBornMs = new Date(state.timeBorn);
   const age = Math.ceil((currentTime - timeBornMs) / (1000 * 60 * 60 * 24));

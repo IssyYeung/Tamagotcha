@@ -1,4 +1,5 @@
 from flask import (request, abort, Blueprint, jsonify)
+from datetime import timedelta, datetime
 from backend.models import User, Tamagotcha, TamagotchaSchema
 from backend import db
 import flask_praetorian
@@ -34,17 +35,59 @@ def update_current_tamagotcha():
         tamagotcha = Tamagotcha.query.filter_by(
             user_id=flask_praetorian .current_user().id).first()
 
-        hunger = request.json['hunger']
-        thirst = request.json['thirst']
-        fun = request.json['fun']
-        sleep = request.json['sleep']
-        last_active = request.json['last_active']
+        maxTimeFood = datetime.now() + timedelta(hours=6)
+        maxTimeDrink = datetime.now() + timedelta(hours=4)
+        maxTimeSleep = datetime.now() + timedelta(hours=18)
+        maxTimeGame = datetime.now() + timedelta(hours=8)
 
-        tamagotcha.hunger = hunger
-        tamagotcha.thirst = thirst
-        tamagotcha.fun = fun
-        tamagotcha.sleep = sleep
-        tamagotcha.last_active = last_active
+        food = request.json['food']
+        drink = request.json['drink']
+        sleep = request.json['sleep']
+        game = request.json['game']
+
+        if food == "apple":
+            tamagotcha.time_feed_by = min(tamagotcha.time_feed_by + timedelta(hours=3),
+                                          maxTimeFood)
+        elif food == "popcorn":
+            tamagotcha.time_feed_by = min(tamagotcha.time_feed_by +
+                                          timedelta(hours=1, minutes=30), maxTimeFood)
+        elif food == "soup":
+            tamagotcha.time_feed_by = min(tamagotcha.time_feed_by +
+                                          timedelta(hours=4, minutes=30), maxTimeFood)
+        elif food == "pizza":
+            tamagotcha.time_feed_by = min(tamagotcha.time_feed_by +
+                                          timedelta(hours=6), maxTimeFood)
+
+        if drink == "wine":
+            tamagotcha.time_drink_by = min(tamagotcha.time_drink_by + timedelta(hours=4),
+                                           maxTimeDrink)
+        elif drink == "beer":
+            tamagotcha.time_drink_by = min(tamagotcha.time_drink_by +
+                                           timedelta(hours=3), maxTimeDrink)
+        elif drink == "juice":
+            tamagotcha.time_drink_by = min(tamagotcha.time_drink_by +
+                                           timedelta(hours=2), maxTimeDrink)
+        elif drink == "water":
+            tamagotcha.time_drink_by = min(tamagotcha.time_drink_by +
+                                           timedelta(hours=1), maxTimeDrink)
+
+        if sleep == "24hr":
+            # todo add time to others to prevent death while sleeping
+            tamagotcha.time_sleep_by = min(tamagotcha.time_sleep_by + timedelta(hours=18),
+                                           maxTimeFood)
+        elif sleep == "8hr":
+            tamagotcha.time_sleep_by = min(tamagotcha.time_sleep_by +
+                                           timedelta(hours=18), maxTimeSleep)
+        elif sleep == "1hr":
+            tamagotcha.time_sleep_by = min(tamagotcha.time_sleep_by +
+                                           timedelta(hours=10), maxTimeSleep)
+        elif sleep == "10min":
+            tamagotcha.time_sleep_by = min(tamagotcha.time_sleep_by +
+                                           timedelta(hours=2), maxTimeSleep)
+
+        if game == "quiz":
+            tamagotcha.time_play_by = min(tamagotcha.time_play_by + timedelta(hours=8),
+                                          maxTimeGame)
 
         db.session.commit()
 
@@ -80,7 +123,7 @@ def update_tamagotcha(id):
     
 # ADMIN ROUTES
 
-@tamagotchas.route('/tamagotcha_list', methods=['GET'])
+@ tamagotchas.route('/tamagotcha_list', methods=['GET'])
 def list_tamagotchas():
     tamagotchas = Tamagotcha.query.all()
     tamagotcha_schema = TamagotchaSchema(many=True)
@@ -88,7 +131,7 @@ def list_tamagotchas():
     return jsonify({'tamagotcha': output})
 
 
-@tamagotchas.route('/tamagotcha/<id>', methods=['GET'])
+@ tamagotchas.route('/tamagotcha/<id>', methods=['GET'])
 def list_tamagotcha(id):
     try:
         tamagotcha = Tamagotcha.query.get(id)
@@ -98,7 +141,7 @@ def list_tamagotcha(id):
         abort(400)
 
 
-@tamagotchas.route('/add_tamagotcha', methods=['POST'])
+@ tamagotchas.route('/add_tamagotcha', methods=['POST'])
 def new_tamagotcha():
     try:
         name = request.json['name']
@@ -114,7 +157,7 @@ def new_tamagotcha():
         abort(400)
 
 
-@tamagotchas.route('/add_multiple_tamagotchas', methods=['POST'])
+@ tamagotchas.route('/add_multiple_tamagotchas', methods=['POST'])
 def new_tamagotchas():
     # try:
     jsonBody = request.get_json()
@@ -136,8 +179,26 @@ def new_tamagotchas():
     #     abort(400)
 
 
+@ tamagotchas.route('/update_tamagotcha/<id>', methods=['PUT'])
+def update_tamagotcha(id):
+    try:
+        tamagotcha = Tamagotcha.query.get(id)
+        name = request.json['name']
+        breed = request.json['breed']
+        user_id = request.json['user_id']
+        tamagotcha.name = name
+        tamagotcha.breed = breed
+        tamagotcha.user_id = user_id
 
-@tamagotchas.route('/delete_tamagotcha/<id>', methods=['DELETE'])
+        db.session.commit()
+
+        tamagotcha_schema = TamagotchaSchema()
+        return tamagotcha_schema.jsonify(tamagotcha)
+    except:
+        abort(404)
+
+
+@ tamagotchas.route('/delete_tamagotcha/<id>', methods=['DELETE'])
 def delete_tamagotcha(id):
     try:
         tamagotcha = Tamagotcha.query.get(id)

@@ -2,18 +2,21 @@
 @import "../variables";
 
 $padding: 10px;
-$margin: 30px;
+$margin: 20px;
 
 .accountPageContainer {
   border-radius: 50px;
-  background-color: $midColor;
+  background-color: $lightColor;
   padding: 30px;
   margin: 10px;
   box-shadow: 5px 5px 5px 0px rgba($color: #000000, $alpha: 0.1);
 }
 
 .infoContainer {
-  padding: 10px;
+  h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
 }
 
 .btnContainer {
@@ -34,5 +37,5 @@ $margin: 30px;
   width: 100%;
   padding: $padding;
   margin-top: $margin;
-  margin-bottom: $margin;
+  margin-bottom: 5px;
 }
