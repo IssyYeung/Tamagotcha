@@ -86,7 +86,11 @@ const BottomNav = () => {
         isOpen={openIndex === 3}
         setOpenIndex={() => setOpenIndex(openIndex === 3 ? -1 : 3)}
       >
-        <Button component={NavLink} to="/minigames/quiz">
+        <Button
+          onClick={() => updateDB({ game: "quiz" })}
+          component={NavLink}
+          to="/minigames/quiz"
+        >
           Quiz
         </Button>
       </DropUp>

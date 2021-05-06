@@ -63,17 +63,17 @@ def update_current_tamagotcha():
 
         if sleep == "24hrs":
             # todo add time to others to prevent death while sleeping
-            tamagotcha.time_sleep_by = min(tamagotcha.time_sleep_by + timedelta(hours=3),
+            tamagotcha.time_sleep_by = min(tamagotcha.time_sleep_by + timedelta(hours=18),
                                            maxTimeFood)
         elif sleep == "8hrs":
             tamagotcha.time_sleep_by = min(tamagotcha.time_sleep_by +
-                                           timedelta(hours=1, minutes=30), maxTimeSleep)
+                                           timedelta(hours=18), maxTimeSleep)
         elif sleep == "1hr":
             tamagotcha.time_sleep_by = min(tamagotcha.time_sleep_by +
-                                           timedelta(hours=4, minutes=30), maxTimeSleep)
+                                           timedelta(hours=10), maxTimeSleep)
         elif sleep == "10min":
             tamagotcha.time_sleep_by = min(tamagotcha.time_sleep_by +
-                                           timedelta(hours=6), maxTimeSleep)
+                                           timedelta(hours=2), maxTimeSleep)
 
         if game == "quiz":
             tamagotcha.time_play_by = min(tamagotcha.time_play_by + timedelta(hours=8),

@@ -56,7 +56,7 @@ const reducer = (state, action) => {
         timeSleepBy: data.timeSleepBy ? data.timeSleepBy : state.timeSleepBy,
         timePlayBy: data.timePlayBy ? data.timePlayBy : state.timePlayBy,
 
-        sleep: data.sleep ? data.timeBorn : state.timeBorn,
+        sleep: data.sleep ? data.sleep : state.sleep,
         thirst: data.thirst ? data.thirst : state.thirst,
         hunger: data.hunger ? data.hunger : state.hunger,
         fun: data.fun ? data.fun : state.fun,
@@ -88,13 +88,23 @@ export const StatsContextProvider = ({ children }) => {
     let hunger = Math.round((timeTillStarve / 21600000) * 100);
     let timeTillParched = state.timeDrinkBy - Date.now();
     let thirst = Math.round((timeTillParched / 14400000) * 100);
+    let timeTillExhaustion = state.timeSleepBy - Date.now();
+    let sleep = Math.round((timeTillExhaustion / 64800000) * 100);
+    let timeTillHeartBreak = state.timePlayBy - Date.now();
+    let fun = Math.round((timeTillHeartBreak / 28800000) * 100);
 
-    console.log(state.thirst);
-    console.log(state.hunger);
+    // console.log("Thirst:");
+    // console.log(state.thirst);
+    // console.log("Hunger:");
+    // console.log(state.hunger);
+    console.log("Sleep:");
+    console.log(state.sleep);
+    // console.log("Fun:");
+    // console.log(state.fun);
 
     dispatch({
       type: "UPDATE_STATS",
-      payload: { hunger: hunger, thirst: thirst },
+      payload: { hunger: hunger, thirst: thirst, sleep: sleep, fun: fun },
     });
 
     return () => {
