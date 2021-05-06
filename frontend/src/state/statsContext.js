@@ -1,5 +1,4 @@
-import { useReducer, createContext, useEffect } from "react";
-import {authFetch} from "../auth/index"
+import { useReducer, createContext } from "react";
 
 export const StatsContext = createContext();
 
@@ -29,6 +28,8 @@ const reducer = (state, action) => {
         thirst: fromAPI.thirst,
         hunger: fromAPI.hunger,
         fun: fromAPI.fun,
+        last_active: fromAPI.last_active,
+        is_dead: fromAPI.is_dead,
         avgHealth: Math.floor(
           (fromAPI.sleep + fromAPI.thirst + fromAPI.hunger + fromAPI.fun) / 4
         ),
@@ -44,14 +45,14 @@ const reducer = (state, action) => {
         thirst: data.thirst ? data.thirst : state.thirst,
         hunger: data.hunger ? data.hunger : state.hunger,
         fun: data.fun ? data.fun : state.fun,
+        last_active: data.last_active ? data.last_active : state.last_active,
+        is_dead: data.is_dead ? data.is_dead : state.is_dead
       };
       let avgHealth = Math.floor(
         (newState.sleep + newState.thirst + newState.hunger + newState.fun) / 4
       );
-
-      // TODO: here we could set/send newState to backend
-
       return { ...newState, avgHealth };
+      //NEW CASE HERE TO SEND TO BACKEND (current state), WILL NEED HEADERS ETC FROM ACCOUNTS PAGE.
     default:
       throw new Error();
   }

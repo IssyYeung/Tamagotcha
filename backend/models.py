@@ -109,15 +109,19 @@ class Tamagotcha(db.Model):
     sleep = db.Column(db.Integer, nullable=False, default=50)
     thirst = db.Column(db.Integer, nullable=False, default=50)
     hunger = db.Column(db.Integer, nullable=False, default=50)
+    last_active = db.Column(db.DateTime, nullable=True)
+    is_dead = db.Column(db.Boolean, nullable=False, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
-    def __init__(self, name, breed, user_id):
+    def __init__(self, name, breed, user_id, last_active):
         self.name = name
         self.breed = breed
         self.user_id = user_id
+        self.last_active = last_active
+    
 
     def __repr__(self):
-        return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.fun}', '{self.sleep}', '{self.thirst}', '{self.hunger}', '{self.user_id}')"
+        return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.fun}', '{self.sleep}', '{self.thirst}', '{self.hunger}', '{self.user_id}', '{self.last_active}', '{self.is_dead}')"
 
 
 class TriviaQuestions(db.Model):

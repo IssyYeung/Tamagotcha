@@ -3,13 +3,16 @@ import style from "./Navbar.module.scss";
 import stats from "../../images/stats.png";
 import computer from "../../images/computer.png";
 import tama from "../../images/tama.png";
-import { Decrement_stats } from "../decrement_stats/DecrementStats";
+import { Decrement_stats, DeathCheck } from "../decrement_stats/DecrementStats";
 
 
 const Navbar = () => {
   
+  /* Call decrement/check_if_dead functions here since component is mounted on
+  every logged-in page. */
   Decrement_stats()
-  
+  DeathCheck()
+
   return (
     <nav className={style.navbar}>
       <div>

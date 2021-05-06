@@ -59,7 +59,22 @@ const LoginPage = () => {
           dispatch({ type: "SET_STATS", payload: json[0] });
         });
       
-
+      //DO ALL MISSED DECREMENTS WHILST LOGGED OUT. ONLY DO IF ALREADY LOGGED IN PREVIOUSLY BEFORE CURRENT SESSION:
+      if (state.last_active!=null) {
+        //INSERT TIME BETWEEN DECREMENTATION INTO DENOMINATOR. SEE DECREMENT_STATE FILE for VALUE.
+        const decrementInterval = 120000;
+        const currentTime = new Date();
+        const timeSinceLastActive = (currentTime - state.last_active);
+        //ONLY DO IF AT LEAST ONE DECREMENT INTERVAL HAS PASSED SINCE LAST LOGOUT:
+        if (timeSinceLastActive>=decrementInterval) {
+          const numDecrementsToDo = Math.round(timeSinceLastActive/(decrementInterval));
+          let i=1;
+          while(i<=numDecrementsToDo) {
+            dispatch({ type: "UPDATE_STATS", payload: { hunger: Math.max(0, state.hunger-1), thirst: Math.max(0, state.thirst-1), sleep: Math.max(0, state.sleep-1), fun: Math.max(0, state.fun-1) } })
+            i++;
+          }
+        }
+      };
   };
 
   const handleChange = (event) => {

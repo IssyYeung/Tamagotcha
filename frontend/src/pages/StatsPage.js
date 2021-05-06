@@ -5,12 +5,12 @@ import { useContext } from "react";
 import { StatsContext } from "../state/statsContext";
 
 const StatsPage = () => {
-  
+
   const currentTime = new Date();
   const [state, dispatch] = useContext(StatsContext);
 
   const timeBornMs = new Date(state.timeBorn);
-  const age = Math.round((currentTime - timeBornMs) / (1000 * 60 * 60));
+  const age = Math.ceil((currentTime - timeBornMs) / (1000 * 60 * 60 * 24));
 
   return (
     <div>
@@ -20,9 +20,7 @@ const StatsPage = () => {
             <h4>Name: {state.name}</h4>
             <h4>Breed: {state.breed}</h4>
             <h4>Age: {age}</h4>
-            <h4>Needs:</h4>
           </div>
-          <div>{state.breed}</div>
           <StatBar statTitle="Average Health" statValue={state.avgHealth} />
           <StatBar statTitle="Sleep" statValue={state.sleep} />
           <StatBar statTitle="Thirst" statValue={state.thirst} />
