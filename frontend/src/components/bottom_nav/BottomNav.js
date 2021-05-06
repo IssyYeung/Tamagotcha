@@ -5,14 +5,12 @@ import moon from "../../images/moon.png";
 import funIcon from "../../images/fun.png";
 import style from "./BottomNav.module.scss";
 import Button from "../button/Button";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { authFetch } from "../../auth/index";
 import { StatsContext } from "../../state/statsContext";
 
 const BottomNav = ({ toggleSleep }) => {
   const [openIndex, setOpenIndex] = useState(-1);
-
   const [state, dispatch] = useContext(StatsContext);
 
   const myHeaders = new Headers();
@@ -94,7 +92,6 @@ const BottomNav = ({ toggleSleep }) => {
         setOpenIndex={() => setOpenIndex(openIndex === 3 ? -1 : 3)}
       >
         <Button
-          // onClick={() => updateDB({ game: "quiz" })}
           component={NavLink}
           to="/minigames/quiz"
         >

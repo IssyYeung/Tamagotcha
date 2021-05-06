@@ -10,7 +10,6 @@ users = Blueprint('users', __name__)
 
 @users.route('/api/register', methods=['POST'])
 def register_user():
-    # try:
         req = request.get_json(force=True)
         email = req.get('email', None)
         username = req.get('username', None)
@@ -27,8 +26,6 @@ def register_user():
         assign_first_tamagotchi(new_user_id)
         user_schema = UserSchema()
         return user_schema.jsonify(new_user)
-    # except:
-    #     abort(400)
 
 @users.route('/api/login', methods=['POST'])
 def login():
@@ -62,7 +59,6 @@ def get_account_details():
     output = user_schema.dump(user)
     return jsonify(output)
 
- 
 # ADMIN ROUTES
 
 @users.route('/user_list', methods=['GET'])
@@ -89,7 +85,6 @@ def new_user():
         email_data = request.json['email']
         username_data = request.json['username']
         password_data = request.json['password']
-        # Hash password entered by user for secure storage in database.
         hashed_password = bcrypt.generate_password_hash(
             password_data).decode('utf-8')
         role = "player"

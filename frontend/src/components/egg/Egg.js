@@ -1,12 +1,7 @@
 import style from "./Egg.module.scss";
-// import { useEffect, useState } from "react";
 
 const Egg = ({ onClick, crackState }) => {
-  // const [show, setShow] = useState(false);
-  // useEffect(() => {
-  //   setTimeout(() => setShow(true), 1000);
-  // }, []);
-
+ 
   return (
     <svg
       version="1.1"

@@ -1,11 +1,10 @@
 from flask import (request, abort, Blueprint, jsonify)
 from datetime import timedelta, datetime
-from backend.models import User, Tamagotcha, TamagotchaSchema
+from backend.models import Tamagotcha, TamagotchaSchema
 from backend import db
 import flask_praetorian
 
 tamagotchas = Blueprint('tamagotchas', __name__)
-
 
 @tamagotchas.route('/api/tamagotcha_stats', methods=['GET'])
 @flask_praetorian .auth_required
@@ -14,14 +13,12 @@ def get_tamagotcha_stats():
         user_id=flask_praetorian .current_user().id)
     tamagotcha_schema = TamagotchaSchema(many=True)
     output = tamagotcha_schema.dump(tamagotchas)
-    # {f'{flask_praetorian .current_user().username}\'s tamagotcha\'s':
     return jsonify(output)
 
 
 @tamagotchas.route('/api/update_tamagotcha', methods=['PUT'])
 @flask_praetorian .auth_required
 def update_current_tamagotcha():
-    # try:
         tamagotcha = Tamagotcha.query.filter_by(
             user_id=flask_praetorian .current_user().id).first()
 
@@ -83,8 +80,7 @@ def update_current_tamagotcha():
 
         tamagotcha_schema = TamagotchaSchema()
         return tamagotcha_schema.jsonify(tamagotcha)
-    # except:
-    #     abort(404)
+   
 
 
 # ADMIN ROUTES
@@ -124,7 +120,6 @@ def new_tamagotcha():
 
 @ tamagotchas.route('/add_multiple_tamagotchas', methods=['POST'])
 def new_tamagotchas():
-    # try:
     jsonBody = request.get_json()
     for json_object in jsonBody:
         name = json_object.get('name')
@@ -139,8 +134,6 @@ def new_tamagotchas():
     tamagotcha_schema = TamagotchaSchema(many=True)
     output = tamagotcha_schema.dump(tamagotchas)
     return jsonify({'# tamagotchas in database': len(output)})
-    # except:
-    #     abort(400)
 
 
 @ tamagotchas.route('/update_tamagotcha/<id>', methods=['PUT'])

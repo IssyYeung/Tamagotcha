@@ -33,7 +33,6 @@ def create_app(config_class=Config):
     # name is the name of the current python module
     app = Flask(__name__)
     
-
     # Linking to config.py file to set configurations
     app.config.from_object(Config)
 
@@ -45,9 +44,7 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
     cors.init_app(app)
 
-
     from backend.errors.handlers import errors
-    from backend.main.routes import main
     from backend.tamagotchas.routes import tamagotchas
     from backend.minigames.routes import minigames
     from backend.users.routes import users
@@ -55,7 +52,6 @@ def create_app(config_class=Config):
     # Register blueprints
     app.register_blueprint(errors)
     app.register_blueprint(tamagotchas)
-    app.register_blueprint(main)
     app.register_blueprint(minigames)
     app.register_blueprint(users)
 

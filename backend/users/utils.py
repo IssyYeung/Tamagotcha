@@ -15,7 +15,6 @@ If you did not make this request then simply ignore this email and no changes wi
 '''
     mail.send(msg)
 
-
 def assign_first_tamagotchi(new_user_id):
     name = "Pandaichi"
     breed = "Baby Panda"

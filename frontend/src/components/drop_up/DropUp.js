@@ -1,6 +1,5 @@
 // import Button from "../button/Button";
 import style from "./DropUp.module.scss";
-import { useState } from "react";
 
 const DropUp = ({ icon, children, title, isOpen, setOpenIndex }) => {
   return (

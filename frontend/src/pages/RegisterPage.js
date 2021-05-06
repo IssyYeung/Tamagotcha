@@ -25,7 +25,6 @@ const RegisterPage = () => {
     formData.set("confirm_password", formInfo.confirm_password);
 
     console.log(formInfo);
-    //console.log(formData);
     const requestOptions = {
       method: "POST",
       body: JSON.stringify(formInfo),

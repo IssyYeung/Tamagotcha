@@ -4,7 +4,6 @@ import { NavLink, useHistory } from "react-router-dom";
 import React, { useReducer } from "react";
 import style from "../styles/pageStyles/loginpage.module.scss";
 import { login, useAuth } from "../auth/index";
-import { Decrement_stats } from "../components/decrement_stats/DecrementStats"
 
 const formReducer = (state, event) => {
   return {
@@ -23,7 +22,6 @@ const LoginPage = () => {
     const formData = new FormData();
     formData.set("username", formInfo.email);
     formData.set("password", formInfo.password);
-    //formData.set("remember", formInfo.remember);
 
     console.log(formInfo);
     const requestOptions = {
@@ -58,8 +56,6 @@ const LoginPage = () => {
     });
   };
 
-  const [logged] = useAuth();
-
   return (
     <Layout pageTitle="Tamagotcha" showNavbar={false}>
       <div className={style.login}>
@@ -85,8 +81,6 @@ const LoginPage = () => {
             <label>Remember me</label>
             <input
               type="checkbox"
-              //value={formInfo.remember}
-              //onChange={handleChange}
             />
           </span>
           <Button
@@ -95,7 +89,6 @@ const LoginPage = () => {
             type="submit"
             value="Login"
             className={style.loginBtn}
-            //onClick={Decrement_stats()}
           />
         </form>
 

@@ -3,7 +3,6 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from backend import db, ma
 
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
@@ -15,7 +14,6 @@ class User(db.Model):
     roles = db.Column(db.Text)
     is_active = db.Column(db.Boolean, default=True, server_default="true")
     # One to many relationship because one user can have many Tamagotchis (eventually).
-    # Backref allows us to get owner (user) attribute of Tamagotchi.
     Tamagotchas = db.relationship('Tamagotcha', backref='author', lazy=True)
 
     def __init__(self, username, email, hashed_password, roles):
@@ -148,11 +146,9 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
 
-
 class TamagotchaSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Tamagotcha
-
 
 class TriviaQuestionsSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
