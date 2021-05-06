@@ -93,15 +93,6 @@ export const StatsContextProvider = ({ children }) => {
     let timeTillHeartBreak = state.timePlayBy - Date.now();
     let fun = Math.round((timeTillHeartBreak / 28800000) * 100);
 
-    // console.log("Thirst:");
-    // console.log(state.thirst);
-    // console.log("Hunger:");
-    // console.log(state.hunger);
-    console.log("Sleep:");
-    console.log(state.sleep);
-    // console.log("Fun:");
-    // console.log(state.fun);
-
     dispatch({
       type: "UPDATE_STATS",
       payload: { hunger: hunger, thirst: thirst, sleep: sleep, fun: fun },
