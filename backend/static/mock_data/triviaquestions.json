@@ -12,19 +12,19 @@
         "correct_ans": "Take that"
     },
     {
-        "question": "ED how big dose mountains u climb?",
+        "question": "How big those mountains Ed climbs?",
         "incorrect_ans_one": "v173",
         "incorrect_ans_two": "v12",
-        "correct_ans": "Itsy bitsy teenie weenie yellow polka dot bikini"
+        "correct_ans": "Itsy bitsy"
     },
     {
         "question": "How old was the oldest Tamagotchi when it died?",
-        "incorrect_ans_one": "219,792,099E156 tamayears",
+        "incorrect_ans_one": "219,792 tamayears",
         "incorrect_ans_two": "17 tamayears",
         "correct_ans": "145 tamayears"
     },
     {
-        "question": "What colour were the origional Pokemon games in the UK?",
+        "question": "What colour were the original Pokemon games in the UK?",
         "incorrect_ans_one": "Gold & Silver",
         "incorrect_ans_two": "Yellow",
         "correct_ans": "Red and blue"
@@ -36,57 +36,57 @@
         "correct_ans": "151"
     },
     {
-        "question": "Are you proud of stealing?",
+        "question": "Are you aware this game is a copyright infringement?",
         "incorrect_ans_one": "Yes I am immoral",
-        "incorrect_ans_two": "I didn't know I was stealing",
-        "correct_ans": "Shut up Adam!"
+        "incorrect_ans_two": "What's a Tamagotchi?",
+        "correct_ans": "I'm sorry judge"
     },
     {
-        "question": "Does Japanese heritage mean nothing to you?",
-        "incorrect_ans_one": "Yes, I love sushi",
-        "incorrect_ans_two": "No, gimme my sword",
-        "correct_ans": "Shut up Adam!"
+        "question": "How tall is Adam?",
+        "incorrect_ans_one": "Average",
+        "incorrect_ans_two": "Scrawny",
+        "correct_ans": "Surprisingly tall"
     },
     {
-        "question": "Are you a cop? You have to tell me if you're a cop.",
-        "incorrect_ans_one": "No",
-        "incorrect_ans_two": "No, really I'm not",
-        "correct_ans": "Shut up Adam!"
+        "question": "How tall is Ed?",
+        "incorrect_ans_one": "Too short to climb",
+        "incorrect_ans_two": "Tall",
+        "correct_ans": "Average"
     },
     {
-        "question": "Would you steal a car?",
-        "incorrect_ans_one": "Would you steal a television?",
-        "incorrect_ans_two": "Would you steal a handbag?",
-        "correct_ans": "Shut up Adam!"
+        "question": "How tall is John?",
+        "incorrect_ans_one": "Surprisingly short",
+        "incorrect_ans_two": "Very average",
+        "correct_ans": "Clearly 6 foot"
     },
     {
-        "question": "Who quit the band Busted first?",
+        "question": "Who quit the band Busted in 2005?",
         "incorrect_ans_one": "James",
         "incorrect_ans_two": "Matt",
-        "correct_ans": "Shut up Adam!"
+        "correct_ans": "Charlie"
     },
     {
-        "question": "Issy Young or Yeung?",
-        "incorrect_ans_one": "YUNG",
-        "incorrect_ans_two": "YOURNG",
-        "correct_ans": "Shut up Adam!"
+        "question": "How tall is Issy?",
+        "incorrect_ans_one": "Tall",
+        "incorrect_ans_two": "Short",
+        "correct_ans": "Average I swear"
     },
     {
-        "question": "Should Ed get a coffee",
-        "incorrect_ans_one": "Yeah baby girl, you go",
-        "incorrect_ans_two": "Tea plz, no sugar, sweetie pie",
-        "correct_ans": "Can I be the milk to your shake?"
+        "question": "Who's a good boy?",
+        "incorrect_ans_one": "Adam",
+        "incorrect_ans_two": "Lottie",
+        "correct_ans": "Buster"
     },
     {
-        "question": "ED how big dose mountains u climb?",
-        "incorrect_ans_one": "v173",
-        "incorrect_ans_two": "Itsy bitsy teenie 5'10'' weenie yellow polka dot Ed",
-        "correct_ans": "Itsy bitsy teenie weenie yellow polka dot bikini"
+        "question": "Who in the group is Lonely because he doesn't have a dog?",
+        "incorrect_ans_one": "Ed",
+        "incorrect_ans_two": "Adam",
+        "correct_ans": "John"
     },
     {
-        "question": "Did you hurt yourself falling from the vending machine, Adam?",
-        "incorrect_ans_one": "Yes, I did, why?",
-        "incorrect_ans_two": "Cuz u snack, shawty",
-        "correct_ans": "Love to see what components are hiding in your wrapper"
-    }
+        "question": "What is Ed's cat called?",
+        "incorrect_ans_one": "Fluffy",
+        "incorrect_ans_two": "Oscar",
+        "correct_ans": "Tigs"
+    },
 ]
