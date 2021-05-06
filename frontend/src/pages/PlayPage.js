@@ -66,6 +66,14 @@ const PlayPage = () => {
     }, 10000);
   };
 
+  const drinking = () => {
+    setIsJumping(true);
+  };
+
+  const eating = () => {
+    setIsJumping(true);
+  };
+
   return (
     <Layout pageTitle="Tamagotcha">
       <div className={style.playPage}>
@@ -90,7 +98,13 @@ const PlayPage = () => {
           <Button className={style.btn3} onClick={handleBtn3} />
         </div>
       </div>
-      {isAwake && <BottomNav toggleSleep={toggleAwake} />}
+      {isAwake && (
+        <BottomNav
+          toggleSleep={toggleAwake}
+          onDrink={drinking}
+          onEat={eating}
+        />
+      )}
     </Layout>
   );
 };
