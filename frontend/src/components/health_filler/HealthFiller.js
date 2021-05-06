@@ -8,7 +8,7 @@ const HealthFiller = () => {
   return (
     <div
       className={style.healthFiller}
-      style={{ width: `${state.avgHealth * 1.5}px` }}
+      style={{ width: `${state.avgHealth * 2}px` }}
     ></div>
   );
 };
