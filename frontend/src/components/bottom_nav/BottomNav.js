@@ -66,8 +66,8 @@ const BottomNav = () => {
       >
         <Button onClick={() => updateDB({ drink: "wine" })}>Wine</Button>
         <Button onClick={() => updateDB({ drink: "beer" })}>Beer</Button>
-        <Button onClick={() => updateDB({ drink: "Juice" })}>Juice</Button>
-        <Button onClick={() => updateDB({ drink: "Water" })}>Water</Button>
+        <Button onClick={() => updateDB({ drink: "juice" })}>Juice</Button>
+        <Button onClick={() => updateDB({ drink: "water" })}>Water</Button>
       </DropUp>
       <DropUp
         icon={moon}
