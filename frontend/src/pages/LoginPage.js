@@ -104,10 +104,6 @@ const LoginPage = () => {
         >
           Register
         </Button>
-
-        <Button to="/play" component={NavLink} className={style.loginBtn}>
-          Pretend login. WILL REMOVE.
-        </Button>
       </div>
     </Layout>
   );

@@ -21,7 +21,7 @@ const AccountPage = () => {
         setEmail(json[0].email);
         setTimeOnApp(json[0].time_on_app);
       });
-  });
+  }, []);
 
   return (
     <div>

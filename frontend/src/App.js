@@ -5,6 +5,7 @@ import StatsPage from "./pages/StatsPage";
 import RegisterPage from "./pages/RegisterPage";
 import AccountPage from "./pages/AccountPage";
 import QuizPage from "./pages/QuizPage";
+import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
   const ProtectedRoute = ({ component: Comp, path, ...rest }) => {

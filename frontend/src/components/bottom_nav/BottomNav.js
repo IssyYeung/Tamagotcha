@@ -5,9 +5,10 @@ import moon from "../../images/moon.png";
 import funIcon from "../../images/fun.png";
 import style from "./BottomNav.module.scss";
 import Button from "../button/Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { authFetch } from "../../auth/index";
+import { StatsContext } from "../../state/statsContext";
 
 const BottomNav = ({ toggleSleep }) => {
   const [openIndex, setOpenIndex] = useState(-1);
@@ -15,6 +16,8 @@ const BottomNav = ({ toggleSleep }) => {
   const [thirst, setThirst] = useState([]);
   const [hunger, setHunger] = useState([]);
   const [fun, setFun] = useState([]);
+
+  const [state, dispatch] = useContext(StatsContext);
 
   useEffect(() => {
     authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
@@ -26,7 +29,7 @@ const BottomNav = ({ toggleSleep }) => {
         setHunger(json[0].hunger);
         setFun(json[0].fun);
       });
-  });
+  }, []);
 
   const myHeaders = new Headers();
   myHeaders.append(
@@ -79,6 +82,7 @@ const BottomNav = ({ toggleSleep }) => {
     headers: myHeaders,
   };
 
+  // These could be moved to statsContext if we wanted:
   const incrementHunger = () => {
     fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsHunger)
       .then((response) => response.text())
@@ -106,6 +110,8 @@ const BottomNav = ({ toggleSleep }) => {
   };
 
   const handleHungerButton = () => {
+    dispatch({ type: "UPDATE_STATS", payload: { hunger: 500 } });
+    // wouldn't need this here if increment functions were in statsContext file:
     incrementHunger();
   };
   const handleThirstButton = () => {

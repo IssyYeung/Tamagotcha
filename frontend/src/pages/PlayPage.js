@@ -6,6 +6,7 @@ import Button from "../components/button/Button";
 import { useState, useEffect } from "react";
 import Creature from "../components/creature/Creature";
 import Egg from "../components/egg/Egg";
+import {Decrement_stats} from '../components/decrement_stats/DecrementStats';
 
 const PlayPage = () => {
   const [isWaving, setIsWaving] = useState(false);
@@ -15,6 +16,8 @@ const PlayPage = () => {
   const [eyes, setEyes] = useState("awake");
   const [mouth, setMouth] = useState("happy");
   // const [isCheering, setIsCheering] = useState(false);
+
+  Decrement_stats()
 
   const [crackState, setCrackState] = useState(0);
   const crackEgg = () => {
