@@ -46,7 +46,7 @@ const LoginPage = () => {
           window.$user_token = token;
           history.push("/play");
         } else {
-          console.log("Please type in correct username/password");
+          alert("Please type in correct username/password");
         }
       });
   };

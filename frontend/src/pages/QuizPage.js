@@ -131,10 +131,10 @@ const QuizPage = () => {
             ref={(ref) => { Window.reward = ref }}
             type='emoji'
             config= {{
-              elementCount: 250,
-              spread: 90,
-              angle: 360,
-              startVelocity: 100,
+              elementCount: 500,
+              spread: 295,
+              angle: 150,
+              startVelocity: 50,
               zIndex:100,
               emoji:["🥚", "🐣", "🐼", "✔️"],
             }}
