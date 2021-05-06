@@ -6,7 +6,6 @@ import Button from "../components/button/Button";
 import { useState, useEffect, useContext } from "react";
 import Creature from "../components/creature/Creature";
 import Egg from "../components/egg/Egg";
-import { Decrement_stats } from "../components/decrement_stats/DecrementStats";
 import { StatsContext } from "../state/statsContext";
 import { authFetch } from "../auth/index";
 
@@ -19,23 +18,55 @@ const PlayPage = () => {
   const [isAwake, setIsAwake] = useState(true);
   const [eyes, setEyes] = useState("awake");
   const [mouth, setMouth] = useState("happy");
+  const [hatched, setHatched] = useState(false);
 
   useEffect(() => {
     authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
+        setHatched(json["is_hatched"]);
         dispatch({ type: "SET_STATS", payload: json[0] });
       });
   }, []);
-
-  Decrement_stats();
 
   const [crackState, setCrackState] = useState(0);
   const crackEgg = () => {
     setCrackState(crackState + 1);
     console.log(`crackState: ${crackState}`);
   };
+
+  const myHeaders = new Headers();
+  myHeaders.append(
+    "Authorization",
+    `Bearer ${window.$user_token["access_token"]}`
+  );
+  myHeaders.append("Content-Type", "application/json");
+
+  const hatching = async () => {
+    fetch("http://127.0.0.1:5000/api/update_tamagotcha", {
+      method: "PUT",
+      body: JSON.stringify({
+        hatch: "true",
+        food: "",
+        drink: "",
+        game: "",
+        sleep: "",
+      }),
+      headers: myHeaders,
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+      });
+    setTimeout(function () {
+      setHatched();
+    }, 10000);
+  };
+
+  if (crackState >= 7) {
+    hatching();
+  }
 
   const handleBtn1 = () => {
     setIsWaving(true);
@@ -92,7 +123,9 @@ const PlayPage = () => {
             mouthState={mouth}
             crackState={crackState}
           />
-          <Egg onClick={crackEgg} crackState={crackState} />
+          {!state.isHatched && (
+            <Egg onClick={crackEgg} crackState={crackState} />
+          )}
           {isAwake && <Button className={style.btn1} onClick={handleBtn1} />}
           {isAwake && <Button className={style.btn2} onClick={handleBtn2} />}
           {isAwake && <Button className={style.btn3} onClick={handleBtn3} />}

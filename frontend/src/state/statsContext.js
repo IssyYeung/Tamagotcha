@@ -9,6 +9,7 @@ const initialState = {
   timeDrinkBy: Date.now(),
   timeSleepBy: Date.now(),
   timePlayBy: Date.now(),
+  isHatched: false,
   timeBorn: 0,
   sleep: 50,
   thirst: 50,
@@ -35,6 +36,7 @@ const reducer = (state, action) => {
         name: fromAPI.name,
         timeBorn: fromAPI.time_of_birth,
         // * NEW:
+        isHatched: fromAPI.is_hatched,
         timeFeedBy: Date.parse(fromAPI.time_feed_by),
         timeDrinkBy: Date.parse(fromAPI.time_drink_by),
         timeSleepBy: Date.parse(fromAPI.time_sleep_by),
@@ -51,6 +53,7 @@ const reducer = (state, action) => {
         name: data.name ? data.name : state.name,
         timeBorn: data.timeBorn ? data.timeBorn : state.timeBorn,
         // * done today:
+        isHatched: data.isHatched ? data.isHatched : state.isHatched,
         timeFeedBy: data.timeFeedBy ? data.timeFeedBy : state.timeFeedBy,
         timeDrinkBy: data.timeDrinkBy ? data.timeDrinkBy : state.timeDrinkBy,
         timeSleepBy: data.timeSleepBy ? data.timeSleepBy : state.timeSleepBy,
@@ -81,6 +84,7 @@ export const StatsContextProvider = ({ children }) => {
   const [time, setTime] = useState(Date.now());
 
   useEffect(() => {
+    let isHatched = state.isHatched;
     const interval = setInterval(() => {
       setTime(Date.now());
     }, 2000);
@@ -95,7 +99,13 @@ export const StatsContextProvider = ({ children }) => {
 
     dispatch({
       type: "UPDATE_STATS",
-      payload: { hunger: hunger, thirst: thirst, sleep: sleep, fun: fun },
+      payload: {
+        hunger: hunger,
+        thirst: thirst,
+        sleep: sleep,
+        fun: fun,
+        isHatched: isHatched,
+      },
     });
 
     return () => {

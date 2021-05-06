@@ -1,4 +1,6 @@
 import style from "./Creature.module.scss";
+import { StatsContext } from "../../state/statsContext";
+import { useContext } from "react";
 
 const Creature = ({
   wave,
@@ -10,6 +12,8 @@ const Creature = ({
   resetAnimations,
   crackState,
 }) => {
+  const [state, dispatch] = useContext(StatsContext);
+
   return (
     <svg
       version="1.1"
@@ -20,7 +24,7 @@ const Creature = ({
       viewBox="0 0 282.6 287.5"
       style={{ enableBackground: "new 0 0 282.6 287.5" }}
       className={`${style.inEgg} ${jump && style.creature__jump} ${
-        crackState >= 7 && style.creature
+        (state.isHatched || crackState >= 7) && style.creature
       }`}
       onAnimationEnd={resetAnimations}
     >

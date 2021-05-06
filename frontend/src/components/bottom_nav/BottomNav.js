@@ -35,6 +35,7 @@ const BottomNav = ({ toggleSleep, onEat, onDrink }) => {
         drink: drink,
         game: game,
         sleep: sleep,
+        hatch: "",
       }),
       headers: myHeaders,
     })
