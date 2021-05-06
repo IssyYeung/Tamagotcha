@@ -35,15 +35,18 @@ def update_current_tamagotcha():
         sleep = request.json['sleep']
         game = request.json['game']
 
+        if  request.json['isDead'] == 'true':
+            tamagotcha.is_dead == True
+
         if request.json['hatch'] == "true":
             tamagotcha.is_hatched = True
 
         if food == "apple":
             tamagotcha.time_feed_by = min(tamagotcha.time_feed_by + timedelta(hours=3),
                                           maxTimeFood)
-        elif food == "popcorn":
-            tamagotcha.time_feed_by = min(tamagotcha.time_feed_by +
-                                          timedelta(hours=1, minutes=30), maxTimeFood)
+        elif food == "peanut":
+            tamagotcha.time_feed_by = datetime.now() + timedelta(hours =0.05)
+                                          
         elif food == "soup":
             tamagotcha.time_feed_by = min(tamagotcha.time_feed_by +
                                           timedelta(hours=4, minutes=30), maxTimeFood)

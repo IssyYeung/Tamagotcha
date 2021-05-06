@@ -36,6 +36,7 @@ const BottomNav = ({ toggleSleep, onEat, onDrink }) => {
         game: game,
         sleep: sleep,
         hatch: "",
+        isDead: "",
       }),
       headers: myHeaders,
     })
@@ -80,11 +81,11 @@ const BottomNav = ({ toggleSleep, onEat, onDrink }) => {
         </Button>
         <Button
           onClick={() => {
-            updateDB({ food: "popcorn" });
+            updateDB({ food: "peanut" });
             onEat();
           }}
         >
-          Popcorn
+          Peanut
         </Button>
       </DropUp>
       <DropUp

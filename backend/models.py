@@ -109,6 +109,7 @@ class Tamagotcha(db.Model):
         db.DateTime, nullable=False, default=datetime.now())
     breed = db.Column(db.String(100), nullable=False)
     is_hatched = db.Column(db.Boolean, nullable=False, default=False)
+    is_dead = db.Column(db.Boolean, nullable=False, default=False)
     fun = db.Column(db.Integer, nullable=False, default=50)
     sleep = db.Column(db.Integer, nullable=False, default=50)
     thirst = db.Column(db.Integer, nullable=False, default=50)

@@ -3,8 +3,9 @@ import style from "./Navbar.module.scss";
 import stats from "../../images/stats.png";
 import computer from "../../images/computer.png";
 import tama from "../../images/tama.png";
-
+import { DeathCheck } from "../../deathCheck/check_if_dead";
 const Navbar = () => {
+  DeathCheck();
   return (
     <nav className={style.navbar}>
       <div>

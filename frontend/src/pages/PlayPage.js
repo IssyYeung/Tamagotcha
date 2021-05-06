@@ -21,6 +21,7 @@ const PlayPage = () => {
   const [eyes, setEyes] = useState("awake");
   const [mouth, setMouth] = useState("happy");
   const [hatched, setHatched] = useState(false);
+  const [dead, setDead] = useState(true);
 
   useEffect(() => {
     authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
@@ -54,6 +55,7 @@ const PlayPage = () => {
         drink: "",
         game: "",
         sleep: "",
+        isDead: "",
       }),
       headers: myHeaders,
     })
@@ -69,6 +71,31 @@ const PlayPage = () => {
   if (crackState >= 7) {
     hatching();
   }
+
+  // const die = async () => {
+  //   fetch("http://127.0.0.1:5000/api/update_tamagotcha", {
+  //     method: "PUT",
+  //     body: JSON.stringify({
+  //       hatch: "",
+  //       food: "",
+  //       drink: "",
+  //       game: "",
+  //       sleep: "",
+  //       isDead: "true",
+  //     }),
+  //     headers: myHeaders,
+  //   })
+  //     .then((res) => res.json())
+  //     .then((json) => {
+  //       console.log(json);
+  //       dispatch({ type: "SET_STATS", payload: json[0] });
+  //     });
+  // };
+  // console.log(state.hunger);
+
+  // if (state.hunger <= 1 || !state.thirst || !state.fun || !state.sleep) {
+  //   die();
+  // }
 
   const handleBtn1 = () => {
     setIsWaving(true);
