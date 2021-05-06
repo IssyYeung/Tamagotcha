@@ -109,6 +109,18 @@ const PlayPage = () => {
     setIsCheering(true);
   };
 
+  let calcMouth = () => {
+    if (!isAwake) {
+      return "neutral";
+    } else if (state.avgHealth > 60) {
+      return "happy";
+    } else if (state.avgHealth > 40) {
+      return "neutral";
+    } else {
+      return "sad";
+    }
+  };
+
   return (
     <Layout pageTitle="Tamagotcha">
       <div className={style.playPage}>
@@ -127,7 +139,7 @@ const PlayPage = () => {
             // Eye options: awake, asleep, dead
             eyeState={eyes}
             // Mouth options: happy, sad, neutral
-            mouthState={mouth}
+            mouthState={calcMouth()}
             crackState={crackState}
           />
           {!state.isHatched && (
