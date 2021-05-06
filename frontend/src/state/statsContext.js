@@ -21,6 +21,7 @@ const reducer = (state, action) => {
       // will need to use this to set from api
       let fromAPI = action.payload;
       return {
+        id: fromAPI.id,
         name: fromAPI.name,
         breed: fromAPI.breed,
         timeBorn: fromAPI.time_of_birth,
@@ -38,6 +39,7 @@ const reducer = (state, action) => {
       // this will be used to change a/some stat(s) and leave the rest alone
       let data = action.payload;
       let newState = {
+        id: data.id ? data.id : state.id,
         name: data.name ? data.name : state.name,
         breed: data.breed ? data.breed : state.breed,
         timeBorn: data.timeBorn ? data.timeBorn : state.timeBorn,

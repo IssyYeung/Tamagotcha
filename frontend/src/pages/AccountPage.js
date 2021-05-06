@@ -28,13 +28,14 @@ const AccountPage = () => {
       });
 
     const currentTime = new Date();
-      dispatch({ type: "UPDATE_STATS", payload: { last_active: currentTime} });
+      var resultInSeconds=Math.round(currentTime.getTime());
+      dispatch({ type: "UPDATE_STATS", payload: { last_active: resultInSeconds} });
 
   }, []);
 
-  const myHeaders = new Headers()
-    myHeaders.append("Authorization", `Bearer ${window.$user_token["access_token"]}`)
-    myHeaders.append("Content-Type", "application/json")
+  const myHeaders = new Headers();
+    //myHeaders.append("Authorization", `Bearer ${window.$user_token["access_token"]}`);
+    myHeaders.append("Content-Type", "application/json");
     // myHeaders.append( "Access-Control-Allow-Origin", "http://localhost:3000")
     // myHeaders.append( "Access-Control-Allow-Credentials", "True")
     // myHeaders.append("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
@@ -54,11 +55,17 @@ const AccountPage = () => {
   };
 
     const logoutBackendStatsUpdate = () => {
-        fetch("http://127.0.0.1:5000/api/update_tamagotcha", requestOptionsLogoutPutStats)
+        fetch(`http://127.0.0.1:5000/update_tamagotcha/${state.id}`, {
+          method: "PUT",
+          body: JSON.stringify({ "fun": `${state.fun}`, "sleep": `${state.sleep}`, "hunger": `${state.hunger}`, "thirst": `${state.thirst}`, "last_active": `${state.last_active}`, "is_dead": `${state.is_dead}` }),
+          headers: myHeaders
+        }
+        
+        )
           // .then((response) => response.text())
           // .then((result) => console.log(result))
           .then(console.log("Final Stats put to backend."))
-          .then(console.log(requestOptionsLogoutPutStats.body))
+          //.then(console.log(requestOptionsLogoutPutStats.body))
       };
 
     const handleLogout = () => {

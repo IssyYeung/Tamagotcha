@@ -6,13 +6,13 @@ from flask_cors import CORS, cross_origin
 
 tamagotchas = Blueprint('tamagotchas', __name__)
 
-@tamagotchas.after_request
-def add_headers(response):
-    response.headers.add('Content-Type', 'application/json')
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-    response.headers.add('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
-    response.headers.add('Access-Control-Allow-Headers', 'Access-Control-Allow-Origin, Content-Type, Authorization')
-    return response
+# @tamagotchas.after_request
+# def add_headers(response):
+#     #response.headers.add('Content-Type', 'application/json')
+#     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+#     response.headers.add('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+#     response.headers.add('Access-Control-Allow-Headers', 'Access-Control-Allow-Origin, Content-Type, Authorization')
+#     return response
 
 @tamagotchas.route('/api/tamagotcha_stats', methods=['GET'])
 @flask_praetorian .auth_required
@@ -53,7 +53,31 @@ def update_current_tamagotcha():
     # except:
     #     abort(404)
 
+@tamagotchas.route('/update_tamagotcha/<id>', methods=['PUT'])
+def update_tamagotcha(id):
+    # try:
+        tamagotcha = Tamagotcha.query.get(id)
+        hunger = request.json['hunger']
+        thirst = request.json['thirst']
+        fun = request.json['fun']
+        sleep = request.json['sleep']
+        last_active = request.json['last_active']
+        is_dead = request.json['is_dead']
 
+        tamagotcha.hunger = hunger
+        tamagotcha.thirst = thirst
+        tamagotcha.fun = fun
+        tamagotcha.sleep = sleep
+        tamagotcha.last_active = last_active
+        tamagotcha.is_dead = is_dead
+
+        db.session.commit()
+
+        tamagotcha_schema = TamagotchaSchema()
+        return tamagotcha_schema.jsonify(tamagotcha)
+    # except:
+    #     abort(404)
+    
 # ADMIN ROUTES
 
 @tamagotchas.route('/tamagotcha_list', methods=['GET'])
@@ -111,26 +135,6 @@ def new_tamagotchas():
     # except:
     #     abort(400)
 
-
-@tamagotchas.route('/update_tamagotcha/<id>', methods=['PUT'])
-def update_tamagotcha(id):
-    try:
-        tamagotcha = Tamagotcha.query.get(id)
-        name = request.json['name']
-        breed = request.json['breed']
-        user_id = request.json['user_id']
-        last_active = request.json['last_active']
-        tamagotcha.name = name
-        tamagotcha.breed = breed
-        tamagotcha.user_id = user_id
-        tamagotcha.last_active = last_active
-
-        db.session.commit()
-
-        tamagotcha_schema = TamagotchaSchema()
-        return tamagotcha_schema.jsonify(tamagotcha)
-    except:
-        abort(404)
 
 
 @tamagotchas.route('/delete_tamagotcha/<id>', methods=['DELETE'])

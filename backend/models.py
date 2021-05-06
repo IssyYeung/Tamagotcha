@@ -2,6 +2,7 @@ from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from backend import db, ma
+import time
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -107,17 +108,18 @@ class Tamagotcha(db.Model):
     breed = db.Column(db.String(100), nullable=False)
     fun = db.Column(db.Integer, nullable=False, default=50)
     sleep = db.Column(db.Integer, nullable=False, default=50)
+    last_active = db.Column(db.Integer, nullable=False, default=0)
     thirst = db.Column(db.Integer, nullable=False, default=50)
     hunger = db.Column(db.Integer, nullable=False, default=50)
-    last_active = db.Column(db.DateTime, nullable=True)
     is_dead = db.Column(db.Boolean, nullable=False, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
-    def __init__(self, name, breed, user_id, last_active):
+    def __init__(self, name, breed, user_id, last_active, is_dead):
         self.name = name
         self.breed = breed
         self.user_id = user_id
         self.last_active = last_active
+        self.is_dead = is_dead
     
 
     def __repr__(self):

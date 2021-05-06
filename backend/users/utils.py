@@ -2,6 +2,7 @@ from flask import url_for
 from flask_mail import Message
 from backend import mail, db
 from backend.models import Tamagotcha, TamagotchaSchema
+import time
 
 
 def send_reset_email(user):
@@ -20,8 +21,9 @@ def assign_first_tamagotchi(new_user_id):
     name = "Pandaichi"
     breed = "Baby Panda"
     user_id = new_user_id
-    last_active = None
-    new_tamagotchi = Tamagotcha(name=name, breed=breed, user_id=user_id, last_active=last_active)
+    last_active = int(round(time.time() * 1000))
+    is_dead = 0
+    new_tamagotchi = Tamagotcha(name=name, breed=breed, user_id=user_id, last_active=last_active, is_dead=is_dead)
     db.session.add(new_tamagotchi)
     db.session.commit()
     tamagotchi_schema = TamagotchaSchema()
