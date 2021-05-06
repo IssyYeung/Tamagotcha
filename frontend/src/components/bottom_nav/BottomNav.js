@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 import { authFetch } from "../../auth/index";
 import { StatsContext } from "../../state/statsContext";
 
-const BottomNav = () => {
+const BottomNav = ({ toggleSleep }) => {
   const [openIndex, setOpenIndex] = useState(-1);
 
   const [state, dispatch] = useContext(StatsContext);
@@ -75,7 +75,14 @@ const BottomNav = () => {
         isOpen={openIndex === 2}
         setOpenIndex={() => setOpenIndex(openIndex === 2 ? -1 : 2)}
       >
-        <Button onClick={() => updateDB({ sleep: "10min" })}>10 minutes</Button>
+        <Button
+          onClick={() => {
+            updateDB({ sleep: "10min" });
+            toggleSleep();
+          }}
+        >
+          10 minutes
+        </Button>
         <Button onClick={() => updateDB({ sleep: "1hr" })}>1 Hour</Button>
         <Button onClick={() => updateDB({ sleep: "8hr" })}>8 Hours</Button>
         <Button onClick={() => updateDB({ sleep: "24hr" })}>24 Hours</Button>
