@@ -30,7 +30,6 @@ const AccountPage = () => {
           <div className={style.infoContainer}>
             <h4>Username: {username}</h4>
             <h4>Email: {email}</h4>
-            <h4>Hours played: {timeOnApp}</h4>
           </div>
           <div className={style.btnContainer}>
             <Button

@@ -94,7 +94,7 @@ const BottomNav = ({ toggleSleep }) => {
         setOpenIndex={() => setOpenIndex(openIndex === 3 ? -1 : 3)}
       >
         <Button
-          onClick={() => updateDB({ game: "quiz" })}
+          // onClick={() => updateDB({ game: "quiz" })}
           component={NavLink}
           to="/minigames/quiz"
         >

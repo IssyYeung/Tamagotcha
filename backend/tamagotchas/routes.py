@@ -21,7 +21,7 @@ def get_tamagotcha_stats():
 @tamagotchas.route('/api/update_tamagotcha', methods=['PUT'])
 @flask_praetorian .auth_required
 def update_current_tamagotcha():
-    try:
+    # try:
         tamagotcha = Tamagotcha.query.filter_by(
             user_id=flask_praetorian .current_user().id).first()
 
@@ -83,8 +83,8 @@ def update_current_tamagotcha():
 
         tamagotcha_schema = TamagotchaSchema()
         return tamagotcha_schema.jsonify(tamagotcha)
-    except:
-        abort(404)
+    # except:
+    #     abort(404)
 
 
 # ADMIN ROUTES
