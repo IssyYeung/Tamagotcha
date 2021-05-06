@@ -4,7 +4,7 @@ import { StatsContext } from "../../state/statsContext";
 
 const HealthFiller = () => {
   const [state, dispatch] = useContext(StatsContext);
-  console.log(state.avgHealth);
+
   return (
     <div
       className={style.healthFiller}

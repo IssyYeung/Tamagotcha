@@ -23,6 +23,7 @@ const PlayPage = () => {
   const [hatched, setHatched] = useState(false);
 
   useEffect(() => {
+    // if (state.isInitial) {
     authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
       .then((res) => res.json())
       .then((json) => {
@@ -30,6 +31,7 @@ const PlayPage = () => {
         setHatched(json["is_hatched"]);
         dispatch({ type: "SET_STATS", payload: json[0] });
       });
+    // }
   }, []);
 
   const [crackState, setCrackState] = useState(0);
