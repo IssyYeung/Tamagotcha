@@ -1,23 +1,15 @@
 import Layout from "../components/layout/Layout";
 import StatBar from "../components/stat_bar/StatBar";
 import style from "../styles/pageStyles/statspage.module.scss";
-import { authFetch } from "../auth/index";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { StatsContext } from "../state/statsContext";
 
 const StatsPage = () => {
-  // const [name, setName] = useState([]);
-  // const [breed, setBreed] = useState([]);
-  // const [sleep, setSleep] = useState([]);
-  // const [thirst, setThirst] = useState([]);
-  // const [hunger, setHunger] = useState([]);
-  // const [timeBorn, setTimeBorn] = useState([]);
-  // const [fun, setFun] = useState([]);
   const currentTime = new Date();
   const [state, dispatch] = useContext(StatsContext);
   // useContext looks up component tree to find StatsContext
 
-  useEffect(() => {});
+  // useEffect(() => {});
 
   const timeBornMs = new Date(state.timeBorn);
   const age = Math.round((currentTime - timeBornMs) / (1000 * 60 * 60));

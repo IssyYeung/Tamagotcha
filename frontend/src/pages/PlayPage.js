@@ -1,6 +1,7 @@
 import Layout from "../components/layout/Layout";
 import BottomNav from "../components/bottom_nav/BottomNav";
 import tamagotchi from "../images/tamagotchi.png";
+import heart from "../images/heart.png";
 import style from "../styles/pageStyles/playpage.module.scss";
 import Button from "../components/button/Button";
 import { useState, useEffect, useContext } from "react";
@@ -8,6 +9,7 @@ import Creature from "../components/creature/Creature";
 import Egg from "../components/egg/Egg";
 import { StatsContext } from "../state/statsContext";
 import { authFetch } from "../auth/index";
+import HealthBar from "../components/health_bar/HealthBar";
 
 const PlayPage = () => {
   const [isWaving, setIsWaving] = useState(false);
@@ -108,8 +110,11 @@ const PlayPage = () => {
   return (
     <Layout pageTitle="Tamagotcha">
       <div className={style.playPage}>
+        <div className={style.heartContainer}>
+          <img src={heart} alt="Heart" />
+        </div>
+        <HealthBar />
         <div className={style.imageContainer}>
-          {/* <HealthBar/>*/}
           <img src={tamagotchi} alt="Tamagotcha toy" />
           <Creature
             wave={isWaving}

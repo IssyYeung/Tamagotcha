@@ -1,0 +1,14 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.healthBar {
+  position: absolute;
+  top: 192px;
+  left: 60px;
+  height: 20px;
+  width: 150px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: white;
+  z-index: 10;
+}
