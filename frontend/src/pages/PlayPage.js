@@ -93,9 +93,9 @@ const PlayPage = () => {
             crackState={crackState}
           />
           <Egg onClick={crackEgg} crackState={crackState} />
-          <Button className={style.btn1} onClick={handleBtn1} />
-          <Button className={style.btn2} onClick={handleBtn2} />
-          <Button className={style.btn3} onClick={handleBtn3} />
+          {isAwake && <Button className={style.btn1} onClick={handleBtn1} />}
+          {isAwake && <Button className={style.btn2} onClick={handleBtn2} />}
+          {isAwake && <Button className={style.btn3} onClick={handleBtn3} />}
         </div>
       </div>
       {isAwake && (
