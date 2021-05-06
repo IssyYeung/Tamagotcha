@@ -35,7 +35,7 @@ const reducer = (state, action) => {
         ...state,
         name: fromAPI.name,
         timeBorn: fromAPI.time_of_birth,
-        // * NEW:
+        breed: fromAPI.breed,
         isHatched: fromAPI.is_hatched,
         timeFeedBy: Date.parse(fromAPI.time_feed_by),
         timeDrinkBy: Date.parse(fromAPI.time_drink_by),
@@ -52,7 +52,7 @@ const reducer = (state, action) => {
       let newState = {
         name: data.name ? data.name : state.name,
         timeBorn: data.timeBorn ? data.timeBorn : state.timeBorn,
-        // * done today:
+        breed: data.breed ? data.breed : state.breed,
         isHatched: data.isHatched ? data.isHatched : state.isHatched,
         timeFeedBy: data.timeFeedBy ? data.timeFeedBy : state.timeFeedBy,
         timeDrinkBy: data.timeDrinkBy ? data.timeDrinkBy : state.timeDrinkBy,
