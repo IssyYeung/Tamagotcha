@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 import { authFetch } from "../../auth/index";
 import { StatsContext } from "../../state/statsContext";
 
-const BottomNav = ({ toggleSleep }) => {
+const BottomNav = ({ toggleSleep, onEat, onDrink }) => {
   const [openIndex, setOpenIndex] = useState(-1);
 
   const [state, dispatch] = useContext(StatsContext);
@@ -53,10 +53,38 @@ const BottomNav = ({ toggleSleep }) => {
         isOpen={openIndex === 0}
         setOpenIndex={() => setOpenIndex(openIndex === 0 ? -1 : 0)}
       >
-        <Button onClick={() => updateDB({ food: "pizza" })}>Pizza</Button>
-        <Button onClick={() => updateDB({ food: "soup" })}>Soup</Button>
-        <Button onClick={() => updateDB({ food: "apple" })}>Apple</Button>
-        <Button onClick={() => updateDB({ food: "popcorn" })}>Popcorn</Button>
+        <Button
+          onClick={() => {
+            updateDB({ food: "pizza" });
+            onEat();
+          }}
+        >
+          Pizza
+        </Button>
+        <Button
+          onClick={() => {
+            updateDB({ food: "soup" });
+            onEat();
+          }}
+        >
+          Soup
+        </Button>
+        <Button
+          onClick={() => {
+            updateDB({ food: "apple" });
+            onEat();
+          }}
+        >
+          Apple
+        </Button>
+        <Button
+          onClick={() => {
+            updateDB({ food: "popcorn" });
+            onEat();
+          }}
+        >
+          Popcorn
+        </Button>
       </DropUp>
       <DropUp
         icon={beer}
@@ -64,10 +92,38 @@ const BottomNav = ({ toggleSleep }) => {
         isOpen={openIndex === 1}
         setOpenIndex={() => setOpenIndex(openIndex === 1 ? -1 : 1)}
       >
-        <Button onClick={() => updateDB({ drink: "wine" })}>Wine</Button>
-        <Button onClick={() => updateDB({ drink: "beer" })}>Beer</Button>
-        <Button onClick={() => updateDB({ drink: "juice" })}>Juice</Button>
-        <Button onClick={() => updateDB({ drink: "water" })}>Water</Button>
+        <Button
+          onClick={() => {
+            updateDB({ drink: "wine" });
+            onDrink();
+          }}
+        >
+          Wine
+        </Button>
+        <Button
+          onClick={() => {
+            updateDB({ drink: "beer" });
+            onDrink();
+          }}
+        >
+          Beer
+        </Button>
+        <Button
+          onClick={() => {
+            updateDB({ drink: "juice" });
+            onDrink();
+          }}
+        >
+          Juice
+        </Button>
+        <Button
+          onClick={() => {
+            updateDB({ drink: "water" });
+            onDrink();
+          }}
+        >
+          Water
+        </Button>
       </DropUp>
       <DropUp
         icon={moon}
@@ -83,9 +139,30 @@ const BottomNav = ({ toggleSleep }) => {
         >
           10 minutes
         </Button>
-        <Button onClick={() => updateDB({ sleep: "1hr" })}>1 Hour</Button>
-        <Button onClick={() => updateDB({ sleep: "8hr" })}>8 Hours</Button>
-        <Button onClick={() => updateDB({ sleep: "24hr" })}>24 Hours</Button>
+        <Button
+          onClick={() => {
+            updateDB({ sleep: "1hr" });
+            toggleSleep();
+          }}
+        >
+          1 Hour
+        </Button>
+        <Button
+          onClick={() => {
+            updateDB({ sleep: "8hr" });
+            toggleSleep();
+          }}
+        >
+          8 Hours
+        </Button>
+        <Button
+          onClick={() => {
+            updateDB({ sleep: "24hr" });
+            toggleSleep();
+          }}
+        >
+          24 Hours
+        </Button>
       </DropUp>
       <DropUp
         icon={funIcon}
