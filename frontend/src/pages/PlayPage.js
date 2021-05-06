@@ -23,6 +23,7 @@ const PlayPage = () => {
   const [hatched, setHatched] = useState(false);
 
   useEffect(() => {
+    // if (state.isInitial) {
     authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
       .then((res) => res.json())
       .then((json) => {
@@ -30,6 +31,7 @@ const PlayPage = () => {
         setHatched(json["is_hatched"]);
         dispatch({ type: "SET_STATS", payload: json[0] });
       });
+    // }
   }, []);
 
   const [crackState, setCrackState] = useState(0);
@@ -107,6 +109,18 @@ const PlayPage = () => {
     setIsCheering(true);
   };
 
+  let calcMouth = () => {
+    if (!isAwake) {
+      return "neutral";
+    } else if (state.avgHealth > 60) {
+      return "happy";
+    } else if (state.avgHealth > 40) {
+      return "neutral";
+    } else {
+      return "sad";
+    }
+  };
+
   return (
     <Layout pageTitle="Tamagotcha">
       <div className={style.playPage}>
@@ -125,7 +139,7 @@ const PlayPage = () => {
             // Eye options: awake, asleep, dead
             eyeState={eyes}
             // Mouth options: happy, sad, neutral
-            mouthState={mouth}
+            mouthState={calcMouth()}
             crackState={crackState}
           />
           {!state.isHatched && (

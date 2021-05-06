@@ -26,12 +26,12 @@ const reducer = (state, action) => {
     case "SET_STATS":
       // will need to use this to set from api
       let fromAPI = action.payload;
-      console.log(`setting stats ${Date.parse(fromAPI.time_feed_by)}`);
+
       console.log(fromAPI);
       if (fromAPI === undefined) {
         return state;
       }
-      return {
+      let ns = {
         ...state,
         name: fromAPI.name,
         timeBorn: fromAPI.time_of_birth,
@@ -42,14 +42,13 @@ const reducer = (state, action) => {
         timeSleepBy: Date.parse(fromAPI.time_sleep_by),
         timePlayBy: Date.parse(fromAPI.time_play_by),
         isInitial: false,
-        avgHealth: Math.floor(
-          (fromAPI.sleep + fromAPI.thirst + fromAPI.hunger + fromAPI.fun) / 4
-        ),
       };
+      return { ...ns, ...calcStats(ns) };
     case "UPDATE_STATS":
       // this will be used to change a/some stat(s) and leave the rest alone
       let data = action.payload;
       let newState = {
+        ...state,
         name: data.name ? data.name : state.name,
         timeBorn: data.timeBorn ? data.timeBorn : state.timeBorn,
         breed: data.breed ? data.breed : state.breed,
@@ -63,7 +62,6 @@ const reducer = (state, action) => {
         thirst: data.thirst ? data.thirst : state.thirst,
         hunger: data.hunger ? data.hunger : state.hunger,
         fun: data.fun ? data.fun : state.fun,
-        isInitial: false,
       };
       let avgHealth = Math.floor(
         (newState.sleep + newState.thirst + newState.hunger + newState.fun) / 4
@@ -77,6 +75,19 @@ const reducer = (state, action) => {
   }
 };
 
+function calcStats(state) {
+  let timeTillParched = state.timeDrinkBy - Date.now();
+  let timeTillExhaustion = state.timeSleepBy - Date.now();
+  let timeTillHeartBreak = state.timePlayBy - Date.now();
+  let timeTillStarve = state.timeFeedBy - Date.now();
+  let hunger = Math.round((timeTillStarve / 21600000) * 100);
+  let thirst = Math.round((timeTillParched / 14400000) * 100);
+  let sleep = Math.round((timeTillExhaustion / 64800000) * 100);
+  let fun = Math.round((timeTillHeartBreak / 28800000) * 100);
+  let avgHealth = Math.floor((sleep + thirst + hunger + fun) / 4);
+  return { hunger, thirst, sleep, fun, avgHealth };
+}
+
 export const StatsContextProvider = ({ children }) => {
   //  dispatch, dispatches an event, like setState but can do multiple
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -84,19 +95,12 @@ export const StatsContextProvider = ({ children }) => {
   const [time, setTime] = useState(Date.now());
 
   useEffect(() => {
-    let isHatched = state.isHatched;
+    // let isHatched = state.isHatched;
     const interval = setInterval(() => {
       setTime(Date.now());
-    }, 2000);
-    let timeTillStarve = state.timeFeedBy - Date.now();
-    let hunger = Math.round((timeTillStarve / 21600000) * 100);
-    let timeTillParched = state.timeDrinkBy - Date.now();
-    let thirst = Math.round((timeTillParched / 14400000) * 100);
-    let timeTillExhaustion = state.timeSleepBy - Date.now();
-    let sleep = Math.round((timeTillExhaustion / 64800000) * 100);
-    let timeTillHeartBreak = state.timePlayBy - Date.now();
-    let fun = Math.round((timeTillHeartBreak / 28800000) * 100);
+    }, 20000);
 
+    let { hunger, thirst, sleep, fun } = calcStats(state, dispatch);
     dispatch({
       type: "UPDATE_STATS",
       payload: {
@@ -104,7 +108,7 @@ export const StatsContextProvider = ({ children }) => {
         thirst: thirst,
         sleep: sleep,
         fun: fun,
-        isHatched: isHatched,
+        // isHatched: isHatched,
       },
     });
 
