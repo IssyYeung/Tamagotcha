@@ -23,6 +23,18 @@
   }
 }
 
+.heartContainer {
+  position: absolute;
+  z-index: 10;
+  // top: 192px;
+  top: 190px;
+  left: 20px;
+  img {
+    height: 25px;
+    width: auto;
+  }
+}
+
 %btn {
   border-radius: 50%;
   position: absolute;

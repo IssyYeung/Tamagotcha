@@ -1,0 +1,14 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.healthFiller {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  height: inherit;
+  // width: 100px;
+  border-radius: inherit;
+  border: inherit;
+  z-index: 12;
+  background-color: green;
+}
