@@ -3,10 +3,10 @@
   height: 60px;
   bottom: 220px;
   transition: height 1s ease-in-out, bottom 1s ease-in-out;
-  transition-delay: 5s;
+  transition-delay: 2s;
 }
 
-.creature {
+.creature.creature {
   position: absolute;
   overflow: visible;
   height: 140px;

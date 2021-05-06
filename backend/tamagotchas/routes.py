@@ -35,6 +35,9 @@ def update_current_tamagotcha():
         sleep = request.json['sleep']
         game = request.json['game']
 
+        if request.json['hatch'] == "true":
+            tamagotcha.is_hatched = True
+
         if food == "apple":
             tamagotcha.time_feed_by = min(tamagotcha.time_feed_by + timedelta(hours=3),
                                           maxTimeFood)
