@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from backend import db, ma
+import time
 
 
 class User(db.Model):
@@ -110,8 +111,10 @@ class Tamagotcha(db.Model):
     breed = db.Column(db.String(100), nullable=False)
     fun = db.Column(db.Integer, nullable=False, default=50)
     sleep = db.Column(db.Integer, nullable=False, default=50)
+    last_active = db.Column(db.Integer, nullable=False, default=0)
     thirst = db.Column(db.Integer, nullable=False, default=50)
     hunger = db.Column(db.Integer, nullable=False, default=50)
+    is_dead = db.Column(db.Boolean, nullable=False, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     time_feed_by = db.Column(db.DateTime, nullable=False,
                              default=datetime.now() + timedelta(hours=3))
@@ -122,10 +125,13 @@ class Tamagotcha(db.Model):
     time_play_by = db.Column(db.DateTime, nullable=False,
                              default=datetime.now() + timedelta(hours=4))
 
-    def __init__(self, name, breed, user_id):
+    def __init__(self, name, breed, user_id, last_active, is_dead):
         self.name = name
         self.breed = breed
         self.user_id = user_id
+        self.last_active = last_active
+        self.is_dead = is_dead
+    
 
     def __repr__(self):
         return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.fun}', '{self.sleep}', '{self.thirst}', '{self.hunger}', '{self.user_id}', '{self.time_feed_by}')"

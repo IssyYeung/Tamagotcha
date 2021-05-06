@@ -11,6 +11,7 @@ import { StatsContext } from "../state/statsContext";
 import { authFetch } from "../auth/index";
 
 const PlayPage = () => {
+  
   const [isWaving, setIsWaving] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
   const [isWiggling, setIsWiggling] = useState(false);

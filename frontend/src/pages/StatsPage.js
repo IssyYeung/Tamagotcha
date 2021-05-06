@@ -1,18 +1,11 @@
 import Layout from "../components/layout/Layout";
 import StatBar from "../components/stat_bar/StatBar";
 import style from "../styles/pageStyles/statspage.module.scss";
-import { authFetch } from "../auth/index";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { StatsContext } from "../state/statsContext";
 
 const StatsPage = () => {
-  // const [name, setName] = useState([]);
-  // const [breed, setBreed] = useState([]);
-  // const [sleep, setSleep] = useState([]);
-  // const [thirst, setThirst] = useState([]);
-  // const [hunger, setHunger] = useState([]);
-  // const [timeBorn, setTimeBorn] = useState([]);
-  // const [fun, setFun] = useState([]);
+
   const currentTime = new Date();
   const [state, dispatch] = useContext(StatsContext);
   // useContext looks up component tree to find StatsContext
@@ -20,7 +13,7 @@ const StatsPage = () => {
   useEffect(() => {});
 
   const timeBornMs = new Date(state.timeBorn);
-  const age = Math.round((currentTime - timeBornMs) / (1000 * 60 * 60));
+  const age = Math.ceil((currentTime - timeBornMs) / (1000 * 60 * 60 * 24));
 
   return (
     <div>
@@ -30,7 +23,6 @@ const StatsPage = () => {
             <h4>Name: {state.name}</h4>
             <h4>Breed: {state.breed}</h4>
             <h4>Age: {age}</h4>
-            <h4>Needs:</h4>
           </div>
           <StatBar statTitle="Average Health" statValue={state.avgHealth} />
           <StatBar statTitle="Sleep" statValue={state.sleep} />

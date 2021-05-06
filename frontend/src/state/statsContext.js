@@ -33,6 +33,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         name: fromAPI.name,
+        breed: fromAPI.breed,
         timeBorn: fromAPI.time_of_birth,
         // * NEW:
         timeFeedBy: Date.parse(fromAPI.time_feed_by),
@@ -48,7 +49,9 @@ const reducer = (state, action) => {
       // this will be used to change a/some stat(s) and leave the rest alone
       let data = action.payload;
       let newState = {
+        id: data.id ? data.id : state.id,
         name: data.name ? data.name : state.name,
+        breed: data.breed ? data.breed : state.breed,
         timeBorn: data.timeBorn ? data.timeBorn : state.timeBorn,
         // * done today:
         timeFeedBy: data.timeFeedBy ? data.timeFeedBy : state.timeFeedBy,
@@ -65,10 +68,8 @@ const reducer = (state, action) => {
       let avgHealth = Math.floor(
         (newState.sleep + newState.thirst + newState.hunger + newState.fun) / 4
       );
-
-      // TODO: here we could set/send newState to backend
-
       return { ...newState, avgHealth };
+      //NEW CASE HERE TO SEND TO BACKEND (current state), WILL NEED HEADERS ETC FROM ACCOUNTS PAGE.
     default:
       throw new Error();
   }

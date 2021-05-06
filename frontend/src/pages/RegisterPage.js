@@ -12,6 +12,7 @@ const formReducer = (state, event) => {
 };
 
 const RegisterPage = () => {
+  
   const [formInfo, setFormInfo] = useReducer(formReducer, {});
   const history = useHistory();
 
@@ -25,7 +26,7 @@ const RegisterPage = () => {
     formData.set("confirm_password", formInfo.confirm_password);
 
     console.log(formInfo);
-    //console.log(formData);
+    
     const requestOptions = {
       method: "POST",
       body: JSON.stringify(formInfo),

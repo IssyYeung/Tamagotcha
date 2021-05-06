@@ -1,10 +1,11 @@
 import Layout from "../components/layout/Layout";
 import Button from "../components/button/Button";
 import { NavLink, useHistory } from "react-router-dom";
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import style from "../styles/pageStyles/loginpage.module.scss";
 import { login, useAuth } from "../auth/index";
-import { Decrement_stats } from "../components/decrement_stats/DecrementStats"
+import { authFetch } from "../auth/index";
+import { StatsContext } from "../state/statsContext";
 
 const formReducer = (state, event) => {
   return {
@@ -14,6 +15,8 @@ const formReducer = (state, event) => {
 };
 
 const LoginPage = () => {
+
+  const [state, dispatch] = useContext(StatsContext);
   const [formInfo, setFormInfo] = useReducer(formReducer, {});
   const history = useHistory();
 
@@ -23,7 +26,6 @@ const LoginPage = () => {
     const formData = new FormData();
     formData.set("username", formInfo.email);
     formData.set("password", formInfo.password);
-    //formData.set("remember", formInfo.remember);
 
     console.log(formInfo);
     const requestOptions = {
@@ -49,6 +51,30 @@ const LoginPage = () => {
           console.log("Please type in correct username/password");
         }
       });
+
+      authFetch("http://127.0.0.1:5000/api/tamagotcha_stats")
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+          dispatch({ type: "SET_STATS", payload: json[0] });
+        });
+      
+      //DO ALL MISSED DECREMENTS WHILST LOGGED OUT. ONLY DO IF ALREADY LOGGED IN PREVIOUSLY BEFORE CURRENT SESSION:
+      if (state.last_active!=null) {
+        //INSERT TIME BETWEEN DECREMENTATION INTO DENOMINATOR. SEE DECREMENT_STATE FILE for VALUE.
+        const decrementInterval = 120000;
+        const currentTime = new Date();
+        const timeSinceLastActive = (currentTime - state.last_active);
+        //ONLY DO IF AT LEAST ONE DECREMENT INTERVAL HAS PASSED SINCE LAST LOGOUT:
+        if (timeSinceLastActive>=decrementInterval) {
+          const numDecrementsToDo = Math.round(timeSinceLastActive/(decrementInterval));
+          let i=1;
+          while(i<=numDecrementsToDo) {
+            dispatch({ type: "UPDATE_STATS", payload: { hunger: Math.max(0, state.hunger-1), thirst: Math.max(0, state.thirst-1), sleep: Math.max(0, state.sleep-1), fun: Math.max(0, state.fun-1) } })
+            i++;
+          }
+        }
+      };
   };
 
   const handleChange = (event) => {
@@ -85,8 +111,6 @@ const LoginPage = () => {
             <label>Remember me</label>
             <input
               type="checkbox"
-              //value={formInfo.remember}
-              //onChange={handleChange}
             />
           </span>
           <Button
@@ -95,7 +119,6 @@ const LoginPage = () => {
             type="submit"
             value="Login"
             className={style.loginBtn}
-            //onClick={Decrement_stats()}
           />
         </form>
 
