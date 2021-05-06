@@ -12,12 +12,6 @@
         "correct_ans": "Take that"
     },
     {
-        "question": "How big those mountains Ed climbs?",
-        "incorrect_ans_one": "v173",
-        "incorrect_ans_two": "v12",
-        "correct_ans": "Itsy bitsy"
-    },
-    {
         "question": "How old was the oldest Tamagotchi when it died?",
         "incorrect_ans_one": "219,792 tamayears",
         "incorrect_ans_two": "17 tamayears",
@@ -38,8 +32,14 @@
     {
         "question": "Are you aware this game is a copyright infringement?",
         "incorrect_ans_one": "Yes I am immoral",
-        "incorrect_ans_two": "What's a Tamagotchi?",
+        "incorrect_ans_two": "Tama-whatcha?!",
         "correct_ans": "I'm sorry judge"
+    },
+    {
+        "question": "How big those mountains Ed climbs?",
+        "incorrect_ans_one": "v173",
+        "incorrect_ans_two": "v12",
+        "correct_ans": "Itsy bitsy"
     },
     {
         "question": "How tall is Adam?",
