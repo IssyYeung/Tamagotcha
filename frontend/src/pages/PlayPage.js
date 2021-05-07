@@ -31,6 +31,9 @@ const PlayPage = () => {
         setHatched(json["is_hatched"]);
         dispatch({ type: "SET_STATS", payload: json[0] });
       });
+    if (state.is_dead) {
+      setEyes("dead");
+    }
     // }
   }, []);
 
@@ -64,10 +67,10 @@ const PlayPage = () => {
         console.log(json);
       });
     setTimeout(function () {
-      setHatched();
+      setHatched(true);
     }, 10000);
   };
-
+  console.log(state.is_dead);
   if (crackState >= 7) {
     hatching();
   }

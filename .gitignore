@@ -6,6 +6,9 @@ instance/*
 !instance/.gitignore
 .webassets-cache
 
+#Ignore local version of database
+backend/site.db
+
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files
 __pycache__/

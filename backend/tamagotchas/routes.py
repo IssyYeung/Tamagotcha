@@ -42,8 +42,7 @@ def update_current_tamagotcha():
             tamagotcha.time_feed_by = min(tamagotcha.time_feed_by + timedelta(hours=3),
                                           maxTimeFood)
         elif food == "popcorn":
-            tamagotcha.time_feed_by = min(tamagotcha.time_feed_by +
-                                          timedelta(hours=1, minutes=30), maxTimeFood)
+            tamagotcha.time_feed_by = datetime.now()
         elif food == "soup":
             tamagotcha.time_feed_by = min(tamagotcha.time_feed_by +
                                           timedelta(hours=4, minutes=30), maxTimeFood)
