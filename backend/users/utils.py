@@ -20,9 +20,10 @@ def assign_first_tamagotchi(new_user_id):
     name = "Pandaichi"
     breed = "Baby Panda"
     user_id = new_user_id
-    new_tamagotchi = Tamagotcha(name=name, breed=breed, user_id=user_id)
+    is_dead = 0
+    new_tamagotchi = Tamagotcha(
+        name=name, breed=breed, user_id=user_id, is_dead=is_dead)
     db.session.add(new_tamagotchi)
     db.session.commit()
     tamagotchi_schema = TamagotchaSchema()
     return tamagotchi_schema.jsonify(new_tamagotchi)
-

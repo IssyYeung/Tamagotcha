@@ -84,7 +84,7 @@ const BottomNav = ({ toggleSleep, onEat, onDrink }) => {
             onEat();
           }}
         >
-          Popcorn
+          Peanuts
         </Button>
       </DropUp>
       <DropUp

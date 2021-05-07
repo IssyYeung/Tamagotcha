@@ -31,10 +31,12 @@ const PlayPage = () => {
         setHatched(json["is_hatched"]);
         dispatch({ type: "SET_STATS", payload: json[0] });
       });
-    if (state.is_dead) {
+    if (state.is_dead === true) {
       setEyes("dead");
+      setTimeout(function () {
+        alert("Pandaichi is dead! Please register a new account!");
+      }, 1000);
     }
-    // }
   }, []);
 
   const [crackState, setCrackState] = useState(0);

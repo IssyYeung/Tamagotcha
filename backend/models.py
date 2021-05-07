@@ -124,10 +124,11 @@ class Tamagotcha(db.Model):
     time_play_by = db.Column(db.DateTime, nullable=False,
                              default=datetime.now() + timedelta(hours=4))
 
-    def __init__(self, name, breed, user_id):
+    def __init__(self, name, breed, user_id, is_dead):
         self.name = name
         self.breed = breed
         self.user_id = user_id
+        self.is_dead = is_dead
 
     def __repr__(self):
         return f"Tamagotchi('{self.name}', '{self.time_of_birth}', '{self.breed}', '{self.fun}', '{self.sleep}', '{self.thirst}', '{self.hunger}', '{self.user_id}', '{self.time_feed_by}', , '{self.is_dead}')"

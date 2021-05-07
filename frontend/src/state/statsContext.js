@@ -38,7 +38,7 @@ const reducer = (state, action) => {
         timeBorn: fromAPI.time_of_birth,
         breed: fromAPI.breed,
         isHatched: fromAPI.is_hatched,
-        is_dead: fromAPI.is_dead,
+        is_dead: false,
         timeFeedBy: Date.parse(fromAPI.time_feed_by),
         timeDrinkBy: Date.parse(fromAPI.time_drink_by),
         timeSleepBy: Date.parse(fromAPI.time_sleep_by),
@@ -103,7 +103,7 @@ export const StatsContextProvider = ({ children }) => {
       setTime(Date.now());
     }, 20000);
 
-    let { hunger, thirst, sleep, fun, is_hatched, is_dead } = calcStats(state, dispatch);
+    let { hunger, thirst, sleep, fun } = calcStats(state, dispatch);
     dispatch({
       type: "UPDATE_STATS",
       payload: {
@@ -111,8 +111,8 @@ export const StatsContextProvider = ({ children }) => {
         thirst: thirst,
         sleep: sleep,
         fun: fun,
-        isHatched: is_hatched,
-        is_dead: is_dead,
+        // isHatched: is_hatched,
+        // is_dead: is_dead,
       },
     });
 

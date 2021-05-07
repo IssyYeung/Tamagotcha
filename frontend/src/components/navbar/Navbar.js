@@ -3,7 +3,6 @@ import style from "./Navbar.module.scss";
 import stats from "../../images/stats.png";
 import computer from "../../images/computer.png";
 import tama from "../../images/tama.png";
-import { deathCheck } from "../../deathCheck/death_check";
 import { useEffect, useContext } from "react";
 import { StatsContext } from "../../state/statsContext";
 
@@ -13,47 +12,18 @@ const Navbar = () => {
 
   let count = 0;
 
-    setInterval(() => {
-      count += 1;
-      console.log(count);
-      if (
-        parseInt(state.hunger) <= 0 ||
-        parseInt(state.thirst) <= 0 ||
-        parseInt(state.fun) <= 0 ||
-        parseInt(state.sleep) <= 0
-      ) {
-        dispatch({ type: "UPDATE_STATS", payload: { is_dead: true } });
-      }
-      if 
-        (state.is_dead)
-       { 
-        const myHeaders = new Headers();
-        myHeaders.append(
-          "Authorization",
-          `Bearer ${window.$user_token["access_token"]}`
-        );
-        myHeaders.append("Content-Type", "application/json");
-        
-        const dying = async () => fetch("http://127.0.0.1:5000/api/update_tamagotcha", {
-          method: "PUT",
-          body: JSON.stringify({
-            hatch: "",
-            food: "",
-            drink: "",
-            game: "",
-            sleep: "",
-            is_dead: "true",
-          }),
-          headers: myHeaders,
-        })
-        .then((res) => res.json())
-        .then((json) => {
-        console.log(json);
-      });
-      }
-    }, 10000);
-  
-  
+  setInterval(() => {
+    count += 1;
+    console.log(count);
+    if (
+      parseInt(state.hunger) <= 0 ||
+      parseInt(state.thirst) <= 0 ||
+      parseInt(state.fun) <= 0 ||
+      parseInt(state.sleep) <= 0
+    ) {
+      dispatch({ type: "UPDATE_STATS", payload: { is_dead: true } });
+    }
+  }, 10000);
 
   return (
     <nav className={style.navbar}>
