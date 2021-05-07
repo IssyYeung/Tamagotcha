@@ -13,6 +13,8 @@ The tech stack for this project is as follows, hence we assume you already have 
 
 Open your favourite IDE, then open a terminal and cd to the directory where the project is stored and run the following commands:
 
+Start by deleting the site.db database inside the backend folder in order to wipe the current database. Then:
+
 Inside the project directory:
 
 1. pip install -r requirements.txt (To install backend dependencies)
